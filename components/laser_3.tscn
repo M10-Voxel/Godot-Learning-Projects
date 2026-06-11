@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bi18sajpka68u"]
+
+[ext_resource type="Script" uid="uid://b1ja7v6a5xtkr" path="res://scripts/Laser.cs" id="1_bab83"]
+[ext_resource type="Texture2D" uid="uid://cqyhtv8ely30h" path="res://art/space_shooter_assets/PNG/Lasers/laserBlue05.png" id="2_th5qq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ar8e4"]
+radius = 6.0
+height = 40.0
+
+[node name="laser3" type="CharacterBody2D" unique_id=1146056826]
+script = ExtResource("1_bab83")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1665888262]
+texture_filter = 1
+position = Vector2(0, 18)
+texture = ExtResource("2_th5qq")
+region_enabled = true
+region_rect = Rect2(0, 8, 9, 20)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1813955966 groups=["laser"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1038983080]
+shape = SubResource("CapsuleShape2D_ar8e4")
+
+[node name="rPoint" type="Node2D" parent="." unique_id=379246204]
+position = Vector2(30, 0)
+rotation = 0.5235988
+
+[node name="lPoint" type="Node2D" parent="." unique_id=722292830]
+position = Vector2(-30, 0)
+rotation = -0.5235988
+
+[node name="Timer" type="Timer" parent="." unique_id=1130163667]
+wait_time = 2.0
+autostart = true
