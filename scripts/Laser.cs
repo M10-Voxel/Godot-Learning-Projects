@@ -69,4 +69,10 @@ public partial class Laser : CharacterBody2D
 		newLaser.GlobalPosition = anchor.GlobalPosition;
 		if (useAnchorRotation) newLaser.GlobalRotation = anchor.GlobalRotation;
 	}
+
+
+	private void OnTimerTimeout()
+	{
+		QueueFree();
+	}
 }

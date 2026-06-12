@@ -1,14 +1,21 @@
 [gd_scene format=3 uid="uid://s7ovrhs4cogg"]
 
 [ext_resource type="Script" uid="uid://b1ja7v6a5xtkr" path="res://scripts/Laser.cs" id="1_w5muo"]
+[ext_resource type="PackedScene" uid="uid://pvc7lkmk5b1f" path="res://components/laser_1.tscn" id="2_ayiyi"]
 [ext_resource type="Texture2D" uid="uid://cqyhtv8ely30h" path="res://art/space_shooter_assets/PNG/Lasers/laserBlue05.png" id="2_yj5uf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ar8e4"]
 radius = 6.0
 height = 40.0
 
-[node name="laser2" type="CharacterBody2D" unique_id=1146056826]
+[node name="laser2" type="CharacterBody2D" unique_id=1146056826 node_paths=PackedStringArray("_laserSprite", "_laserCollision", "_rAnchor", "_lAnchor")]
 script = ExtResource("1_w5muo")
+_lasterType = 2
+_laser = ExtResource("2_ayiyi")
+_laserSprite = NodePath("Sprite2D")
+_laserCollision = NodePath("Area2D/CollisionShape2D")
+_rAnchor = NodePath("rPoint")
+_lAnchor = NodePath("lPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1665888262]
 texture_filter = 1
@@ -30,3 +37,5 @@ rotation = -0.5235988
 [node name="Timer" type="Timer" parent="." unique_id=1130163667]
 wait_time = 2.0
 autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

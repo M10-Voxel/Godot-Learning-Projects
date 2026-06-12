@@ -9,10 +9,14 @@
 [ext_resource type="FontFile" uid="uid://c2v5p0e5aj5bt" path="res://art/ui_assets/Font/Kenney Future.ttf" id="6_85g3d"]
 [ext_resource type="Texture2D" uid="uid://cban5sw7xel3u" path="res://art/space_shooter_assets/PNG/playerShip1_blue.png" id="7_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://drnsicmoc7eve" path="res://art/space_shooter_assets/PNG/playerShip3_blue.png" id="8_eb6dy"]
+[ext_resource type="Script" uid="uid://bi750yrnn3oiq" path="res://scripts/ShipUi.cs" id="9_a8y0u"]
 [ext_resource type="FontFile" uid="uid://h0d7rpordj80" path="res://art/ui_assets/Font/Kenney Future Narrow.ttf" id="9_trceg"]
 [ext_resource type="Texture2D" uid="uid://cxf6mcc7un78s" path="res://art/ui_assets/PNG/Blue/Default/icon_outline_checkmark.png" id="10_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://pvc7lkmk5b1f" path="res://components/laser_1.tscn" id="10_muem4"]
+[ext_resource type="PackedScene" uid="uid://s7ovrhs4cogg" path="res://components/laser_2.tscn" id="11_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://csbvk6gfl7xf4" path="res://art/ui_assets/PNG/Blue/Default/icon_outline_cross.png" id="11_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://waqi4iecw51f" path="res://art/ui_assets/PNG/Red/Default/button_rectangle_border.png" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://bi18sajpka68u" path="res://components/laser_3.tscn" id="13_0ld40"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -198,6 +202,7 @@ _gameOverScore = NodePath("CanvasLayer/gameOverScreen/FinalScore")
 [node name="CanvasLayer" type="CanvasLayer" parent="ui" unique_id=1642623733]
 
 [node name="startScreen" type="Node2D" parent="ui/CanvasLayer" unique_id=1451947178]
+visible = false
 
 [node name="Title" type="Label" parent="ui/CanvasLayer/startScreen" unique_id=1421535711]
 offset_right = 720.0
@@ -262,40 +267,66 @@ theme_type_variation = &"FlatButton"
 theme_override_styles/focus = SubResource("StyleBoxFlat_eb6dy")
 
 [node name="chooseScreen" type="Node2D" parent="ui/CanvasLayer" unique_id=1996346319]
-visible = false
 
 [node name="SelectText" type="Label" parent="ui/CanvasLayer/chooseScreen" unique_id=1167505882]
 offset_right = 720.0
 offset_bottom = 640.0
 text = "
-
 Select your Spaceship"
 label_settings = SubResource("LabelSettings_jbj1t")
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="ships" type="Node2D" parent="ui/CanvasLayer/chooseScreen" unique_id=1071999732]
 
-[node name="Ship1" type="Sprite2D" parent="ui/CanvasLayer/chooseScreen/ships" unique_id=82525365]
+[node name="Ship1" type="Sprite2D" parent="ui/CanvasLayer/chooseScreen/ships" unique_id=82525365 node_paths=PackedStringArray("_anchor")]
 texture_filter = 1
 position = Vector2(360, 640)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("7_ya4ey")
+script = ExtResource("9_a8y0u")
+_laser = ExtResource("10_muem4")
+_anchor = NodePath("point")
 
-[node name="Ship2" type="Sprite2D" parent="ui/CanvasLayer/chooseScreen/ships" unique_id=1862940268]
+[node name="point" type="Node2D" parent="ui/CanvasLayer/chooseScreen/ships/Ship1" unique_id=539449438]
+position = Vector2(0, -60.399998)
+
+[node name="Timer" type="Timer" parent="ui/CanvasLayer/chooseScreen/ships/Ship1" unique_id=2141986027]
+wait_time = 0.6
+autostart = true
+
+[node name="Ship2" type="Sprite2D" parent="ui/CanvasLayer/chooseScreen/ships" unique_id=1862940268 node_paths=PackedStringArray("_anchor")]
 visible = false
 texture_filter = 1
 position = Vector2(360, 640)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("4_o6xl0")
+script = ExtResource("9_a8y0u")
+_laser = ExtResource("11_dp3eg")
+_anchor = NodePath("point")
 
-[node name="Ship3" type="Sprite2D" parent="ui/CanvasLayer/chooseScreen/ships" unique_id=902599681]
-visible = false
+[node name="point" type="Node2D" parent="ui/CanvasLayer/chooseScreen/ships/Ship2" unique_id=216943667]
+position = Vector2(0, -60.399998)
+
+[node name="Timer" type="Timer" parent="ui/CanvasLayer/chooseScreen/ships/Ship2" unique_id=1001771713]
+wait_time = 1.2
+autostart = true
+
+[node name="Ship3" type="Sprite2D" parent="ui/CanvasLayer/chooseScreen/ships" unique_id=902599681 node_paths=PackedStringArray("_anchor")]
 texture_filter = 1
 position = Vector2(360, 640)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("8_eb6dy")
+script = ExtResource("9_a8y0u")
+_laser = ExtResource("13_0ld40")
+_anchor = NodePath("point")
+
+[node name="point" type="Node2D" parent="ui/CanvasLayer/chooseScreen/ships/Ship3" unique_id=125292454]
+position = Vector2(0, -66.39999)
+
+[node name="Timer" type="Timer" parent="ui/CanvasLayer/chooseScreen/ships/Ship3" unique_id=401547451]
+wait_time = 1.5
+autostart = true
 
 [node name="buttons" type="Node2D" parent="ui/CanvasLayer/chooseScreen" unique_id=1079490601]
 
@@ -614,6 +645,9 @@ theme_type_variation = &"FlatButton"
 theme_override_styles/focus = SubResource("StyleBoxFlat_eb6dy")
 
 [connection signal="pressed" from="ui/CanvasLayer/startScreen/PlayButton/ButtonPlay" to="ui" method="OnButtonPlayPressed"]
+[connection signal="timeout" from="ui/CanvasLayer/chooseScreen/ships/Ship1/Timer" to="ui/CanvasLayer/chooseScreen/ships/Ship1" method="OnTimerTimeout"]
+[connection signal="timeout" from="ui/CanvasLayer/chooseScreen/ships/Ship2/Timer" to="ui/CanvasLayer/chooseScreen/ships/Ship2" method="OnTimerTimeout"]
+[connection signal="timeout" from="ui/CanvasLayer/chooseScreen/ships/Ship3/Timer" to="ui/CanvasLayer/chooseScreen/ships/Ship3" method="OnTimerTimeout"]
 [connection signal="pressed" from="ui/CanvasLayer/chooseScreen/buttons/Ship1Button/ButtonShip1" to="ui" method="OnButtonShip1Pressed"]
 [connection signal="pressed" from="ui/CanvasLayer/chooseScreen/buttons/Ship2Button/ButtonShip2" to="ui" method="OnButtonShip2Pressed"]
 [connection signal="pressed" from="ui/CanvasLayer/chooseScreen/buttons/Ship3Button/ButtonShip3" to="ui" method="OnButtonShip3Pressed"]

@@ -7,10 +7,13 @@
 radius = 6.0
 height = 40.0
 
-[node name="laser1" type="CharacterBody2D" unique_id=1146056826 node_paths=PackedStringArray("_laserSprite", "_laserCollision")]
+[node name="laser1" type="CharacterBody2D" unique_id=1146056826 node_paths=PackedStringArray("_laserSprite", "_laserCollision", "_rAnchor", "_lAnchor")]
 script = ExtResource("1_ar8e4")
+_laser = null
 _laserSprite = NodePath("Sprite2D")
 _laserCollision = NodePath("Area2D/CollisionShape2D")
+_rAnchor = NodePath("rPoint")
+_lAnchor = NodePath("lPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1665888262]
 texture_filter = 1
@@ -32,3 +35,5 @@ rotation = -0.5235988
 [node name="Timer" type="Timer" parent="." unique_id=1130163667]
 wait_time = 2.0
 autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
