@@ -94,14 +94,14 @@ public partial class Ui : Node2D
         if (Global.Mute)
         {
             Global.Mute = false;
-            _soundOff.Visible = true;
-            _soundOn.Visible = false;
+            _soundOff.Visible = false;
+            _soundOn.Visible = true;
         }
         else
         {
             Global.Mute = true;
-            _soundOff.Visible = false;
-            _soundOn.Visible = true;
+            _soundOff.Visible = true;
+            _soundOn.Visible = false;
         }
     }
 

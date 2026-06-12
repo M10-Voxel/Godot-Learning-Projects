@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csbvk6gfl7xf4" path="res://art/ui_assets/PNG/Blue/Default/icon_outline_cross.png" id="11_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://waqi4iecw51f" path="res://art/ui_assets/PNG/Red/Default/button_rectangle_border.png" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://bi18sajpka68u" path="res://components/laser_3.tscn" id="13_0ld40"]
+[ext_resource type="PackedScene" uid="uid://dqubjutvfcs3u" path="res://components/player.tscn" id="18_dp3eg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wfyh"]
 texture = ExtResource("1_o5qli")
@@ -202,7 +203,6 @@ _gameOverScore = NodePath("CanvasLayer/gameOverScreen/FinalScore")
 [node name="CanvasLayer" type="CanvasLayer" parent="ui" unique_id=1642623733]
 
 [node name="startScreen" type="Node2D" parent="ui/CanvasLayer" unique_id=1451947178]
-visible = false
 
 [node name="Title" type="Label" parent="ui/CanvasLayer/startScreen" unique_id=1421535711]
 offset_right = 720.0
@@ -267,15 +267,7 @@ theme_type_variation = &"FlatButton"
 theme_override_styles/focus = SubResource("StyleBoxFlat_eb6dy")
 
 [node name="chooseScreen" type="Node2D" parent="ui/CanvasLayer" unique_id=1996346319]
-
-[node name="SelectText" type="Label" parent="ui/CanvasLayer/chooseScreen" unique_id=1167505882]
-offset_right = 720.0
-offset_bottom = 640.0
-text = "
-Select your Spaceship"
-label_settings = SubResource("LabelSettings_jbj1t")
-horizontal_alignment = 1
-autowrap_mode = 2
+visible = false
 
 [node name="ships" type="Node2D" parent="ui/CanvasLayer/chooseScreen" unique_id=1071999732]
 
@@ -313,6 +305,7 @@ wait_time = 1.2
 autostart = true
 
 [node name="Ship3" type="Sprite2D" parent="ui/CanvasLayer/chooseScreen/ships" unique_id=902599681 node_paths=PackedStringArray("_anchor")]
+visible = false
 texture_filter = 1
 position = Vector2(360, 640)
 scale = Vector2(2.5, 2.5)
@@ -518,6 +511,15 @@ offset_bottom = 50.0
 theme_type_variation = &"FlatButton"
 theme_override_styles/focus = SubResource("StyleBoxFlat_eb6dy")
 
+[node name="SelectText" type="Label" parent="ui/CanvasLayer/chooseScreen" unique_id=1167505882]
+offset_right = 720.0
+offset_bottom = 640.0
+text = "
+Select your Spaceship"
+label_settings = SubResource("LabelSettings_jbj1t")
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="inGameScreen" type="Node2D" parent="ui/CanvasLayer" unique_id=1576658255]
 visible = false
 
@@ -643,6 +645,9 @@ offset_right = 210.0
 offset_bottom = 50.0
 theme_type_variation = &"FlatButton"
 theme_override_styles/focus = SubResource("StyleBoxFlat_eb6dy")
+
+[node name="player" parent="." unique_id=985449750 instance=ExtResource("18_dp3eg")]
+position = Vector2(360, 1100)
 
 [connection signal="pressed" from="ui/CanvasLayer/startScreen/PlayButton/ButtonPlay" to="ui" method="OnButtonPlayPressed"]
 [connection signal="timeout" from="ui/CanvasLayer/chooseScreen/ships/Ship1/Timer" to="ui/CanvasLayer/chooseScreen/ships/Ship1" method="OnTimerTimeout"]
