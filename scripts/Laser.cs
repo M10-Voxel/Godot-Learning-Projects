@@ -5,7 +5,7 @@ namespace SpaceShooter.scripts;
 public partial class Laser : CharacterBody2D
 {
 	[Export] private float _speed = 900.0f;
-	[Export] private int _lasterType = 1;
+	[Export] public int LasterType { get; private set; } = 1;
 	[Export] private PackedScene _laser;
 
 	[ExportGroup("Two Extra Lasers")]
@@ -30,7 +30,7 @@ public partial class Laser : CharacterBody2D
 	{
 		if (_global.GameOver) return;
 
-		switch (_lasterType)
+		switch (LasterType)
 		{
 			case 1:
 				Velocity = new Vector2(_xDirection, _yDirection) * _speed;

@@ -8,7 +8,9 @@ public partial class Global : Node
     [Signal] public delegate void GameOverChangedEventHandler(bool gameOver);
     public bool GameOver { get; private set; } = false;
 
-    public static bool GameOn { get; set; } = false;
+    [Signal] public delegate void GameOnChangedEventHandler(bool gameOn);
+    public bool GameOn { get; private set; } = false;
+
     public static int Score { get; set; } = 0;
     public static int ChosenShip { get; set; } = 1;
     public static bool Mute { get; set; } = false;
@@ -19,6 +21,14 @@ public partial class Global : Node
 
         GameOver = value;
         EmitSignal(SignalName.GameOverChanged, GameOver);
+    }
+
+    public void SetGameOn(bool value)
+    {
+        if (GameOn == value) return;
+
+        GameOn = value;
+        EmitSignal(SignalName.GameOnChanged, GameOn);
     }
 
     public void ResetValues()

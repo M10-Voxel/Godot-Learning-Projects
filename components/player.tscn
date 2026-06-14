@@ -46,7 +46,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_couud"]
-resource_name = "explosion"
+resource_name = "explode"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -91,7 +91,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mm1xv"]
 _data = {
 &"RESET": SubResource("Animation_0lm1f"),
-&"explosion": SubResource("Animation_couud"),
+&"explode": SubResource("Animation_couud"),
 &"idle": SubResource("Animation_pir3r")
 }
 
@@ -202,13 +202,14 @@ _data = {
 &"idle": SubResource("Animation_kn8w6")
 }
 
-[node name="player" type="CharacterBody2D" unique_id=985449750 node_paths=PackedStringArray("_anchor", "_shootTimer", "_powerUpTimer", "_allShips", "_ship1", "_ship2", "_ship3", "_explosionAnimation", "_powerUpAnimation", "_damageAnimation", "_laserSound", "_damageSound", "_gameOverSound")]
+[node name="player" type="CharacterBody2D" unique_id=985449750 node_paths=PackedStringArray("_anchor", "_shootTimer", "_powerUpTimer", "_invincibilityTimer", "_allShips", "_ship1", "_ship2", "_ship3", "_explosionAnimation", "_powerUpAnimation", "_damageAnimation", "_laserSound", "_damageSound", "_gameOverSound")]
 visible = false
 script = ExtResource("1_7ta67")
-_stoppingDistance = 15.0
+_stoppingDistance = 10.0
 _anchor = NodePath("anchor")
 _shootTimer = NodePath("ShootTimer")
 _powerUpTimer = NodePath("PowerUpTimer")
+_invincibilityTimer = NodePath("InvincibilityTimer")
 _laser1 = ExtResource("2_jhk7o")
 _laser2 = ExtResource("3_1wqow")
 _laser3 = ExtResource("4_6qb5m")
@@ -274,6 +275,10 @@ autostart = true
 wait_time = 5.0
 one_shot = true
 
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=69395079]
+wait_time = 0.6
+one_shot = true
+
 [node name="ExplosionAnimation" type="AnimationPlayer" parent="." unique_id=472555555]
 libraries/ = SubResource("AnimationLibrary_mm1xv")
 
@@ -295,3 +300,4 @@ stream = ExtResource("7_pir3r")
 [connection signal="area_entered" from="Area2D" to="." method="OnArea2DAreaEntered"]
 [connection signal="timeout" from="ShootTimer" to="." method="OnShootTimerTimeout"]
 [connection signal="timeout" from="PowerUpTimer" to="." method="OnPowerUpTimerTimeout"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="OnInvincibilityTimerTimeout"]

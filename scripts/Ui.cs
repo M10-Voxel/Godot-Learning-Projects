@@ -53,7 +53,6 @@ public partial class Ui : Node2D
         }
     }
 
-
     //________________________________________________________________________________________
 
     private void OnButtonPlayPressed()
@@ -83,7 +82,7 @@ public partial class Ui : Node2D
 
     private void OnButtonSelectPressed()
     {
-        Global.GameOn = true;
+        _global.SetGameOn(true);
         ShowOnly(_inGameScreen, _chooseScreen, _startScreen, _gameOverScreen);
     }
 
