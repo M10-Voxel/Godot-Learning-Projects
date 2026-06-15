@@ -8,7 +8,7 @@ public partial class Global : Node
     [Signal] public delegate void GameOverChangedEventHandler(bool gameOver);
     public bool GameOver { get; private set; } = false;
 
-    [Signal] public delegate void GameOnChangedEventHandler(bool gameOn);
+    [Signal] public delegate void GameWinChangedEventHandler(bool gameOn);
     public bool GameWin { get; private set; } = false;
 
     [Signal] public delegate void PowerUpStateChangedEventHandler(bool activePowerUp);
@@ -38,7 +38,7 @@ public partial class Global : Node
         if (GameWin == value) return;
 
         GameWin = value;
-        EmitSignal(SignalName.GameOnChanged, GameWin);
+        EmitSignal(SignalName.GameWinChanged, GameWin);
     }
     public void SetActivePowerUp(bool value)
     {
