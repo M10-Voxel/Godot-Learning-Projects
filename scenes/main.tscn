@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://b6nk3ib2b62sg"]
 
+[ext_resource type="Script" uid="uid://dp6v651hoif38" path="res://scripts/ui/UiScreensToggle.cs" id="1_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://rbgtdfalkawk" path="res://components/ui/scrolling_background.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://bx2ypx0y2841l" path="res://scripts/ui/UiMenu.cs" id="1_trceg"]
 [ext_resource type="Texture2D" uid="uid://dpwtv6uap8v5p" path="res://assets/plattformer/Spritesheets/spritesheet-tiles-default.png" id="2_0wfyh"]
@@ -263,7 +264,12 @@ stacked_shadow_0/outline_size = 4
 
 [node name="main" type="Node2D" unique_id=1730579766]
 
-[node name="ui" type="Node2D" parent="." unique_id=2025515163]
+[node name="ui" type="Node2D" parent="." unique_id=2025515163 node_paths=PackedStringArray("_uiMenu", "_uiInGame", "_uiGameOver", "_uiGameWin")]
+script = ExtResource("1_a8y0u")
+_uiMenu = NodePath("menu")
+_uiInGame = NodePath("inGame")
+_uiGameOver = NodePath("gameOver")
+_uiGameWin = NodePath("gameWin")
 
 [node name="menu" type="CanvasLayer" parent="ui" unique_id=1664447528 node_paths=PackedStringArray("_muteAnimation")]
 script = ExtResource("1_trceg")
