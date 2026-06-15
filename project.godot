@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="2D-Plattformer"
+run/main_scene="uid://b6nk3ib2b62sg"
+config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*uid://gp2txkvl0fnh"
+
+[dotnet]
+
+project/assembly_name="2D-Plattformer"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://components/": "yellow",
+"res://scenes/": "purple",
+"res://scripts/": "green"
+}
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
