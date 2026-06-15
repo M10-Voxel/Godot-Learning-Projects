@@ -10,7 +10,7 @@ height = 1996.0
 
 [node name="laser3" type="CharacterBody2D" unique_id=1146056826]
 script = ExtResource("1_bab83")
-_lasterType = 3
+LasterType = 3
 _laser = ExtResource("2_h4rgd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1665888262]

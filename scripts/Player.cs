@@ -84,12 +84,8 @@ public partial class Player : CharacterBody2D
 
 		if (_health <= 0 || _isDestroyed)
 		{
-			_global.SetGameOver(true);
-			_speed = 0.0f;
-			_allShips.Visible = false;
-			_gameOverSound.Play();
-			_explosionAnimation.Play(Animations.Explosion);
-			_isDestroyed = true;
+			GameOver();
+			return;
 		}
 		
 	}
@@ -176,6 +172,10 @@ public partial class Player : CharacterBody2D
 		{
 			TakeDamage();
 		}
+		else if (area.IsInGroup("meteor"))
+		{
+			GameOver();
+		}
 		else if (area.IsInGroup("power_up"))
 		{
 			area.GetParent().QueueFree();
@@ -188,18 +188,31 @@ public partial class Player : CharacterBody2D
 	public void TakeDamage(int amount = 1)
 	{
 		if (_isInvincible || _isDestroyed) return;
-
+		
 		_isInvincible = true;
 
 		_damageAnimation.Play(Animations.Damage);
 		_health = Mathf.Max(0, _health - amount);
+		GD.Print("Player health after hit:" + _health);
 
+		if (_health <= 0) GameOver();
 		if (_health >= 1) _damageSound.Play();
 
 		OnPowerUpTimerTimeout();
 		_invincibilityTimer.Start();
 	}
 
+
+	private void GameOver()
+	{
+		GD.Print("Game over called");
+		_global.SetGameOver(true);
+		_speed = 0.0f;
+		_allShips.Visible = false;
+		_gameOverSound.Play();
+		_explosionAnimation.Play(Animations.Explosion);
+		_isDestroyed = true;
+	}
 
 	//________________________________________________________________________________________
 	// LINKED TIMER METHODS:

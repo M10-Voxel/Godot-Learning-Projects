@@ -2,7 +2,7 @@ using Godot;
 
 namespace SpaceShooter.scripts;
 
-public partial class Enemy : CharacterBody2D
+public partial class Interactable : CharacterBody2D
 {
     [Export] private int _health = 1;
     [Export] private float _speed = 100.0f;
@@ -30,7 +30,7 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_global.GameOver || !_global.GameOn)
+        if (_global.GameOver || _global.GameOn)
         {
             Velocity = new Vector2(0, 1) * _speed;
             MoveAndSlide();
@@ -70,15 +70,11 @@ public partial class Enemy : CharacterBody2D
     {
         if (area.IsInGroup("player"))
         {
-            _health = 0;    // kill
-            if (_enemyType == Type.Meteor && area.GetParent() is Player player)
-            {
-                player.TakeDamage(999);
-            }
+            _health = 0;    // kill Enemy
         }
         else if (area.IsInGroup("laser"))
         {
-            _health -= 1;
+            _health -= 1;   // Damage Enemy
             if (_enemyType != Type.Ship && _health <= 0) return;
             
             _damageAnimation.Play(Animations.Damage);
@@ -95,7 +91,7 @@ public partial class Enemy : CharacterBody2D
 
     private void OnLifeTimeTimerTimeout()
     {
-        QueueFree();
+        //QueueFree();
     }
     
     //________________________________________________________________________________________

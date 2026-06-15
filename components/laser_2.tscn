@@ -10,7 +10,8 @@ height = 40.0
 
 [node name="laser2" type="CharacterBody2D" unique_id=1146056826 node_paths=PackedStringArray("_laserSprite", "_laserCollision", "_rAnchor", "_lAnchor")]
 script = ExtResource("1_w5muo")
-_lasterType = 2
+_speed = 700.0
+LasterType = 2
 _laser = ExtResource("2_ayiyi")
 _laserSprite = NodePath("Sprite2D")
 _laserCollision = NodePath("Area2D/CollisionShape2D")
