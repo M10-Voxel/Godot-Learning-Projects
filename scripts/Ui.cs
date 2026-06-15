@@ -82,7 +82,9 @@ public partial class Ui : Node2D
 
     private void OnButtonSelectPressed()
     {
+        GD.Print("Ui - Chosen Ship: " + Global.ChosenShip);
         _global.SetGameOn(true);
+        GD.Print("Ui - After-Restart GameOn: " + _global.GameOn);
         ShowOnly(_inGameScreen, _chooseScreen, _startScreen, _gameOverScreen);
     }
 
@@ -108,6 +110,8 @@ public partial class Ui : Node2D
 
     private void OnButtonGameOverPressed()
     {
+        GD.Print("Game Over Button pressed");
+        GD.Print("Ui - Pre-Restart GameOn: " + _global.GameOn);
         _global.ResetValues();
         GetTree().ReloadCurrentScene();
     }

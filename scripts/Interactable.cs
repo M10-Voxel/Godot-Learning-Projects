@@ -6,7 +6,7 @@ public partial class Interactable : CharacterBody2D
 {
     [Export] private int _health = 1;
     [Export] private float _speed = 100.0f;
-    [Export] private Type _enemyType = Type.Ship;
+    [Export] private Type _interactableType = Type.Ship;
     [Export] private Sprite2D _spaceshipSprite;
     [Export] private AudioStreamPlayer2D _explosionSound;
 
@@ -51,7 +51,7 @@ public partial class Interactable : CharacterBody2D
         _speed = 0;
         Velocity = Vector2.Zero;
         
-        if (_enemyType == Type.Ship)
+        if (_interactableType == Type.Ship)
         {
             _spaceshipSprite.Visible = false;
             _explosionAnimation.Play(Animations.Explosion);
@@ -74,15 +74,20 @@ public partial class Interactable : CharacterBody2D
         }
         else if (area.IsInGroup("laser"))
         {
-            _health -= 1;   // Damage Enemy
-            if (_enemyType != Type.Ship && _health <= 0) return;
+            if (_interactableType == Type.Powerup) return; // Powerups shouldn't be able to be shot
             
-            _damageAnimation.Play(Animations.Damage);
-
+            _health -= 1;   // Damage Enemy
+            if (_interactableType == Type.Ship && _health > 0)  // Only Play Animation if it is a ship
+            {
+                _damageAnimation.Play(Animations.Damage);
+            }
+            
             if (area.GetParent() is Laser laser && laser.LasterType != 3)
             {
                 laser.QueueFree();
             }
+            
+            
         }
     }
 
@@ -100,7 +105,8 @@ public partial class Interactable : CharacterBody2D
     private enum Type
     {
         Ship,
-        Meteor
+        Meteor,
+        Powerup
     }
     private static class Animations
     {

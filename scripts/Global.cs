@@ -29,12 +29,13 @@ public partial class Global : Node
 
         GameOn = value;
         EmitSignal(SignalName.GameOnChanged, GameOn);
+        GD.Print("Emitted GameOnChanged signal: " + GameOn);
     }
 
     public void ResetValues()
     {
         SetGameOver(false);
-        GameOn = false;
+        SetGameOn(false);
         Score = 0;
         ChosenShip = 1;
         Mute = false;

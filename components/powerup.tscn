@@ -140,7 +140,9 @@ _data = {
 
 [node name="powerup" type="CharacterBody2D" unique_id=2028439518 node_paths=PackedStringArray("_spaceshipSprite", "_explosionSound", "_explosionAnimation", "_damageAnimation")]
 script = ExtResource("1_m0i0m")
+_health = 999
 _speed = 150.0
+_interactableType = 2
 _spaceshipSprite = NodePath("spaceshipSprite")
 _explosionSound = NodePath("ExplosionSound")
 _explosionAnimation = NodePath("ExplosionAnimation")

@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csbvk6gfl7xf4" path="res://art/ui_assets/PNG/Blue/Default/icon_outline_cross.png" id="11_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://waqi4iecw51f" path="res://art/ui_assets/PNG/Red/Default/button_rectangle_border.png" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://bi18sajpka68u" path="res://components/laser_3.tscn" id="13_0ld40"]
-[ext_resource type="PackedScene" path="res://components/player.tscn" id="18_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://dqubjutvfcs3u" path="res://components/player.tscn" id="18_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://bpgbpclh0eyte" path="res://components/enemy_1.tscn" id="19_jscy8"]
 [ext_resource type="PackedScene" uid="uid://de58l1gkaao5h" path="res://components/enemy_2.tscn" id="20_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://c1yn4mqcyw7cg" path="res://components/meteor.tscn" id="21_y6deb"]
@@ -654,16 +654,16 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_eb6dy")
 position = Vector2(360, 1100)
 
 [node name="enemy1" parent="." unique_id=2028439518 instance=ExtResource("19_jscy8")]
-position = Vector2(120, -185)
+position = Vector2(285, -213)
 
 [node name="enemy2" parent="." unique_id=1864512169 instance=ExtResource("20_pm3ni")]
 position = Vector2(288, -66)
 
-[node name="meteor" parent="." unique_id=2133104114 instance=ExtResource("21_y6deb")]
-position = Vector2(528, -160)
+[node name="meteor" parent="." unique_id=962120505 instance=ExtResource("21_y6deb")]
+position = Vector2(461, -168)
 
-[node name="powerup" parent="." unique_id=1102778183 instance=ExtResource("22_og1vs")]
-position = Vector2(391, -354)
+[node name="powerup" parent="." unique_id=2063454087 instance=ExtResource("22_og1vs")]
+position = Vector2(586, -131)
 
 [connection signal="pressed" from="ui/CanvasLayer/startScreen/PlayButton/ButtonPlay" to="ui" method="OnButtonPlayPressed"]
 [connection signal="timeout" from="ui/CanvasLayer/chooseScreen/ships/Ship1/Timer" to="ui/CanvasLayer/chooseScreen/ships/Ship1" method="OnTimerTimeout"]

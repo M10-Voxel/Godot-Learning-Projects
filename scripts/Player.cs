@@ -22,7 +22,6 @@ public partial class Player : CharacterBody2D
 	[Export] private PackedScene _laser3;
 	
 	[ExportGroup("Ships")]
-	[Export] private Node2D _allShips;
 	[Export] private Sprite2D _ship1;
 	[Export] private Sprite2D _ship2;
 	[Export] private Sprite2D _ship3;
@@ -48,10 +47,19 @@ public partial class Player : CharacterBody2D
 	private void OnGameOnChanged(bool gameOn)
 	{
 		if (!gameOn) return;
-		
-		TurnOnShipBody();
-		Visible = true;
+
+		_isDestroyed = false;
+		_canShoot = true;
+		_powerUpBoost = 0.0f;
+		_isInvincible = false;
+
+		_explosionAnimation.Play(Animations.Idle);
+		_powerUpAnimation.Play(Animations.Idle);
+		_damageAnimation.Play(Animations.Idle);
+
+		ShowPlayer();
 	}
+
 	
 	//________________________________________________________________________________________
 	
@@ -90,11 +98,26 @@ public partial class Player : CharacterBody2D
 		
 	}
 	
+	public override void _ExitTree()
+	{
+		if (_global != null)
+		{
+			_global.GameOnChanged -= OnGameOnChanged;
+		}
+	}
+
+	
 	//________________________________________________________________________________________
 	// SUB METHODS OF _PhysicsProcess:
 	
-	private void TurnOnShipBody()
+	private void ShowPlayer()
 	{
+		Visible = true;
+		
+		_ship1.Visible = false;
+		_ship2.Visible = false;
+		_ship3.Visible = false;
+
 		switch (Global.ChosenShip)
 		{
 			case 1:
@@ -108,6 +131,7 @@ public partial class Player : CharacterBody2D
 				break;
 		}
 	}
+
 	
 	private void HandleMovement()
 	{
@@ -185,7 +209,7 @@ public partial class Player : CharacterBody2D
 		}
 	}
 	
-	public void TakeDamage(int amount = 1)
+	private void TakeDamage(int amount = 1)
 	{
 		if (_isInvincible || _isDestroyed) return;
 		
@@ -193,7 +217,6 @@ public partial class Player : CharacterBody2D
 
 		_damageAnimation.Play(Animations.Damage);
 		_health = Mathf.Max(0, _health - amount);
-		GD.Print("Player health after hit:" + _health);
 
 		if (_health <= 0) GameOver();
 		if (_health >= 1) _damageSound.Play();
@@ -205,14 +228,21 @@ public partial class Player : CharacterBody2D
 
 	private void GameOver()
 	{
-		GD.Print("Game over called");
+		if (_isDestroyed) return;
+
+		_isDestroyed = true;
+
 		_global.SetGameOver(true);
-		_speed = 0.0f;
-		_allShips.Visible = false;
+		_global.SetGameOn(false);
+
+		_ship1.Visible = false;
+		_ship2.Visible = false;
+		_ship3.Visible = false;
+
 		_gameOverSound.Play();
 		_explosionAnimation.Play(Animations.Explosion);
-		_isDestroyed = true;
 	}
+
 
 	//________________________________________________________________________________________
 	// LINKED TIMER METHODS:
