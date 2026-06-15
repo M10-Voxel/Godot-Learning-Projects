@@ -9,6 +9,7 @@ radius = 6.0
 height = 1996.0
 
 [node name="laser3" type="CharacterBody2D" unique_id=1146056826]
+z_index = -1
 script = ExtResource("1_bab83")
 LasterType = 3
 _laser = ExtResource("2_h4rgd")
@@ -43,7 +44,7 @@ position = Vector2(-30, 0)
 rotation = -0.5235988
 
 [node name="Timer" type="Timer" parent="." unique_id=1130163667]
-wait_time = 0.9
+wait_time = 0.8
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

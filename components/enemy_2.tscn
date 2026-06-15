@@ -141,7 +141,7 @@ _data = {
 [node name="enemy2" type="CharacterBody2D" unique_id=2028439518 node_paths=PackedStringArray("_spaceshipSprite", "_explosionSound", "_explosionAnimation", "_damageAnimation")]
 script = ExtResource("1_kc3gc")
 _health = 3
-_speed = 75.0
+_speed = 120.0
 _spaceshipSprite = NodePath("spaceshipSprite")
 _explosionSound = NodePath("ExplosionSound")
 _explosionAnimation = NodePath("ExplosionAnimation")
@@ -180,7 +180,7 @@ stream = ExtResource("5_5hjcx")
 pitch_scale = 0.72
 
 [node name="LifteTimeTimer" type="Timer" parent="." unique_id=571234149]
-wait_time = 5.0
+wait_time = 15.0
 one_shot = true
 autostart = true
 

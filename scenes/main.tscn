@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bi18sajpka68u" path="res://components/laser_3.tscn" id="13_0ld40"]
 [ext_resource type="PackedScene" uid="uid://dqubjutvfcs3u" path="res://components/player.tscn" id="18_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://bpgbpclh0eyte" path="res://components/enemy_1.tscn" id="19_jscy8"]
+[ext_resource type="Script" uid="uid://b2rq5dciau4fd" path="res://scripts/Spawner.cs" id="19_yc10j"]
 [ext_resource type="PackedScene" uid="uid://de58l1gkaao5h" path="res://components/enemy_2.tscn" id="20_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://c1yn4mqcyw7cg" path="res://components/meteor.tscn" id="21_y6deb"]
 [ext_resource type="PackedScene" uid="uid://dhje11eqafab0" path="res://components/powerup.tscn" id="22_og1vs"]
@@ -153,6 +154,7 @@ outline_color = Color(0.8039216, 0.043137256, 0.16470589, 1)
 [node name="main" type="Node2D" unique_id=2121602076]
 
 [node name="background" type="Node2D" parent="." unique_id=602049280]
+z_index = -100
 script = ExtResource("1_0wfyh")
 
 [node name="space1" type="Node2D" parent="background" unique_id=175869708]
@@ -653,17 +655,25 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_eb6dy")
 [node name="player" parent="." unique_id=985449750 instance=ExtResource("18_dp3eg")]
 position = Vector2(360, 1100)
 
-[node name="enemy1" parent="." unique_id=2028439518 instance=ExtResource("19_jscy8")]
-position = Vector2(285, -213)
+[node name="spawner" type="Node2D" parent="." unique_id=767564287 node_paths=PackedStringArray("_spawnIntervalTimer", "_lAnchor", "_rAnchor")]
+script = ExtResource("19_yc10j")
+_spawnIntervalTimer = NodePath("SpawnIntervalTimer")
+_enemy1 = ExtResource("19_jscy8")
+_enemy2 = ExtResource("20_pm3ni")
+_meteor = ExtResource("21_y6deb")
+_powerup = ExtResource("22_og1vs")
+_lAnchor = NodePath("lAnchor")
+_rAnchor = NodePath("rAnchor")
 
-[node name="enemy2" parent="." unique_id=1864512169 instance=ExtResource("20_pm3ni")]
-position = Vector2(288, -66)
+[node name="lAnchor" type="Node2D" parent="spawner" unique_id=1651922948]
+position = Vector2(50, -100)
 
-[node name="meteor" parent="." unique_id=962120505 instance=ExtResource("21_y6deb")]
-position = Vector2(461, -168)
+[node name="rAnchor" type="Node2D" parent="spawner" unique_id=1392740434]
+position = Vector2(670, -100)
 
-[node name="powerup" parent="." unique_id=2063454087 instance=ExtResource("22_og1vs")]
-position = Vector2(586, -131)
+[node name="SpawnIntervalTimer" type="Timer" parent="spawner" unique_id=2061757353]
+wait_time = 0.7
+autostart = true
 
 [connection signal="pressed" from="ui/CanvasLayer/startScreen/PlayButton/ButtonPlay" to="ui" method="OnButtonPlayPressed"]
 [connection signal="timeout" from="ui/CanvasLayer/chooseScreen/ships/Ship1/Timer" to="ui/CanvasLayer/chooseScreen/ships/Ship1" method="OnTimerTimeout"]
@@ -675,3 +685,4 @@ position = Vector2(586, -131)
 [connection signal="pressed" from="ui/CanvasLayer/chooseScreen/buttons/SelectButton/ButtonSelect" to="ui" method="OnButtonSelectPressed"]
 [connection signal="pressed" from="ui/CanvasLayer/inGameScreen/MuteButton/ButtonMute" to="ui" method="OnButtonMutePressed"]
 [connection signal="pressed" from="ui/CanvasLayer/gameOverScreen/GameOverButton/ButtonGameOver" to="ui" method="OnButtonGameOverPressed"]
+[connection signal="timeout" from="spawner/SpawnIntervalTimer" to="spawner" method="OnSpawnIntervalTimerTimeout"]

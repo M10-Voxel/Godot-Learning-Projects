@@ -73,6 +73,7 @@ public partial class Laser : CharacterBody2D
 
 	private void OnTimerTimeout()
 	{
+		if (_global.GameOver) return;
 		QueueFree();
 	}
 }

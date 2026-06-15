@@ -11,7 +11,8 @@ public partial class Global : Node
     [Signal] public delegate void GameOnChangedEventHandler(bool gameOn);
     public bool GameOn { get; private set; } = false;
 
-    public static int Score { get; set; } = 0;
+    [Signal] public delegate void ScoreChangedEventHandler(int score);
+    public static int Score { get; private set; } = 0;
     public static int ChosenShip { get; set; } = 1;
     public static bool Mute { get; set; } = false;
 
@@ -30,6 +31,12 @@ public partial class Global : Node
         GameOn = value;
         EmitSignal(SignalName.GameOnChanged, GameOn);
         GD.Print("Emitted GameOnChanged signal: " + GameOn);
+    }
+
+    public void AddGameScore(int score)
+    {
+        Score += score;
+        EmitSignal(SignalName.ScoreChanged, Score);
     }
 
     public void ResetValues()

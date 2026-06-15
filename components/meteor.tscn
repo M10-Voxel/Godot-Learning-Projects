@@ -141,7 +141,7 @@ _data = {
 [node name="meteor" type="CharacterBody2D" unique_id=2028439518 node_paths=PackedStringArray("_spaceshipSprite", "_explosionSound", "_explosionAnimation", "_damageAnimation")]
 script = ExtResource("1_w5vrq")
 _health = 999
-_speed = 80.0
+_speed = 65.0
 _interactableType = 1
 _spaceshipSprite = NodePath("meteorSprite")
 _explosionSound = NodePath("ExplosionSound")
@@ -181,7 +181,7 @@ stream = ExtResource("5_4rrh1")
 pitch_scale = 0.72
 
 [node name="LifteTimeTimer" type="Timer" parent="." unique_id=571234149]
-wait_time = 5.0
+wait_time = 25.0
 one_shot = true
 autostart = true
 

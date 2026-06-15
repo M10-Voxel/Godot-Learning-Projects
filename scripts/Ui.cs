@@ -33,22 +33,28 @@ public partial class Ui : Node2D
         ShowOnly(_ship1, _ship2, _ship3);
 
         _global.GameOverChanged += OnGameOverChanged;
+        _global.ScoreChanged += OnScoreChanged;
         OnGameOverChanged(_global.GameOver);
     }
 
     public override void _ExitTree()
     {
         _global.GameOverChanged -= OnGameOverChanged;
+        _global.ScoreChanged -= OnScoreChanged;
     }
 
     //________________________________________________________________________________________
+
+    private void OnScoreChanged(int score)
+    {
+        _inGameScore.Text = Global.Score.ToString();
+    }
     
     private void OnGameOverChanged(bool gameOver)
     {
         if (gameOver)
         {
             ShowOnly(_gameOverScreen, _startScreen, _chooseScreen, _inGameScreen);
-            _inGameScore.Text = Global.Score.ToString();
             _gameOverScore.Text = "Score:\n" + Global.Score;
         }
     }
@@ -82,9 +88,7 @@ public partial class Ui : Node2D
 
     private void OnButtonSelectPressed()
     {
-        GD.Print("Ui - Chosen Ship: " + Global.ChosenShip);
         _global.SetGameOn(true);
-        GD.Print("Ui - After-Restart GameOn: " + _global.GameOn);
         ShowOnly(_inGameScreen, _chooseScreen, _startScreen, _gameOverScreen);
     }
 

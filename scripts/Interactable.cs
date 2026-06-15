@@ -30,7 +30,7 @@ public partial class Interactable : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_global.GameOver || _global.GameOn)
+        if (!_global.GameOver && _global.GameOn)
         {
             Velocity = new Vector2(0, 1) * _speed;
             MoveAndSlide();
@@ -38,7 +38,7 @@ public partial class Interactable : CharacterBody2D
 
         if (_health <= 0 && !_destroyed)
         {
-            Global.Score += 10;
+            _global.AddGameScore(10);
             Destroy();
         }
     }
@@ -96,7 +96,8 @@ public partial class Interactable : CharacterBody2D
 
     private void OnLifeTimeTimerTimeout()
     {
-        //QueueFree();
+        if (_global.GameOver) return;
+        QueueFree();
     }
     
     //________________________________________________________________________________________

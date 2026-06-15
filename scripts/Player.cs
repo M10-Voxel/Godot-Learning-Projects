@@ -157,13 +157,13 @@ public partial class Player : CharacterBody2D
 		switch (Global.ChosenShip)
 		{
 			case 1:
-				ShootLaser(_laser1, 0.5f);
+				ShootLaser(_laser1, 0.4f);
 				break;
 			case 2:
 				ShootLaser(_laser2, 0.8f);
 				break;
 			case 3:
-				ShootLaser(_laser3, 1.5f, true);
+				ShootLaser(_laser3, 2.0f, true);
 				break;
 			default:
 				GD.PushWarning($"Unknown chosen ship: {Global.ChosenShip}");
