@@ -21,6 +21,12 @@ public partial class UiScreensToggle : Node2D
 		_global.GameOverChanged += OnGameOverChanged;
 	}
 	
+	public override void _ExitTree()
+	{
+		_global.GameWinChanged -= OnGameWinChanged;
+		_global.GameOverChanged -= OnGameOverChanged;
+	}
+	
 	private void OnGameWinChanged(bool gameWin)
 	{
 		if (gameWin)
@@ -38,8 +44,16 @@ public partial class UiScreensToggle : Node2D
 	}
 
 	
-	
-	
+	private void OnLvlButtonPressed()
+	{
+		ShowOnly(_uiInGame, _uiMenu, _uiGameWin, _uiGameOver );
+	}
+
+	private void OnMenuButtonPressed()
+	{
+		_global.ResetValues();
+		GetTree().ReloadCurrentScene();
+	}
 	
 	
 	private static void ShowOnly(CanvasLayer visibleItem, params CanvasLayer[] hiddenItems)

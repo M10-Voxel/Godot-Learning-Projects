@@ -23,13 +23,34 @@ public partial class UiMenu : CanvasLayer
 		if (isOn)
 		{
 			_muteAnimation.PlayBackwards("switch");
+			AudioServer.SetBusMute(AudioServer.GetBusIndex("Master"), false);
 			GD.Print("Sound On");
 		}
 		else
 		{
 			_muteAnimation.Play("switch");
+			AudioServer.SetBusMute(AudioServer.GetBusIndex("Master"), true);
 			GD.Print("Sound Off");
 		}
+	}
+
+
+	private void OnLvl1ButtonPressed()
+	{
+		Node2D newLevel = _lvl1Scene.Instantiate<Node2D>();
+		AddSibling(newLevel);
+	}
+	
+	private void OnLvl2ButtonPressed()
+	{
+		Node2D newLevel = _lvl2Scene.Instantiate<Node2D>();
+		AddSibling(newLevel);
+	}
+
+	private void OnLvl3ButtonPressed()
+	{
+		Node2D newLevel = _lvl3Scene.Instantiate<Node2D>();
+		AddSibling(newLevel);
 	}
 	
 	

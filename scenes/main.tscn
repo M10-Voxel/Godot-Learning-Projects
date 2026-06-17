@@ -12,8 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://dtml1td1m8gqm" path="res://assets/plattformer/Sprites/Tiles/Default/hud_heart.png" id="7_tipki"]
 [ext_resource type="Texture2D" uid="uid://mlfvfvrlxjrm" path="res://assets/plattformer/Sprites/Tiles/Default/hud_coin.png" id="8_85g3d"]
 [ext_resource type="Texture2D" uid="uid://drj8p68ld4454" path="res://assets/ui/PNG/Blue/Default/check_square_grey_cross.png" id="9_85g3d"]
+[ext_resource type="Script" uid="uid://u30f2b107vu1" path="res://scripts/ui/UiInGame.cs" id="10_muem4"]
 [ext_resource type="Texture2D" uid="uid://bs65c3s65x1q5" path="res://assets/ui/PNG/Red/Default/button_rectangle_depth_flat.png" id="10_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://bigpm076jw7pd" path="res://assets/plattformer/Sprites/Tiles/Default/hud_heart_empty.png" id="11_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://b5n5usekpucdd" path="res://assets/ui/PNG/Yellow/Default/button_rectangle_depth_flat.png" id="11_eb6dy"]
+[ext_resource type="Script" uid="uid://cs4ebcb4f60c6" path="res://scripts/ui/UiGameOver.cs" id="14_dp3eg"]
+[ext_resource type="Script" uid="uid://dg8omaoa14l16" path="res://scripts/ui/UiGameWin.cs" id="16_0ld40"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sugp2"]
 texture = ExtResource("2_0wfyh")
@@ -337,13 +341,20 @@ flip_v = true
 libraries/ = SubResource("AnimationLibrary_muem4")
 
 [node name="lvl1Button" type="Node2D" parent="ui/menu" unique_id=369268603]
-position = Vector2(0, -12)
+position = Vector2(768, 450)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ui/menu/lvl1Button" unique_id=506753213]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 485.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -22.5
+offset_right = 142.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("7_eb6dy")
 patch_margin_left = 5
 patch_margin_top = 5
@@ -351,82 +362,134 @@ patch_margin_right = 5
 patch_margin_bottom = 5
 
 [node name="Label" type="Label" parent="ui/menu/lvl1Button" unique_id=966626694]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 480.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -15.5
+offset_right = 54.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
 text = "Level 1"
 label_settings = SubResource("LabelSettings_o6xl0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="lvl1Button" type="Button" parent="ui/menu/lvl1Button" unique_id=2124280070]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 485.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -22.5
+offset_right = 142.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tipki")
 
-[node name="lvl2Button" type="Node2D" parent="ui/menu" unique_id=1041858539]
-position = Vector2(0, 52)
+[node name="lvl2Button" type="Node2D" parent="ui/menu" unique_id=135814407]
+position = Vector2(768, 514)
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ui/menu/lvl2Button" unique_id=1494952225]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 485.0
+[node name="NinePatchRect" type="NinePatchRect" parent="ui/menu/lvl2Button" unique_id=924797930]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -22.5
+offset_right = 142.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("7_eb6dy")
 patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="Label" type="Label" parent="ui/menu/lvl2Button" unique_id=1713764195]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 480.0
+[node name="Label" type="Label" parent="ui/menu/lvl2Button" unique_id=546814394]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Level 2"
 label_settings = SubResource("LabelSettings_o6xl0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lvl2Button" type="Button" parent="ui/menu/lvl2Button" unique_id=1007498953]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 485.0
+[node name="lvl2Button" type="Button" parent="ui/menu/lvl2Button" unique_id=957017231]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -22.5
+offset_right = 142.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tipki")
 
-[node name="lvl3Button" type="Node2D" parent="ui/menu" unique_id=358110525]
-position = Vector2(0, 116)
+[node name="lvl3Button" type="Node2D" parent="ui/menu" unique_id=1059203457]
+position = Vector2(768, 578)
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ui/menu/lvl3Button" unique_id=296226885]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 485.0
+[node name="NinePatchRect" type="NinePatchRect" parent="ui/menu/lvl3Button" unique_id=1126650848]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -22.5
+offset_right = 142.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("7_eb6dy")
 patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="ui/menu/lvl3Button" unique_id=816996535]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 480.0
+[node name="Label" type="Label" parent="ui/menu/lvl3Button" unique_id=1181254568]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Level 3"
 label_settings = SubResource("LabelSettings_o6xl0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lvl3Button" type="Button" parent="ui/menu/lvl3Button" unique_id=884175337]
-offset_left = 626.0
-offset_top = 440.0
-offset_right = 910.0
-offset_bottom = 485.0
+[node name="lvl3Button" type="Button" parent="ui/menu/lvl3Button" unique_id=432772471]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -22.5
+offset_right = 142.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tipki")
 
 [node name="Title" type="Label" parent="ui/menu" unique_id=1667804265]
@@ -438,10 +501,33 @@ label_settings = SubResource("LabelSettings_jyhfs")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="inGame" type="CanvasLayer" parent="ui" unique_id=2059044931]
+[node name="inGame" type="CanvasLayer" parent="ui" unique_id=2059044931 node_paths=PackedStringArray("_coinAmount", "_powerHearts", "_heart1", "_heart2", "_heart3")]
 visible = false
+script = ExtResource("10_muem4")
+_coinAmount = NodePath("counter/CoinLabel")
+_powerHearts = NodePath("hearts/powerHearts")
+_heart1 = NodePath("hearts/normalHearts/h1")
+_heart2 = NodePath("hearts/normalHearts/h2")
+_heart3 = NodePath("hearts/normalHearts/h3")
 
 [node name="hearts" type="Node2D" parent="ui/inGame" unique_id=1780843726]
+
+[node name="emptyHearts" type="Node2D" parent="ui/inGame/hearts" unique_id=706679830]
+
+[node name="h1" type="Sprite2D" parent="ui/inGame/hearts/emptyHearts" unique_id=1702736529]
+position = Vector2(25.000002, 25)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("11_dp3eg")
+
+[node name="h2" type="Sprite2D" parent="ui/inGame/hearts/emptyHearts" unique_id=154593752]
+position = Vector2(60, 25)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("11_dp3eg")
+
+[node name="h3" type="Sprite2D" parent="ui/inGame/hearts/emptyHearts" unique_id=533819397]
+position = Vector2(95, 25)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("11_dp3eg")
 
 [node name="normalHearts" type="Node2D" parent="ui/inGame/hearts" unique_id=138467712]
 
@@ -486,12 +572,12 @@ texture = ExtResource("7_tipki")
 
 [node name="counter" type="Node2D" parent="ui/inGame" unique_id=1433627234]
 
-[node name="h1" type="Sprite2D" parent="ui/inGame/counter" unique_id=130485021]
+[node name="coinSprite" type="Sprite2D" parent="ui/inGame/counter" unique_id=130485021]
 position = Vector2(1073, 25)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("8_85g3d")
 
-[node name="Label" type="Label" parent="ui/inGame/counter" unique_id=321194769]
+[node name="CoinLabel" type="Label" parent="ui/inGame/counter" unique_id=321194769]
 offset_left = 770.0
 offset_top = 4.0
 offset_right = 1050.0
@@ -524,6 +610,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tipki")
 
 [node name="gameOver" type="CanvasLayer" parent="ui" unique_id=1366626283]
 visible = false
+script = ExtResource("14_dp3eg")
 
 [node name="GameOverLabel" type="Label" parent="ui/gameOver" unique_id=852354639]
 offset_right = 1152.0
@@ -533,10 +620,10 @@ label_settings = SubResource("LabelSettings_trceg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lvl1Button" type="Node2D" parent="ui/gameOver" unique_id=473610332]
+[node name="menuButton" type="Node2D" parent="ui/gameOver" unique_id=473610332]
 position = Vector2(434, 505)
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ui/gameOver/lvl1Button" unique_id=1450454734]
+[node name="NinePatchRect" type="NinePatchRect" parent="ui/gameOver/menuButton" unique_id=1450454734]
 offset_right = 284.0
 offset_bottom = 45.0
 texture = ExtResource("10_ya4ey")
@@ -546,7 +633,7 @@ patch_margin_right = 5
 patch_margin_bottom = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="ui/gameOver/lvl1Button" unique_id=857638808]
+[node name="Label" type="Label" parent="ui/gameOver/menuButton" unique_id=857638808]
 offset_right = 284.0
 offset_bottom = 40.0
 text = "main Menu"
@@ -554,13 +641,15 @@ label_settings = SubResource("LabelSettings_o6xl0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lvl1Button" type="Button" parent="ui/gameOver/lvl1Button" unique_id=1868922669]
+[node name="MenuButton" type="Button" parent="ui/gameOver/menuButton" unique_id=1868922669]
 offset_right = 284.0
 offset_bottom = 45.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tipki")
 
-[node name="gameWin" type="CanvasLayer" parent="ui" unique_id=790030670]
+[node name="gameWin" type="CanvasLayer" parent="ui" unique_id=790030670 node_paths=PackedStringArray("_finalScore")]
 visible = false
+script = ExtResource("16_0ld40")
+_finalScore = NodePath("ScoreLabel")
 
 [node name="GameOverLabel" type="Label" parent="ui/gameWin" unique_id=1543030622]
 offset_right = 1152.0
@@ -579,10 +668,10 @@ label_settings = SubResource("LabelSettings_jkv2x")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lvl1Button" type="Node2D" parent="ui/gameWin" unique_id=1469611755]
+[node name="menuButton" type="Node2D" parent="ui/gameWin" unique_id=1469611755]
 position = Vector2(434, 505)
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ui/gameWin/lvl1Button" unique_id=1626936008]
+[node name="NinePatchRect" type="NinePatchRect" parent="ui/gameWin/menuButton" unique_id=1626936008]
 offset_right = 284.0
 offset_bottom = 45.0
 texture = ExtResource("11_eb6dy")
@@ -592,7 +681,7 @@ patch_margin_right = 5
 patch_margin_bottom = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="ui/gameWin/lvl1Button" unique_id=1584323811]
+[node name="Label" type="Label" parent="ui/gameWin/menuButton" unique_id=1584323811]
 offset_right = 284.0
 offset_bottom = 40.0
 text = "main Menu"
@@ -600,9 +689,18 @@ label_settings = SubResource("LabelSettings_o6xl0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="lvl1Button" type="Button" parent="ui/gameWin/lvl1Button" unique_id=292753591]
+[node name="MenuButton" type="Button" parent="ui/gameWin/menuButton" unique_id=292753591]
 offset_right = 284.0
 offset_bottom = 45.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tipki")
 
 [connection signal="toggled" from="ui/menu/muteButton/MuteButton" to="ui/menu" method="OnMuteButtonToggled"]
+[connection signal="pressed" from="ui/menu/lvl1Button/lvl1Button" to="ui" method="OnLvlButtonPressed"]
+[connection signal="pressed" from="ui/menu/lvl1Button/lvl1Button" to="ui/menu" method="OnLvl1ButtonPressed"]
+[connection signal="pressed" from="ui/menu/lvl2Button/lvl2Button" to="ui" method="OnLvlButtonPressed"]
+[connection signal="pressed" from="ui/menu/lvl2Button/lvl2Button" to="ui/menu" method="OnLvl2ButtonPressed"]
+[connection signal="pressed" from="ui/menu/lvl3Button/lvl3Button" to="ui" method="OnLvlButtonPressed"]
+[connection signal="pressed" from="ui/menu/lvl3Button/lvl3Button" to="ui/menu" method="OnLvl3ButtonPressed"]
+[connection signal="pressed" from="ui/inGame/exitButton/MenuButton" to="ui" method="OnMenuButtonPressed"]
+[connection signal="pressed" from="ui/gameOver/menuButton/MenuButton" to="ui" method="OnMenuButtonPressed"]
+[connection signal="pressed" from="ui/gameWin/menuButton/MenuButton" to="ui" method="OnMenuButtonPressed"]

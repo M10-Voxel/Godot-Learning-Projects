@@ -51,7 +51,7 @@ public partial class Global : Node
     {
         if (Health == value) return;
         
-        Health = value;
+        Health = Mathf.Clamp(value, 0 , 3);
         EmitSignal(SignalName.HealthChanged, Health);
     }
     public void SetCoins(int value)
