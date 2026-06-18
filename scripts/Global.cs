@@ -54,6 +54,10 @@ public partial class Global : Node
         Health = Mathf.Clamp(value, 0 , 3);
         EmitSignal(SignalName.HealthChanged, Health);
     }
+    public void ChangeHealth(int value)
+    {
+        SetHealth(Health + value);
+    }
     public void SetCoins(int value)
     {
         if (Coins == value) return;

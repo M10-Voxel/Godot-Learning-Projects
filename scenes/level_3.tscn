@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dpwtv6uap8v5p" path="res://assets/plattformer/Spritesheets/spritesheet-tiles-default.png" id="2_uwxec"]
 [ext_resource type="Texture2D" uid="uid://cgkn8k86ilgtx" path="res://assets/plattformer/Sprites/Tiles/Default/torch_on_a.png" id="3_1pn4d"]
 [ext_resource type="Texture2D" uid="uid://duwoc5v8jml38" path="res://assets/plattformer/Sprites/Tiles/Default/torch_on_b.png" id="4_ah8om"]
+[ext_resource type="PackedScene" uid="uid://bdidyowf62cv1" path="res://components/player.tscn" id="5_ah8om"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nkto"]
 texture = ExtResource("2_uwxec")
@@ -56,7 +57,8 @@ metadata/_snap_count = 2
 metadata/_snap_enabled = true
 
 [sub_resource type="Animation" id="Animation_p6vls"]
-length = 0.001
+length = 0.3
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -64,10 +66,10 @@ tracks/0/path = NodePath("TorchL:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.033333335, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("3_1pn4d")]
+"values": [ExtResource("3_1pn4d"), ExtResource("4_ah8om")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -76,10 +78,10 @@ tracks/1/path = NodePath("TorchR:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("4_ah8om")]
+"values": [ExtResource("4_ah8om"), ExtResource("3_1pn4d")]
 }
 
 [sub_resource type="Animation" id="Animation_hhfj6"]
@@ -345,7 +347,6 @@ tile_map_data = PackedByteArray("AABCAAYAAAAAABEAAABHAAYAAAAAABEAAAAZAAcAAAARAAY
 tile_set = SubResource("TileSet_rus8k")
 
 [node name="collision" type="Node2D" parent="map" unique_id=1527532917]
-visible = false
 
 [node name="gameBorder" type="StaticBody2D" parent="map/collision" unique_id=1118572119]
 
@@ -354,7 +355,7 @@ position = Vector2(-1186, 268)
 shape = SubResource("RectangleShape2D_bswci")
 
 [node name="RightBorder" type="CollisionShape2D" parent="map/collision/gameBorder" unique_id=1513832074]
-position = Vector2(4574, 268)
+position = Vector2(4581, 268)
 shape = SubResource("RectangleShape2D_bswci")
 
 [node name="SpikeBorder1" type="CollisionShape2D" parent="map/collision/gameBorder" unique_id=1159830007]
@@ -381,7 +382,7 @@ position = Vector2(1312, 350)
 shape = SubResource("RectangleShape2D_4nkto")
 one_way_collision = true
 
-[node name="spikeCollider" type="Area2D" parent="map/collision" unique_id=219739975]
+[node name="spikeCollider" type="Area2D" parent="map/collision" unique_id=219739975 groups=["spikes"]]
 
 [node name="SpikeCollider1" type="CollisionShape2D" parent="map/collision/spikeCollider" unique_id=496454250]
 position = Vector2(1088, 647)
@@ -395,8 +396,11 @@ shape = SubResource("RectangleShape2D_ah8om")
 position = Vector2(2976, 647)
 shape = SubResource("RectangleShape2D_uwxec")
 
-[node name="winCollider" type="Area2D" parent="map/collision" unique_id=37968108]
+[node name="winCollider" type="Area2D" parent="map/collision" unique_id=37968108 groups=["win"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/collision/winCollider" unique_id=2008538841]
-position = Vector2(3989, 472.5)
+position = Vector2(4008, 472.5)
 shape = SubResource("RectangleShape2D_2y5yt")
+
+[node name="player" parent="." unique_id=1172452329 instance=ExtResource("5_ah8om")]
+position = Vector2(240, 472)

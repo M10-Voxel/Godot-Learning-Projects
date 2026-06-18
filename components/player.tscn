@@ -1,0 +1,342 @@
+[gd_scene format=3 uid="uid://bdidyowf62cv1"]
+
+[ext_resource type="Script" uid="uid://b52l3bw246kls" path="res://scripts/Player.cs" id="1_6qb5m"]
+[ext_resource type="AudioStream" uid="uid://c7lu0xdagrvtt" path="res://assets/plattformer/Sounds/sfx_coin.ogg" id="1_jhk7o"]
+[ext_resource type="Texture2D" uid="uid://1ypijl02y8tq" path="res://assets/plattformer/Sprites/Characters/Default/character_yellow_hit.png" id="1_mm1xv"]
+[ext_resource type="AudioStream" uid="uid://37h0cubt70h0" path="res://assets/plattformer/Sounds/sfx_gem.ogg" id="2_1wqow"]
+[ext_resource type="Texture2D" uid="uid://bcib2xb8xgeay" path="res://assets/plattformer/Sprites/Characters/Default/character_yellow_idle.png" id="2_qe8hj"]
+[ext_resource type="AudioStream" uid="uid://kkgbaqsycvgh" path="res://assets/plattformer/Sounds/sfx_hurt.ogg" id="3_6qb5m"]
+[ext_resource type="Texture2D" uid="uid://dpuyf6eyqlrrf" path="res://assets/plattformer/Sprites/Characters/Default/character_yellow_walk_b.png" id="3_eju5v"]
+[ext_resource type="Texture2D" uid="uid://reri7gpxsufb" path="res://assets/plattformer/Sprites/Characters/Default/character_yellow_jump.png" id="4_7ta67"]
+[ext_resource type="AudioStream" uid="uid://cfevsjdf4jm38" path="res://assets/plattformer/Sounds/sfx_jump.ogg" id="4_kn8w6"]
+[ext_resource type="AudioStream" uid="uid://caepo8xi78rkc" path="res://assets/plattformer/Sounds/sfx_disappear.ogg" id="5_1wqow"]
+[ext_resource type="Texture2D" uid="uid://cvw4ycmidvh57" path="res://assets/plattformer/Sprites/Characters/Default/character_yellow_walk_a.png" id="5_jhk7o"]
+[ext_resource type="Texture2D" uid="uid://bmfxwcwni31we" path="res://assets/plattformer/Sprites/Characters/Default/character_beige_hit.png" id="6_1wqow"]
+[ext_resource type="Texture2D" uid="uid://csfcsdw4skt3y" path="res://assets/plattformer/Sprites/Characters/Default/character_beige_idle.png" id="7_6qb5m"]
+[ext_resource type="Texture2D" uid="uid://b6fp8y0xmnyca" path="res://assets/plattformer/Sprites/Characters/Default/character_beige_walk_b.png" id="8_kn8w6"]
+[ext_resource type="Texture2D" uid="uid://cybcu2tgebf07" path="res://assets/plattformer/Sprites/Characters/Default/character_beige_jump.png" id="9_eaetu"]
+[ext_resource type="Texture2D" uid="uid://bb0nnuksdq2xv" path="res://assets/plattformer/Sprites/Characters/Default/character_beige_walk_a.png" id="10_1dyya"]
+
+[sub_resource type="Animation" id="Animation_bswci"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rus8k"]
+resource_name = "game_over"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 0.84705883)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5xbjy"]
+_data = {
+&"RESET": SubResource("Animation_bswci"),
+&"game_over": SubResource("Animation_rus8k")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tr1x6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mm1xv")
+}],
+"loop": true,
+"name": &"game_over",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qe8hj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_eju5v")
+}],
+"loop": true,
+"name": &"in_air_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7ta67")
+}],
+"loop": true,
+"name": &"in_air_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jhk7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eju5v")
+}],
+"loop": true,
+"name": &"sprinting",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jhk7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eju5v")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d5akn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1wqow")
+}],
+"loop": true,
+"name": &"gameOver",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6qb5m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_kn8w6")
+}],
+"loop": true,
+"name": &"inAirDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_eaetu")
+}],
+"loop": true,
+"name": &"inAirUp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_1dyya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kn8w6")
+}],
+"loop": true,
+"name": &"sprinting",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_1dyya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kn8w6")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 7.0
+}]
+
+[sub_resource type="Animation" id="Animation_go7sj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("default/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.73333335, 0, 0.07058824, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7gny6"]
+resource_name = "damage"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("default/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.74509805), Color(0.73333335, 0, 0.07058824, 0.74509805), Color(1, 1, 1, 0.74509805)]
+}
+
+[sub_resource type="Animation" id="Animation_2aecg"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("default/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.73333335, 0, 0.07058824, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6dial"]
+_data = {
+&"RESET": SubResource("Animation_go7sj"),
+&"damage": SubResource("Animation_7gny6"),
+&"idle": SubResource("Animation_2aecg")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mm1xv"]
+radius = 37.0
+height = 98.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm1xv"]
+size = Vector2(56, 8)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qe8hj"]
+radius = 30.0
+height = 98.0
+
+[node name="player" type="CharacterBody2D" unique_id=1172452329 node_paths=PackedStringArray("_damageAnimation", "_gameOverAnimation", "_bodyCollision", "_hitboxCollision", "_playerSprite", "_poweredUpPlayerSprite", "_coinSound", "_gemSound", "_jumpSound", "_damageSound", "_gameOverSound", "_camera", "_invincibilityTimer") groups=["player"]]
+z_index = 25
+script = ExtResource("1_6qb5m")
+_damageAnimation = NodePath("body/HurtAnimation")
+_gameOverAnimation = NodePath("effects/GameOverAnimation")
+_bodyCollision = NodePath("Body")
+_hitboxCollision = NodePath("areas/Hitbox/CollisionShape2D")
+_playerSprite = NodePath("body/default")
+_poweredUpPlayerSprite = NodePath("body/powerUp")
+_coinSound = NodePath("sounds/CoinSFX")
+_gemSound = NodePath("sounds/GemSFX")
+_jumpSound = NodePath("sounds/JumpSFX")
+_damageSound = NodePath("sounds/DamageSFX")
+_gameOverSound = NodePath("sounds/GameOverSFX")
+_camera = NodePath("Camera")
+_invincibilityTimer = NodePath("InvincibilityTimer")
+
+[node name="effects" type="Node2D" parent="." unique_id=1315705176]
+
+[node name="ColorRect" type="ColorRect" parent="effects" unique_id=1574388223]
+z_index = 100
+offset_left = -607.1111
+offset_top = -388.0
+offset_right = 616.0
+offset_bottom = 300.0
+color = Color(1, 1, 1, 0)
+
+[node name="GameOverAnimation" type="AnimationPlayer" parent="effects" unique_id=1698529095]
+libraries/ = SubResource("AnimationLibrary_5xbjy")
+
+[node name="sounds" type="Node2D" parent="." unique_id=1790394107]
+
+[node name="CoinSFX" type="AudioStreamPlayer2D" parent="sounds" unique_id=1967904264]
+stream = ExtResource("1_jhk7o")
+
+[node name="GemSFX" type="AudioStreamPlayer2D" parent="sounds" unique_id=632794373]
+stream = ExtResource("2_1wqow")
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="sounds" unique_id=1559189053]
+stream = ExtResource("4_kn8w6")
+
+[node name="DamageSFX" type="AudioStreamPlayer2D" parent="sounds" unique_id=105111782]
+stream = ExtResource("3_6qb5m")
+
+[node name="GameOverSFX" type="AudioStreamPlayer2D" parent="sounds" unique_id=1257150346]
+stream = ExtResource("5_1wqow")
+
+[node name="body" type="Node2D" parent="." unique_id=563994131]
+
+[node name="default" type="AnimatedSprite2D" parent="body" unique_id=485414289]
+clip_children = 2
+sprite_frames = SubResource("SpriteFrames_tr1x6")
+animation = &"in_air_down"
+
+[node name="ColorRect" type="ColorRect" parent="body/default" unique_id=622462590]
+offset_left = -57.0
+offset_top = -61.0
+offset_right = 56.0
+offset_bottom = 67.0
+color = Color(0.73333335, 0, 0.07058824, 0)
+
+[node name="powerUp" type="AnimatedSprite2D" parent="body" unique_id=2113910212]
+visible = false
+sprite_frames = SubResource("SpriteFrames_d5akn")
+animation = &"sprinting"
+
+[node name="HurtAnimation" type="AnimationPlayer" parent="body" unique_id=451445961]
+libraries/ = SubResource("AnimationLibrary_6dial")
+
+[node name="areas" type="Node2D" parent="." unique_id=632222516]
+
+[node name="Hitbox" type="Area2D" parent="areas" unique_id=350586819]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areas/Hitbox" unique_id=2077378265]
+position = Vector2(0, 17)
+shape = SubResource("CapsuleShape2D_mm1xv")
+debug_color = Color(0.7090815, 0.26564005, 1, 0.41960785)
+
+[node name="Feet" type="Area2D" parent="areas" unique_id=481593877 groups=["feet"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areas/Feet" unique_id=508774544]
+position = Vector2(0, 61)
+shape = SubResource("RectangleShape2D_mm1xv")
+
+[node name="Head" type="Area2D" parent="areas" unique_id=567909815 groups=["head"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areas/Head" unique_id=556098897]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_mm1xv")
+
+[node name="Body" type="CollisionShape2D" parent="." unique_id=1801930770]
+position = Vector2(0, 17)
+scale = Vector2(0.95, 0.95)
+shape = SubResource("CapsuleShape2D_qe8hj")
+debug_color = Color(1.8289685e-06, 0.6456132, 0.2768192, 0.41960785)
+
+[node name="Camera" type="Camera2D" parent="." unique_id=2034678022]
+position = Vector2(0, -40)
+position_smoothing_enabled = true
+
+[node name="InvincibilityTimer" type="Timer" parent="." unique_id=1944140812]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="area_entered" from="areas/Hitbox" to="." method="OnHitboxAreaEntered"]
+[connection signal="body_entered" from="areas/Hitbox" to="." method="OnHitboxBodyEntered"]
+[connection signal="body_exited" from="areas/Hitbox" to="." method="OnHitboxBodyExited"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="OnInvincibilityTimerTimeout"]
