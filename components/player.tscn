@@ -59,7 +59,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_mm1xv")
 }],
-"loop": true,
+"loop": 1,
 "name": &"game_over",
 "speed": 5.0
 }, {
@@ -67,7 +67,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_qe8hj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -75,7 +75,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_eju5v")
 }],
-"loop": true,
+"loop": 1,
 "name": &"in_air_down",
 "speed": 5.0
 }, {
@@ -83,7 +83,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_7ta67")
 }],
-"loop": true,
+"loop": 1,
 "name": &"in_air_up",
 "speed": 5.0
 }, {
@@ -94,7 +94,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_eju5v")
 }],
-"loop": true,
+"loop": 1,
 "name": &"sprinting",
 "speed": 6.0
 }, {
@@ -105,7 +105,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_eju5v")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking",
 "speed": 5.0
 }]
@@ -116,7 +116,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_1wqow")
 }],
-"loop": true,
+"loop": 1,
 "name": &"gameOver",
 "speed": 5.0
 }, {
@@ -124,7 +124,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_6qb5m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -132,7 +132,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_kn8w6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"inAirDown",
 "speed": 5.0
 }, {
@@ -140,7 +140,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_eaetu")
 }],
-"loop": true,
+"loop": 1,
 "name": &"inAirUp",
 "speed": 5.0
 }, {
@@ -151,7 +151,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_kn8w6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"sprinting",
 "speed": 8.0
 }, {
@@ -162,7 +162,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_kn8w6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"walking",
 "speed": 7.0
 }]
@@ -232,21 +232,21 @@ size = Vector2(56, 8)
 radius = 30.0
 height = 98.0
 
-[node name="player" type="CharacterBody2D" unique_id=1172452329 node_paths=PackedStringArray("_damageAnimation", "_gameOverAnimation", "_bodyCollision", "_hitboxCollision", "_playerSprite", "_poweredUpPlayerSprite", "_coinSound", "_gemSound", "_jumpSound", "_damageSound", "_gameOverSound", "_camera", "_invincibilityTimer") groups=["player"]]
+[node name="player" type="CharacterBody2D" unique_id=1172452329 node_paths=PackedStringArray("_playerSprite", "_poweredUpPlayerSprite", "_damageAnimation", "_gameOverAnimation", "_bodyCollision", "_hitboxCollision", "_coinSound", "_gemSound", "_jumpSound", "_damageSound", "_gameOverSound", "_camera", "_invincibilityTimer") groups=["player"]]
 z_index = 25
 script = ExtResource("1_6qb5m")
+_playerSprite = NodePath("body/default")
+_poweredUpPlayerSprite = NodePath("body/powerUp")
 _damageAnimation = NodePath("body/HurtAnimation")
 _gameOverAnimation = NodePath("effects/GameOverAnimation")
 _bodyCollision = NodePath("Body")
 _hitboxCollision = NodePath("areas/Hitbox/CollisionShape2D")
-_playerSprite = NodePath("body/default")
-_poweredUpPlayerSprite = NodePath("body/powerUp")
 _coinSound = NodePath("sounds/CoinSFX")
 _gemSound = NodePath("sounds/GemSFX")
 _jumpSound = NodePath("sounds/JumpSFX")
 _damageSound = NodePath("sounds/DamageSFX")
 _gameOverSound = NodePath("sounds/GameOverSFX")
-_camera = NodePath("Camera")
+_camera = NodePath("")
 _invincibilityTimer = NodePath("InvincibilityTimer")
 
 [node name="effects" type="Node2D" parent="." unique_id=1315705176]
@@ -327,10 +327,6 @@ position = Vector2(0, 17)
 scale = Vector2(0.95, 0.95)
 shape = SubResource("CapsuleShape2D_qe8hj")
 debug_color = Color(1.8289685e-06, 0.6456132, 0.2768192, 0.41960785)
-
-[node name="Camera" type="Camera2D" parent="." unique_id=2034678022]
-position = Vector2(0, -40)
-position_smoothing_enabled = true
 
 [node name="InvincibilityTimer" type="Timer" parent="." unique_id=1944140812]
 wait_time = 1.5

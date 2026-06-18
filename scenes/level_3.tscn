@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cgkn8k86ilgtx" path="res://assets/plattformer/Sprites/Tiles/Default/torch_on_a.png" id="3_1pn4d"]
 [ext_resource type="Texture2D" uid="uid://duwoc5v8jml38" path="res://assets/plattformer/Sprites/Tiles/Default/torch_on_b.png" id="4_ah8om"]
 [ext_resource type="PackedScene" uid="uid://bdidyowf62cv1" path="res://components/player.tscn" id="5_ah8om"]
+[ext_resource type="Script" uid="uid://cmthyv7lthfh8" path="res://scripts/Camera.cs" id="6_p6vls"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nkto"]
 texture = ExtResource("2_uwxec")
@@ -404,3 +405,8 @@ shape = SubResource("RectangleShape2D_2y5yt")
 
 [node name="player" parent="." unique_id=1172452329 instance=ExtResource("5_ah8om")]
 position = Vector2(240, 472)
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1529877633 node_paths=PackedStringArray("_target")]
+position = Vector2(0, -40)
+script = ExtResource("6_p6vls")
+_target = NodePath("../player")
