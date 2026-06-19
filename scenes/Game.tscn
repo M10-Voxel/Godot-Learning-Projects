@@ -1,3 +1,19 @@
 [gd_scene format=3 uid="uid://dip62esvk4nl1"]
 
+[ext_resource type="Script" uid="uid://c4mcdvgdtybk3" path="res://scripts/scenes/Game.cs" id="1_ibkli"]
+[ext_resource type="Texture2D" uid="uid://tjvfwr3wu2ye" path="res://assets/background/rocks_2.png" id="2_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://wlxi5xo3hvml" path="res://components/Tappy.tscn" id="3_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://mi7yquw1bjlq" path="res://components/Barrier.tscn" id="4_78awf"]
+
 [node name="Game" type="Node" unique_id=159313528]
+script = ExtResource("1_ibkli")
+
+[node name="Rocks2" type="Sprite2D" parent="." unique_id=1293046846]
+position = Vector2(142, 492)
+texture = ExtResource("2_qbsmt")
+
+[node name="Tappy" parent="." unique_id=144415537 instance=ExtResource("3_cpr0p")]
+position = Vector2(201, 510)
+
+[node name="Barrier" parent="." unique_id=635638017 instance=ExtResource("4_78awf")]
+position = Vector2(-1, -1)
