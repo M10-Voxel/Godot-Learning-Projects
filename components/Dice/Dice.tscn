@@ -6,12 +6,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_i2p60"]
 radius = 37.01351
 
-[node name="Dice" type="Area2D" unique_id=1356446078 node_paths=PackedStringArray("_sprite")]
+[node name="Dice" type="Area2D" unique_id=1356446078 node_paths=PackedStringArray("_sprite") groups=["stoppable"]]
+z_index = 1
 script = ExtResource("1_k13gh")
 _sprite = NodePath("DiceSprite")
 
 [node name="DiceSprite" type="Sprite2D" parent="." unique_id=482643343]
+position = Vector2(0, 36)
 texture = ExtResource("1_naubr")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=932125099]
+position = Vector2(0, 36)
 shape = SubResource("CircleShape2D_i2p60")

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://biwbwmpgp7ewh"]
+
+[ext_resource type="Texture2D" uid="uid://dppd2jt3o16wh" path="res://assets/sprites/Fox.png" id="1_o565v"]
+[ext_resource type="Script" uid="uid://ctynrnudb5b6t" path="res://components/Fox/Fox.cs" id="1_ovean"]
+[ext_resource type="AudioStream" uid="uid://daq0p42emd4i" path="res://assets/sounds/eating.wav" id="3_qknpu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2p60"]
+size = Vector2(112, 27)
+
+[node name="Fox" type="Area2D" unique_id=1866573230 node_paths=PackedStringArray("_sprite", "_eatEffect") groups=["stoppable"]]
+script = ExtResource("1_ovean")
+_sprite = NodePath("FoxSprite")
+_eatEffect = NodePath("EatSound")
+
+[node name="FoxSprite" type="Sprite2D" parent="." unique_id=489440857]
+texture = ExtResource("1_o565v")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1927680162]
+position = Vector2(0, 33.5)
+shape = SubResource("RectangleShape2D_i2p60")
+
+[node name="EatSound" type="AudioStreamPlayer2D" parent="." unique_id=837150625]
+stream = ExtResource("3_qknpu")
+volume_db = -5.0
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

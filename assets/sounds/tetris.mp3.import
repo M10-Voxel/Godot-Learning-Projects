@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/tetris.mp3-6ef4b558761c6e69906c5d7e58ff0555.m
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

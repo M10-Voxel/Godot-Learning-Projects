@@ -4,6 +4,7 @@ namespace DiceCatcher.components.Dice;
 
 public partial class Dice : Area2D
 {
+	[Signal] public delegate void GameOverEventHandler();
 	[Export] private Sprite2D _sprite;
 	
 	private const float Speed = 80.0f;
@@ -20,5 +21,19 @@ public partial class Dice : Area2D
 	{
 		Position += new Vector2(0, Speed * (float)delta);
 		_sprite.Rotate(_rotationSpeed * (float)delta);
+		CheckGameOver();
+	}
+
+
+	private void CheckGameOver()
+	{
+		Rect2 vpr = GetViewportRect();
+		
+		if(Position.Y > vpr.End.Y)
+		{
+			SetPhysicsProcess(false);
+			EmitSignal(SignalName.GameOver);
+			QueueFree();
+		}
 	}
 }

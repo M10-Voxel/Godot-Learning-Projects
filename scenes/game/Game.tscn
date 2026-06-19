@@ -1,9 +1,25 @@
 [gd_scene format=3 uid="uid://xlj61jrmvlld"]
 
+[ext_resource type="Script" uid="uid://ckr6sbxfafpnd" path="res://scenes/game/Game.cs" id="1_7qcb4"]
 [ext_resource type="Texture2D" uid="uid://bxndsc7log5om" path="res://assets/sprites/GemBg.png" id="1_klkup"]
 [ext_resource type="PackedScene" uid="uid://b7aiq2u2mw54w" path="res://components/Dice/Dice.tscn" id="2_m44fu"]
+[ext_resource type="PackedScene" uid="uid://biwbwmpgp7ewh" path="res://components/Fox/Fox.tscn" id="3_vrspl"]
+[ext_resource type="FontFile" uid="uid://c7tgiiss0j67j" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="5_lyhax"]
+[ext_resource type="AudioStream" uid="uid://bjl1p2y50eugp" path="res://assets/sounds/tetris.mp3" id="6_365ku"]
 
-[node name="Game" type="Node2D" unique_id=796727051]
+[sub_resource type="LabelSettings" id="LabelSettings_i2p60"]
+font = ExtResource("5_lyhax")
+font_size = 24
+outline_size = 6
+outline_color = Color(0.3665946, 0.3665946, 0.36659458, 1)
+
+[node name="Game" type="Node2D" unique_id=796727051 node_paths=PackedStringArray("_fox", "_score", "_audioPlayer", "_spawnTimer")]
+script = ExtResource("1_7qcb4")
+_diceScene = ExtResource("2_m44fu")
+_fox = NodePath("Fox")
+_score = NodePath("Score")
+_audioPlayer = NodePath("AudioPlayer")
+_spawnTimer = NodePath("SpawnTimer")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=561290874]
 texture_filter = 1
@@ -11,5 +27,26 @@ position = Vector2(576, 324)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_klkup")
 
-[node name="Dice" parent="." unique_id=1356446078 instance=ExtResource("2_m44fu")]
-position = Vector2(696, 92)
+[node name="Fox" parent="." unique_id=1866573230 instance=ExtResource("3_vrspl")]
+position = Vector2(970, 564)
+
+[node name="Score" type="Label" parent="." unique_id=1382908001]
+z_index = 2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 39.0
+text = "0"
+label_settings = SubResource("LabelSettings_i2p60")
+vertical_alignment = 1
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=2145496716]
+stream = ExtResource("6_365ku")
+volume_db = -10.0
+autoplay = true
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=475679904]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="SpawnDice"]
