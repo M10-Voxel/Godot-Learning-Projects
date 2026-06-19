@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://xlj61jrmvlld"]
+
+[ext_resource type="Texture2D" uid="uid://bxndsc7log5om" path="res://assets/sprites/GemBg.png" id="1_klkup"]
+[ext_resource type="PackedScene" uid="uid://b7aiq2u2mw54w" path="res://components/Dice/Dice.tscn" id="2_m44fu"]
+
+[node name="Game" type="Node2D" unique_id=796727051]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=561290874]
+texture_filter = 1
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_klkup")
+
+[node name="Dice" parent="." unique_id=1356446078 instance=ExtResource("2_m44fu")]
+position = Vector2(696, 92)
