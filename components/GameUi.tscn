@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cip6qfhgovkkv"]
+
+[ext_resource type="Script" uid="uid://dg6omlqr4ece8" path="res://scripts/components/GameUi.cs" id="1_are1l"]
+[ext_resource type="LabelSettings" uid="uid://c8nl5ky80rmb4" path="res://resources/LabelRed24.tres" id="1_ocyd2"]
+[ext_resource type="FontFile" uid="uid://bjcoc1xtrdtjk" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_gqp6f"]
+[ext_resource type="AudioStream" uid="uid://bfvex1i44nsqs" path="res://assets/audio/game_over.wav" id="4_1s2ul"]
+[ext_resource type="AudioStream" uid="uid://l4ecch1fnveu" path="res://assets/audio/bgm_menu.mp3" id="5_jsrpd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_are1l"]
+font = ExtResource("2_gqp6f")
+font_size = 64
+font_color = Color(1, 0.32941177, 0.31764707, 1)
+outline_size = 12
+outline_color = Color(0.9999992, 0.93574035, 0.92424726, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1s2ul"]
+font = ExtResource("2_gqp6f")
+font_size = 48
+font_color = Color(0, 0, 1, 1)
+outline_size = 12
+outline_color = Color(0.91616625, 0.94451416, 1, 1)
+
+[node name="GameUi" type="Control" unique_id=1610603960 node_paths=PackedStringArray("_gameOverLabel", "_pressSpaceLabel", "_scoreLabel", "_timer", "_gameOverSound")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_are1l")
+_gameOverLabel = NodePath("MarginContainer/GameOver")
+_pressSpaceLabel = NodePath("MarginContainer/PressSpace")
+_scoreLabel = NodePath("MarginContainer/Score")
+_timer = NodePath("Timer")
+_gameOverSound = NodePath("GameOver")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2143632445]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Score" type="Label" parent="MarginContainer" unique_id=2128015143]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "0"
+label_settings = ExtResource("1_ocyd2")
+vertical_alignment = 1
+
+[node name="GameOver" type="Label" parent="MarginContainer" unique_id=598033745]
+visible = false
+layout_mode = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_are1l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressSpace" type="Label" parent="MarginContainer" unique_id=40171444]
+visible = false
+layout_mode = 2
+text = "Press Space"
+label_settings = SubResource("LabelSettings_1s2ul")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=541962157]
+wait_time = 2.0
+one_shot = true
+
+[node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=1433427580]
+stream = ExtResource("4_1s2ul")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1807136079]
+stream = ExtResource("5_jsrpd")
+volume_db = -30.0
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

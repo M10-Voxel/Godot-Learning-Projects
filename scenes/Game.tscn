@@ -4,16 +4,38 @@
 [ext_resource type="Texture2D" uid="uid://tjvfwr3wu2ye" path="res://assets/background/rocks_2.png" id="2_qbsmt"]
 [ext_resource type="PackedScene" uid="uid://wlxi5xo3hvml" path="res://components/Tappy.tscn" id="3_cpr0p"]
 [ext_resource type="PackedScene" uid="uid://mi7yquw1bjlq" path="res://components/Barrier.tscn" id="4_78awf"]
+[ext_resource type="PackedScene" uid="uid://owyfody45p7r" path="res://components/Pipes.tscn" id="5_s0nni"]
+[ext_resource type="PackedScene" uid="uid://cip6qfhgovkkv" path="res://components/GameUi.tscn" id="6_aug50"]
 
-[node name="Game" type="Node" unique_id=159313528]
+[node name="Game" type="Node" unique_id=159313528 node_paths=PackedStringArray("_upperSpawn", "_lowerSpawn", "_pipesHolder")]
 script = ExtResource("1_ibkli")
+_upperSpawn = NodePath("UpperSpawn")
+_lowerSpawn = NodePath("LowerSpawn")
+_pipesHolder = NodePath("PipesHolder")
+_pipesScene = ExtResource("5_s0nni")
 
 [node name="Rocks2" type="Sprite2D" parent="." unique_id=1293046846]
 position = Vector2(142, 492)
 texture = ExtResource("2_qbsmt")
 
 [node name="Tappy" parent="." unique_id=144415537 instance=ExtResource("3_cpr0p")]
-position = Vector2(201, 510)
+position = Vector2(73, 406)
 
 [node name="Barrier" parent="." unique_id=635638017 instance=ExtResource("4_78awf")]
 position = Vector2(-1, -1)
+
+[node name="UpperSpawn" type="Marker2D" parent="." unique_id=1792223300]
+position = Vector2(540, 270)
+
+[node name="LowerSpawn" type="Marker2D" parent="." unique_id=740530300]
+position = Vector2(540, 550)
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1039437927]
+wait_time = 1.2
+autostart = true
+
+[node name="PipesHolder" type="Node" parent="." unique_id=2105239747]
+
+[node name="GameUi" parent="." unique_id=1610603960 instance=ExtResource("6_aug50")]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="SpawnPipes"]

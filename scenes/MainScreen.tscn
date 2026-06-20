@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://bd0htoydd24eb"]
+
+[ext_resource type="Texture2D" uid="uid://vq0f5xlew4r7" path="res://assets/background/sky.png" id="1_7oy5c"]
+[ext_resource type="LabelSettings" uid="uid://b0emdny41saky" path="res://resources/LabelRed84.tres" id="1_j6ixq"]
+[ext_resource type="Script" uid="uid://pdejgohi7aow" path="res://scripts/scenes/MainScreen.cs" id="1_svp2y"]
+[ext_resource type="FontFile" uid="uid://bjcoc1xtrdtjk" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="2_ton5t"]
+[ext_resource type="LabelSettings" uid="uid://c8nl5ky80rmb4" path="res://resources/LabelRed24.tres" id="3_no7ry"]
+[ext_resource type="AudioStream" uid="uid://l4ecch1fnveu" path="res://assets/audio/bgm_menu.mp3" id="5_ju4p7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ju4p7"]
+font = ExtResource("2_ton5t")
+font_size = 48
+font_color = Color(0, 0.32941177, 1, 1)
+outline_size = 8
+outline_color = Color(0.9999992, 0.93574035, 0.92424726, 1)
+
+[sub_resource type="Animation" id="Animation_svp2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Play:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ju4p7"]
+resource_name = "flash"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Play:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1, 1.3, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_svp2y"]
+_data = {
+&"RESET": SubResource("Animation_svp2y"),
+&"flash": SubResource("Animation_ju4p7")
+}
+
+[node name="MainScreen" type="Control" unique_id=752756840 node_paths=PackedStringArray("_highScoreLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_svp2y")
+_highScoreLabel = NodePath("MarginContainer/HighScoreCount")
+
+[node name="SkyBackground" type="TextureRect" parent="." unique_id=365566090]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_7oy5c")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=880086419]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Title" type="Label" parent="MarginContainer" unique_id=2025003572]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Tappy
+Plane"
+label_settings = ExtResource("1_j6ixq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Label" parent="MarginContainer" unique_id=850861461]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Press Space
+To Play"
+label_settings = SubResource("LabelSettings_ju4p7")
+horizontal_alignment = 1
+
+[node name="HighScoreText" type="Label" parent="MarginContainer" unique_id=2141223402]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "High Score"
+label_settings = ExtResource("3_no7ry")
+vertical_alignment = 1
+
+[node name="HighScoreCount" type="Label" parent="MarginContainer" unique_id=404306584]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = ExtResource("3_no7ry")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=958464077]
+stream = ExtResource("5_ju4p7")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
+[node name="PlayFlash" type="AnimationPlayer" parent="." unique_id=594252891]
+libraries/ = SubResource("AnimationLibrary_svp2y")
+autoplay = &"flash"

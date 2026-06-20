@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cm8d5emfd0bde" path="res://assets/plane/planes_sheet.png" id="1_0hxwa"]
 [ext_resource type="Script" uid="uid://ctistos2822n6" path="res://scripts/components/Tappy.cs" id="1_cnus6"]
+[ext_resource type="AudioStream" uid="uid://cexd1me7rgau7" path="res://assets/audio/engine.mp3" id="3_t38np"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cnus6"]
 atlas = ExtResource("1_0hxwa")
@@ -35,9 +36,48 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_i2p60"]
 radius = 25.0
 
-[node name="Tappy" type="CharacterBody2D" unique_id=144415537 node_paths=PackedStringArray("_playerSprite")]
+[sub_resource type="Animation" id="Animation_cnus6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_t38np"]
+resource_name = "jump"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.3490658503988659, 0.08726646259971647, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2t7a"]
+_data = {
+&"RESET": SubResource("Animation_cnus6"),
+&"jump": SubResource("Animation_t38np")
+}
+
+[node name="Tappy" type="CharacterBody2D" unique_id=144415537 node_paths=PackedStringArray("_playerSprite", "_playerAnimation", "_engineSound")]
 script = ExtResource("1_cnus6")
 _playerSprite = NodePath("PlayerSprite")
+_playerAnimation = NodePath("AnimationPlayer")
+_engineSound = NodePath("EngineSound")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=920414352]
 scale = Vector2(0.75, 0.75)
@@ -48,3 +88,12 @@ autoplay = "fly"
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=783252222]
 position = Vector2(8, 0)
 shape = SubResource("CircleShape2D_i2p60")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1862825035]
+libraries/ = SubResource("AnimationLibrary_t2t7a")
+
+[node name="EngineSound" type="AudioStreamPlayer" parent="." unique_id=1875122951]
+stream = ExtResource("3_t38np")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
