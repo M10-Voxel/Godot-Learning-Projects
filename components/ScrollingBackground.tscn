@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://d3sf4fosp0d87"]
+
+[ext_resource type="Texture2D" uid="uid://vq0f5xlew4r7" path="res://assets/background/sky.png" id="1_casyr"]
+[ext_resource type="Texture2D" uid="uid://dssgllkm0dpq5" path="res://assets/background/clouds_1.png" id="1_rbmqb"]
+[ext_resource type="Texture2D" uid="uid://bs7rv0pa02brl" path="res://assets/background/clouds_2.png" id="2_w37xt"]
+[ext_resource type="Texture2D" uid="uid://baomy6be0k3uc" path="res://assets/background/rocks_1.png" id="3_fpbdu"]
+[ext_resource type="Texture2D" uid="uid://tjvfwr3wu2ye" path="res://assets/background/rocks_2.png" id="4_casyr"]
+
+[node name="ScrollingBackground" type="Node2D" unique_id=369299579]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1775571305]
+texture = ExtResource("1_casyr")
+centered = false
+
+[node name="CloudsBack" type="Parallax2D" parent="." unique_id=446312303]
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-10, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CloudsBack" unique_id=323828635]
+texture = ExtResource("1_rbmqb")
+centered = false
+
+[node name="CloudsFront" type="Parallax2D" parent="." unique_id=932342423]
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-30, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CloudsFront" unique_id=1169447500]
+texture = ExtResource("2_w37xt")
+centered = false
+
+[node name="MountainsBack" type="Parallax2D" parent="." unique_id=1264729600]
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-50, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="MountainsBack" unique_id=1098144512]
+texture = ExtResource("3_fpbdu")
+centered = false
+
+[node name="MountainsFront" type="Parallax2D" parent="." unique_id=717825849]
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-80, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="MountainsFront" unique_id=744914790]
+texture = ExtResource("4_casyr")
+centered = false

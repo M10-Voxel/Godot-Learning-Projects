@@ -22,6 +22,9 @@ public partial class GameUi : Control
         if (_pressSpaceLabel.IsVisible() && @event.IsActionPressed("ui_accept"))
         {
             GameManager.LoadMainScreen();
+            
+            GD.Print("New Run");
+            if (_score > ScoreManager.Instance.HighSore) GD.Print($"New High Score: {_score}");
         }
     }
 
@@ -46,8 +49,8 @@ public partial class GameUi : Control
 
     private void OnPointScored()
     {
-        GD.Print("Point scored");
         ++_score;
+        GD.Print($"Score: {_score}");
         _scoreLabel.Text = _score.ToString();
         ScoreManager.Instance.HighSore = _score;
     }
