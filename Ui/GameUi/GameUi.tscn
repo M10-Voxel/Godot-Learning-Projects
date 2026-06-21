@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dhqnuxoi8ghht"]
+
+[ext_resource type="FontFile" uid="uid://cvggivpkv0c32" path="res://Assets/fonts/LuckiestGuy-Regular.ttf" id="1_0kpmm"]
+[ext_resource type="Script" uid="uid://dmobfbqli8yw7" path="res://Ui/GameUi/GameUi.cs" id="1_2jgyd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lv4oo"]
+font = ExtResource("1_0kpmm")
+font_size = 48
+font_color = Color(0.9019608, 0.95686275, 0.98039216, 1)
+stacked_shadow_count = 1
+stacked_shadow_0/color = Color(0.35686275, 0.4, 0.4, 1)
+stacked_shadow_0/outline_size = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_0kpmm"]
+font = ExtResource("1_0kpmm")
+font_size = 20
+font_color = Color(0.9019608, 0.95686275, 0.98039216, 1)
+stacked_shadow_count = 1
+stacked_shadow_0/color = Color(0.35686275, 0.4, 0.4, 1)
+stacked_shadow_0/outline_size = 3
+
+[node name="GameUi" type="Control" unique_id=960469231 node_paths=PackedStringArray("_levelLabel", "_attemptsLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_2jgyd")
+_levelLabel = NodePath("Margin/Vertical/Level")
+_attemptsLabel = NodePath("Margin/Vertical/Attempts")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=1033544581]
+layout_mode = 1
+offset_right = 116.0
+offset_bottom = 98.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+
+[node name="Vertical" type="VBoxContainer" parent="Margin" unique_id=310789285]
+layout_mode = 2
+
+[node name="Level" type="Label" parent="Margin/Vertical" unique_id=1033902058]
+layout_mode = 2
+text = "Level 0"
+label_settings = SubResource("LabelSettings_lv4oo")
+
+[node name="Attempts" type="Label" parent="Margin/Vertical" unique_id=672591686]
+layout_mode = 2
+text = "Attempts: 0"
+label_settings = SubResource("LabelSettings_0kpmm")
