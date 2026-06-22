@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://1pg05ss6u7p7"]
 
-[ext_resource type="Script" uid="uid://s0723y54xyrt" path="res://Ui/LevelBase/LevelBase.cs" id="1_nq8be"]
+[ext_resource type="Script" uid="uid://s0723y54xyrt" path="res://Scenes/LevelBase/LevelBase.cs" id="1_nq8be"]
 [ext_resource type="PackedScene" uid="uid://bhxuvti2a2m7w" path="res://Interactables/Animal/Animal.tscn" id="2_upwop"]
 [ext_resource type="Texture2D" uid="uid://c7d53nanbsk1y" path="res://Assets/scene/colored_castle.png" id="3_m6gba"]
+[ext_resource type="PackedScene" uid="uid://bkwfjygc5qe33" path="res://Scenes/MainScreen.tscn" id="3_ooqsx"]
 [ext_resource type="PackedScene" uid="uid://udqw47at4vv0" path="res://Interactables/Water/Water.tscn" id="4_sjbp5"]
 [ext_resource type="PackedScene" uid="uid://dhqnuxoi8ghht" path="res://Ui/GameUi/GameUi.tscn" id="5_upwop"]
-[ext_resource type="PackedScene" uid="uid://ci338jhkcv4tg" path="res://Interactables/Cup/Cup.tscn" id="6_m6gba"]
 
 [node name="LevelBase" type="Node" unique_id=2049251600 node_paths=PackedStringArray("_animalStartPos")]
 script = ExtResource("1_nq8be")
 _animalStartPos = NodePath("AnimalStartPos")
 _animalScene = ExtResource("2_upwop")
+_mainScene = ExtResource("3_ooqsx")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1594100193]
 anchors_preset = 15
@@ -27,6 +28,3 @@ position = Vector2(593, 630)
 position = Vector2(146, 326)
 
 [node name="GameUi" parent="." unique_id=960469231 instance=ExtResource("5_upwop")]
-
-[node name="Cup" parent="." unique_id=1611070321 instance=ExtResource("6_m6gba")]
-position = Vector2(290, 463)

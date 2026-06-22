@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cgo34yjn22p6n" path="res://Assets/audio/stretch2.ogg" id="2_6800i"]
 [ext_resource type="AudioStream" uid="uid://cls2sqdj6tdd6" path="res://Assets/audio/catapult.ogg" id="3_7qhiq"]
 [ext_resource type="AudioStream" uid="uid://v8sry077hab4" path="res://Assets/audio/kick_wood.ogg" id="4_a4f7n"]
+[ext_resource type="Texture2D" uid="uid://f4oukfw2rvky" path="res://Assets/items/arrow.png" id="6_a4f7n"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6800i"]
 bounce = 0.3
@@ -12,7 +13,7 @@ bounce = 0.3
 [sub_resource type="CircleShape2D" id="CircleShape2D_i2p60"]
 radius = 19.0
 
-[node name="Animal" type="RigidBody2D" unique_id=1161565899 node_paths=PackedStringArray("_debugLabel", "_stretchSound", "_launchSound", "_kickSound")]
+[node name="Animal" type="RigidBody2D" unique_id=1161565899 node_paths=PackedStringArray("_debugLabel", "_directionIndicator", "_stretchSound", "_launchSound", "_kickSound")]
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_6800i")
 freeze = true
@@ -20,6 +21,7 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_7qhiq")
 _debugLabel = NodePath("Label")
+_directionIndicator = NodePath("Arrow")
 _stretchSound = NodePath("StretchSound")
 _launchSound = NodePath("LaunchSound")
 _kickSound = NodePath("KickSound")
@@ -35,6 +37,7 @@ visible = false
 shape = SubResource("CircleShape2D_i2p60")
 
 [node name="Label" type="Label" parent="." unique_id=1990878178]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -57,4 +60,11 @@ stream = ExtResource("3_7qhiq")
 [node name="KickSound" type="AudioStreamPlayer2D" parent="." unique_id=1114485503]
 stream = ExtResource("4_a4f7n")
 
+[node name="Arrow" type="Sprite2D" parent="." unique_id=1876198534]
+texture_filter = 1
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_a4f7n")
+offset = Vector2(150, 0)
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="sleeping_state_changed" from="." to="." method="OnSleepStateChanged"]

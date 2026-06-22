@@ -11,11 +11,13 @@ config_version=5
 [application]
 
 config/name="Angry Animals"
+run/main_scene="uid://bkwfjygc5qe33"
 config/features=PackedStringArray("4.7", "C#", "Mobile")
 
 [autoload]
 
 SignalHub="*uid://co52crvh5054s"
+ScoreManager="*uid://cmrljib70wrpc"
 
 [display]
 

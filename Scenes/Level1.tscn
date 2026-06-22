@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cwkxjyvla1rei"]
+
+[ext_resource type="PackedScene" uid="uid://1pg05ss6u7p7" path="res://Scenes/LevelBase/LevelBase.tscn" id="1_2llne"]
+[ext_resource type="PackedScene" uid="uid://ci338jhkcv4tg" path="res://Interactables/Cup/Cup.tscn" id="2_q12u6"]
+
+[node name="Level1" unique_id=2049251600 instance=ExtResource("1_2llne")]
+
+[node name="Level" parent="GameUi/Margin/Vertical" parent_id_path=PackedInt32Array(960469231, 310789285) index="0" unique_id=1033902058]
+text = "Level  01"
+
+[node name="Cup" parent="." index="4" unique_id=1611070321 instance=ExtResource("2_q12u6")]
+position = Vector2(357, 391)
+
+[node name="Cup2" parent="." index="5" unique_id=1818361013 instance=ExtResource("2_q12u6")]
+position = Vector2(493, 326)
+
+[editable path="GameUi"]
