@@ -1,16 +1,20 @@
 [gd_scene format=3 uid="uid://bxxekj6faa77a"]
 
+[ext_resource type="Script" uid="uid://c6g32xteptcc6" path="res://Scenes/Master/Master.cs" id="1_1t0lv"]
 [ext_resource type="Texture2D" uid="uid://bwqn55ww4rkf2" path="res://Assets/images/backgroundEmpty.png" id="1_h6g34"]
 [ext_resource type="PackedScene" uid="uid://bs1x6v1m5k1vs" path="res://Scenes/Main/Main.tscn" id="2_o4rt4"]
 [ext_resource type="PackedScene" uid="uid://bwliesedvreqm" path="res://Scenes/Game/Game.tscn" id="3_7tgqy"]
 
-[node name="Master" type="Control" unique_id=1051714642]
+[node name="Master" type="Control" unique_id=1051714642 node_paths=PackedStringArray("_mainMenuScene", "_gameScene")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1t0lv")
+_mainMenuScene = NodePath("Main")
+_gameScene = NodePath("Game")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1408346974]
 layout_mode = 1
@@ -22,8 +26,8 @@ grow_vertical = 2
 texture = ExtResource("1_h6g34")
 
 [node name="Main" parent="." unique_id=1705923367 instance=ExtResource("2_o4rt4")]
-visible = false
 layout_mode = 1
 
 [node name="Game" parent="." unique_id=1975700826 instance=ExtResource("3_7tgqy")]
+visible = false
 layout_mode = 1

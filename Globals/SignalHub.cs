@@ -3,13 +3,25 @@ using System;
 
 public partial class SignalHub : Node
 {
-	// Called when the node enters the scene tree for the first time.
+	[Signal] public delegate void OnLevelSelectedEventHandler(LevelSetting levelSetting);
+	[Signal] public delegate void OnGameExitPressedEventHandler();
+	
+	public static SignalHub Instance { get; private set; }
+
+
 	public override void _Ready()
 	{
+		Instance = this;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+
+	public static void EmitOnLevelSelected(LevelSetting levelSetting)
 	{
+		Instance.EmitSignalOnLevelSelected(levelSetting);
+	}
+
+	public static void EmitOnGameExitPressed()
+	{
+		Instance.EmitSignalOnGameExitPressed();
 	}
 }
