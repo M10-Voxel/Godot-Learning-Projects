@@ -1,0 +1,219 @@
+[gd_scene format=3 uid="uid://bwliesedvreqm"]
+
+[ext_resource type="PackedScene" uid="uid://cevqdar0spfew" path="res://Scenes/MemoryTile/MemoryTile.tscn" id="1_rdw05"]
+[ext_resource type="LabelSettings" uid="uid://bygg8kwjd7r5p" path="res://Resources/GrayLabel24.tres" id="2_gwu2e"]
+[ext_resource type="Texture2D" uid="uid://cojqkvj5axroa" path="res://Assets/ui/grey_button00.png" id="3_y3kpf"]
+[ext_resource type="Texture2D" uid="uid://c5sg10ux4bnqk" path="res://Assets/ui/blue_button00.png" id="4_3k6gv"]
+[ext_resource type="Texture2D" uid="uid://x2c11ohulhnx" path="res://Assets/ui/green_button00.png" id="5_1q8bt"]
+[ext_resource type="FontFile" uid="uid://cgvk11l8lignh" path="res://Assets/fonts/LuckiestGuy-Regular.ttf" id="6_3k6gv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1q8bt"]
+font = ExtResource("6_3k6gv")
+font_size = 24
+font_color = Color(0.38039216, 0.3882353, 0.45490196, 1)
+stacked_shadow_count = 1
+stacked_shadow_0/color = Color(0.60784316, 0.6156863, 0.6784314, 1)
+stacked_shadow_0/outline_size = 3
+
+[node name="Game" type="Control" unique_id=1975700826]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=410775215]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileGrid" type="GridContainer" parent="HBoxContainer" unique_id=831049854]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+columns = 6
+
+[node name="MemoryTile" parent="HBoxContainer/TileGrid" unique_id=533748883 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile2" parent="HBoxContainer/TileGrid" unique_id=1102858371 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile3" parent="HBoxContainer/TileGrid" unique_id=985954675 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile4" parent="HBoxContainer/TileGrid" unique_id=972782103 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile5" parent="HBoxContainer/TileGrid" unique_id=1603037526 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile6" parent="HBoxContainer/TileGrid" unique_id=1559292336 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile7" parent="HBoxContainer/TileGrid" unique_id=741536260 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile8" parent="HBoxContainer/TileGrid" unique_id=1563401891 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile9" parent="HBoxContainer/TileGrid" unique_id=502777595 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile10" parent="HBoxContainer/TileGrid" unique_id=308116279 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile11" parent="HBoxContainer/TileGrid" unique_id=1359733661 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile12" parent="HBoxContainer/TileGrid" unique_id=2049494487 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile13" parent="HBoxContainer/TileGrid" unique_id=1762747871 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile14" parent="HBoxContainer/TileGrid" unique_id=283890113 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile15" parent="HBoxContainer/TileGrid" unique_id=1963407656 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile16" parent="HBoxContainer/TileGrid" unique_id=853782089 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile17" parent="HBoxContainer/TileGrid" unique_id=1673921442 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile18" parent="HBoxContainer/TileGrid" unique_id=1002067323 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile19" parent="HBoxContainer/TileGrid" unique_id=1500684975 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile20" parent="HBoxContainer/TileGrid" unique_id=1589487354 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile21" parent="HBoxContainer/TileGrid" unique_id=1159940130 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile22" parent="HBoxContainer/TileGrid" unique_id=112346731 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile23" parent="HBoxContainer/TileGrid" unique_id=355979237 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile24" parent="HBoxContainer/TileGrid" unique_id=165869660 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile25" parent="HBoxContainer/TileGrid" unique_id=2068365373 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile26" parent="HBoxContainer/TileGrid" unique_id=1472385027 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile27" parent="HBoxContainer/TileGrid" unique_id=838324522 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile28" parent="HBoxContainer/TileGrid" unique_id=30650570 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile29" parent="HBoxContainer/TileGrid" unique_id=151298569 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile30" parent="HBoxContainer/TileGrid" unique_id=1032954310 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile31" parent="HBoxContainer/TileGrid" unique_id=2006981774 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile32" parent="HBoxContainer/TileGrid" unique_id=1356919299 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile33" parent="HBoxContainer/TileGrid" unique_id=1057026346 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile34" parent="HBoxContainer/TileGrid" unique_id=1573714887 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile35" parent="HBoxContainer/TileGrid" unique_id=852974855 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MemoryTile36" parent="HBoxContainer/TileGrid" unique_id=288789967 instance=ExtResource("1_rdw05")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=605811151]
+layout_mode = 2
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="RightSideContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer" unique_id=326347114]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MovesContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/RightSideContainer" unique_id=1070375149]
+layout_mode = 2
+
+[node name="Moves" type="Label" parent="HBoxContainer/MarginContainer/RightSideContainer/MovesContainer" unique_id=1842397498]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Moves:"
+label_settings = ExtResource("2_gwu2e")
+
+[node name="MoveCount" type="Label" parent="HBoxContainer/MarginContainer/RightSideContainer/MovesContainer" unique_id=800271215]
+layout_mode = 2
+text = "00"
+label_settings = ExtResource("2_gwu2e")
+horizontal_alignment = 2
+
+[node name="PairsContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/RightSideContainer" unique_id=1634398302]
+layout_mode = 2
+
+[node name="Pairs" type="Label" parent="HBoxContainer/MarginContainer/RightSideContainer/PairsContainer" unique_id=308707310]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pairs:"
+label_settings = ExtResource("2_gwu2e")
+
+[node name="PairCount" type="Label" parent="HBoxContainer/MarginContainer/RightSideContainer/PairsContainer" unique_id=622999766]
+layout_mode = 2
+text = "0/18"
+label_settings = ExtResource("2_gwu2e")
+horizontal_alignment = 2
+
+[node name="Seperator" type="Control" parent="HBoxContainer/MarginContainer/RightSideContainer" unique_id=91995020]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="Exit" type="TextureButton" parent="HBoxContainer/MarginContainer/RightSideContainer" unique_id=1676156571]
+layout_mode = 2
+texture_normal = ExtResource("3_y3kpf")
+texture_pressed = ExtResource("4_3k6gv")
+texture_hover = ExtResource("5_1q8bt")
+
+[node name="TopMargin" type="MarginContainer" parent="HBoxContainer/MarginContainer/RightSideContainer/Exit" unique_id=1857869535]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -20.0
+offset_right = 23.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 6
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/RightSideContainer/Exit/TopMargin" unique_id=848667925]
+layout_mode = 2
+text = "Exit"
+label_settings = SubResource("LabelSettings_1q8bt")
+horizontal_alignment = 1
+vertical_alignment = 1
