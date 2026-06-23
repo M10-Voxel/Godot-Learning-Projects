@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://q34yldxwnto7"]
+
+[ext_resource type="Script" uid="uid://cdas7uht8xnth" path="res://scenes/Levels/LevelBlueprint.cs" id="1_1fskv"]
+
+[node name="LevelBlueprint" type="Node" unique_id=498748723]
+script = ExtResource("1_1fskv")
