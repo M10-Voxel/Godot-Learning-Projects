@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d4lgwr2bccxai" path="res://Scenes/Game/Game.cs" id="1_3k6gv"]
 [ext_resource type="PackedScene" uid="uid://cevqdar0spfew" path="res://Scenes/MemoryTile/MemoryTile.tscn" id="1_rdw05"]
-[ext_resource type="LabelSettings" uid="uid://bygg8kwjd7r5p" path="res://Resources/GrayLabel24.tres" id="2_gwu2e"]
+[ext_resource type="LabelSettings" uid="uid://bygg8kwjd7r5p" path="res://Resources/WhiteLabel24.tres" id="2_gwu2e"]
 [ext_resource type="Texture2D" uid="uid://cojqkvj5axroa" path="res://Assets/ui/grey_button00.png" id="3_y3kpf"]
 [ext_resource type="Texture2D" uid="uid://c5sg10ux4bnqk" path="res://Assets/ui/blue_button00.png" id="4_3k6gv"]
 [ext_resource type="Texture2D" uid="uid://x2c11ohulhnx" path="res://Assets/ui/green_button00.png" id="5_1q8bt"]
 [ext_resource type="FontFile" uid="uid://cgvk11l8lignh" path="res://Assets/fonts/LuckiestGuy-Regular.ttf" id="6_3k6gv"]
+[ext_resource type="PackedScene" uid="uid://bea0ujlcd8mv7" path="res://Scenes/Scorer/Scorer.tscn" id="8_gvja8"]
+[ext_resource type="PackedScene" uid="uid://c0nbxhu8bsg6q" path="res://Scenes/GameWonUi/GameWonUi.tscn" id="9_m1o7v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1q8bt"]
 font = ExtResource("6_3k6gv")
@@ -16,7 +18,7 @@ stacked_shadow_count = 1
 stacked_shadow_0/color = Color(0.60784316, 0.6156863, 0.6784314, 1)
 stacked_shadow_0/outline_size = 3
 
-[node name="Game" type="Control" unique_id=1975700826 node_paths=PackedStringArray("_parentGrid", "_exitButton")]
+[node name="Game" type="Control" unique_id=1975700826 node_paths=PackedStringArray("_parentGrid", "_exitButton", "_movesLabel", "_pairLabel", "_scorer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +29,9 @@ script = ExtResource("1_3k6gv")
 _memoryTileScene = ExtResource("1_rdw05")
 _parentGrid = NodePath("HBoxContainer/TileGrid")
 _exitButton = NodePath("HBoxContainer/MarginContainer/RightSideContainer/Exit")
+_movesLabel = NodePath("HBoxContainer/MarginContainer/RightSideContainer/MovesContainer/MoveCount")
+_pairLabel = NodePath("HBoxContainer/MarginContainer/RightSideContainer/PairsContainer/PairCount")
+_scorer = NodePath("Scorer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=410775215]
 layout_mode = 1
@@ -125,5 +130,14 @@ vertical_alignment = 1
 [node name="---------------3" type="Control" parent="HBoxContainer" unique_id=1389874879]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Scorer" parent="." unique_id=643700252 instance=ExtResource("8_gvja8")]
+
+[node name="GameWonUi" parent="." unique_id=2088108685 instance=ExtResource("9_m1o7v")]
+layout_mode = 1
+offset_left = -211.5
+offset_top = -91.0
+offset_right = 211.5
+offset_bottom = 91.0
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer/RightSideContainer/Exit" to="." method="OnExitButtonPressed"]

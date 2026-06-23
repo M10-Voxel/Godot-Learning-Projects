@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://cdhj3vqmxq5n6"]
 
 [ext_resource type="Texture2D" uid="uid://cl0v5f5t3kr01" path="res://Assets/glitch/cabbage.png" id="1_dw5qn"]
+[ext_resource type="Script" uid="uid://b0ymsb4x4pa1g" path="res://Scenes/FrontSprite/FrontSprite.cs" id="2_g3sii"]
 
 [node name="FrontSprite" type="TextureRect" unique_id=1079664673]
 offset_right = 40.0
 offset_bottom = 40.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("1_dw5qn")
+script = ExtResource("2_g3sii")

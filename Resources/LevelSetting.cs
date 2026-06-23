@@ -9,6 +9,8 @@ public partial class LevelSetting : Resource
     public int TargetPairs => (Rows * Cols) / 2;
     public int TotalTiles => Rows * Cols;
 
+    
+    // EMPTY CONSTRUCTOR:
     public LevelSetting() {}
 
     public override string ToString()

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://c0nbxhu8bsg6q"]
+
+[ext_resource type="FontFile" uid="uid://cgvk11l8lignh" path="res://Assets/fonts/LuckiestGuy-Regular.ttf" id="1_aq6y0"]
+[ext_resource type="Script" uid="uid://b78kdwff4sth4" path="res://Scenes/GameWonUi/GameWonUi.cs" id="1_rpa42"]
+[ext_resource type="LabelSettings" uid="uid://bygg8kwjd7r5p" path="res://Resources/WhiteLabel24.tres" id="2_rpa42"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbcmg"]
+content_margin_left = 24.0
+content_margin_top = 32.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.5137255, 0.5294118, 0.5882353, 0.3137255)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ap3b"]
+font = ExtResource("1_aq6y0")
+font_size = 96
+font_color = Color(0.93333334, 0.93333334, 0.93333334, 1)
+stacked_shadow_count = 1
+stacked_shadow_0/color = Color(0.29411766, 0.29411766, 0.29411766, 1)
+stacked_shadow_0/outline_size = 3
+
+[node name="GameWonUi" type="PanelContainer" unique_id=2088108685 node_paths=PackedStringArray("_finalMovesLabel")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_pbcmg")
+script = ExtResource("1_rpa42")
+_finalMovesLabel = NodePath("VBoxContainer/FinalScore")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=333751013]
+layout_mode = 2
+
+[node name="Win" type="Label" parent="VBoxContainer" unique_id=1584640956]
+layout_mode = 2
+text = "YOU WIN"
+label_settings = SubResource("LabelSettings_4ap3b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScore" type="Label" parent="VBoxContainer" unique_id=482903445]
+layout_mode = 2
+text = "adadadsdasdasdasdasdasd"
+label_settings = ExtResource("2_rpa42")
+horizontal_alignment = 1
+vertical_alignment = 1

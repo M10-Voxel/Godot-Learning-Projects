@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bea0ujlcd8mv7"]
+
+[ext_resource type="Script" uid="uid://dyu5iinpfrhmk" path="res://Scenes/Scorer/Scorer.cs" id="1_pmgxc"]
+[ext_resource type="AudioStream" uid="uid://bnfexjvmrii35" path="res://Assets/sounds/sfx_sounds_fanfare3.wav" id="2_5y244"]
+[ext_resource type="AudioStream" uid="uid://bb0g314okt017" path="res://Assets/sounds/sfx_sounds_powerup12.wav" id="3_48ebc"]
+
+[node name="Scorer" type="Node" unique_id=643700252 node_paths=PackedStringArray("_revealTimer", "_effects")]
+script = ExtResource("1_pmgxc")
+_revealTimer = NodePath("RevealTimer")
+_success = ExtResource("2_5y244")
+_gameWon = ExtResource("3_48ebc")
+_effects = NodePath("Effects")
+
+[node name="RevealTimer" type="Timer" parent="." unique_id=661889229]
+wait_time = 1.4
+one_shot = true
+
+[node name="Effects" type="AudioStreamPlayer" parent="." unique_id=124129805]
+volume_db = -7.5
+
+[connection signal="timeout" from="RevealTimer" to="." method="OnRevealTimerTimeout"]

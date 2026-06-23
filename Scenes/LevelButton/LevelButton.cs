@@ -5,6 +5,9 @@ public partial class LevelButton : TextureButton
     [Export] private LevelSetting _levelSetting;
     [Export] private Label _levelSize;
 
+    
+    //* ________________________________________________________________________________________________
+    //* GODOT BASE METHODS:
 
     public override void _Ready()
     {
@@ -18,8 +21,13 @@ public partial class LevelButton : TextureButton
         _levelSize.Text = _levelSetting.ToString();
     }
     
+    
+    //* ________________________________________________________________________________________________
+    //* SIGNAL METHODS:
+    
     private void OnButtonPressed()
     {
         SignalHub.EmitOnLevelSelected(_levelSetting);
+        SignalHub.EmitOnButtonPressed();
     }
 }

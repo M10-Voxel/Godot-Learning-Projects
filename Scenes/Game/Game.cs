@@ -5,6 +5,9 @@ public partial class Game : Control
     [Export] private PackedScene _memoryTileScene;
     [Export] private GridContainer _parentGrid;
     [Export] private TextureButton _exitButton;
+    [Export] private Label _movesLabel;
+    [Export] private Label _pairLabel;
+    [Export] private Scorer _scorer;
     
     //* ________________________________________________________________________________________________
     //* GODOT BASE METHODS:
@@ -14,7 +17,11 @@ public partial class Game : Control
         SignalHub.Instance.OnLevelSelected += OnLevelSelected;
     }
 
-    
+    public override void _Process(double delta)
+    {
+        _movesLabel.Text = _scorer.GetMovesMade();
+        _pairLabel.Text = _scorer.GetPairsMade();
+    }
     
     
     //* ________________________________________________________________________________________________
@@ -22,12 +29,19 @@ public partial class Game : Control
     
     private void OnLevelSelected(LevelSetting levelSettings)
     {
+        Texture2D frameImage = ImageManager.GetRandomFrameImage();
         _parentGrid.Columns = levelSettings.Cols;
-        
-        for (int i = 0; i < levelSettings.TotalTiles; i++)
+
+        LevelDataSelector levelDataSelector = new LevelDataSelector();
+
+        foreach (var item in levelDataSelector.GetImagesForLevel(levelSettings))
         {
-            _parentGrid.AddChild(_memoryTileScene.Instantiate<MemoryTile>());
+            MemoryTile newTile = _memoryTileScene.Instantiate<MemoryTile>();
+            _parentGrid.AddChild(newTile);
+            newTile.Setup(item, frameImage);
         }
+
+        _scorer.ClearNewGame(levelSettings);
     }
 
     private void OnExitButtonPressed()
@@ -37,5 +51,6 @@ public partial class Game : Control
             item.QueueFree();
         }
         SignalHub.EmitOnGameExitPressed();
+        SignalHub.EmitOnButtonPressed();
     }
 }

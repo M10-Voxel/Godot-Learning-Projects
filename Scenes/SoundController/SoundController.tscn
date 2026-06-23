@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://uoaecja156uc"]
+
+[ext_resource type="Script" uid="uid://ddft8403o87c" path="res://Scenes/SoundController/SoundController.cs" id="1_i6akb"]
+[ext_resource type="AudioStream" uid="uid://cbrr6y78fp5pa" path="res://Assets/sounds/bgm_action_3.mp3" id="2_tktkl"]
+[ext_resource type="AudioStream" uid="uid://dvpbmlqspv6va" path="res://Assets/sounds/bgm_action_4.mp3" id="3_c34ci"]
+[ext_resource type="AudioStream" uid="uid://b862lvdotqr0t" path="res://Assets/sounds/sfx_sounds_impact1.wav" id="4_aodr5"]
+[ext_resource type="AudioStream" uid="uid://b5aprfa31eosc" path="res://Assets/sounds/sfx_sounds_impact7.wav" id="5_tb68k"]
+
+[node name="SoundController" type="Node" unique_id=1409806356 node_paths=PackedStringArray("_music", "_effects")]
+script = ExtResource("1_i6akb")
+_music = NodePath("Music")
+_effects = NodePath("Effects")
+_mainMenuMusic = ExtResource("2_tktkl")
+_gameMusic = ExtResource("3_c34ci")
+_click = ExtResource("4_aodr5")
+_tileSelected = ExtResource("5_tb68k")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=133685873]
+volume_db = -20.0
+
+[node name="Effects" type="AudioStreamPlayer" parent="." unique_id=132197902]
+volume_db = -10.0
