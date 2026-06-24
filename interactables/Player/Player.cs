@@ -24,6 +24,11 @@ public partial class Player : CharacterBody2D
 	//* ________________________________________________________________________________________________
 	//* GODOT BASE METHODS:
 
+	public override void _EnterTree()
+	{
+		AddToGroup(GameConstants.GroupPlayer);
+	}
+
 	public override void _Ready()
 	{
 	}

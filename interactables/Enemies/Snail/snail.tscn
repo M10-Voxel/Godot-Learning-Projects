@@ -12,9 +12,9 @@ size = Vector2(36, 24)
 [node name="Snail" unique_id=1582077499 node_paths=PackedStringArray("_floorDetect") instance=ExtResource("1_iab4f")]
 script = ExtResource("2_nc603")
 _floorDetect = NodePath("FloorDetect")
-_maxAnimationStartDelay = 0.8
 
 [node name="EnemieSprites" parent="." index="0" unique_id=913801390]
+animation = &"snail"
 autoplay = "snail"
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1213411130]
@@ -26,6 +26,6 @@ shape = SubResource("CapsuleShape2D_nc603")
 position = Vector2(0, 1)
 Shape = SubResource("RectangleShape2D_xx4vp")
 
-[node name="FloorDetect" type="RayCast2D" parent="." index="4" unique_id=963637676]
+[node name="FloorDetect" type="RayCast2D" parent="." index="5" unique_id=963637676]
 position = Vector2(-19, 0)
 target_position = Vector2(0, 20)

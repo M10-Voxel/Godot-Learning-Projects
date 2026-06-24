@@ -1,35 +1,44 @@
+using System;
 using Godot;
 
 public partial class Frog : EnemyBlueprint
 {
 	// EXPORTS:
-	[Export] private RayCast2D _floorDetect;
-	[Export] private float _maxAnimationStartDelay = 0.8f;
-	
+	[Export] private RayCast2D _smallWallDetect;
+	[Export] private RayCast2D _highWallDetect;
 	
 	// PRIVATE VARIABLES:
-	private bool IsInMovingFrame => AnimatedSprite.Frame is >= 2 and <= 5;
+	private const float MinXDistance = 80.0f;
+	private const float MaxXDistance = 130.0f;
+	private const float JumpHeight = -240.0f;
+	
+	private bool _inJump = false;
 	
 	//* ________________________________________________________________________________________________
 	//* GODOT BASE METHODS:
 
 	public override void _Ready()
 	{
+		base._Ready();
 		DelayInitialAnimation();
+		Timer.OneShot = true;
+		Timer.Start(GD.RandRange(2.0f, 4.0f));
 	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
-		
-		velocity.Y += Gravity * (float)delta;
-
-		velocity = MoveSnake(velocity);
-		
+		Vector2 velocity = ApplyGravity(delta);
 		Velocity = velocity;
+		
+		ApplyJump();
 		MoveAndSlide();
 		
-		FlipSnake();
+		if (IsOnFloor())
+		{
+			AnimatedSprite.Play("frog_idle");
+			Velocity = Vector2.Zero;
+			FlipFrog();
+		}
 	}
 
 	
@@ -37,43 +46,50 @@ public partial class Frog : EnemyBlueprint
 	//* SUB METHODS:
 
 	// FOR _Ready:
-	private async void DelayInitialAnimation()
-	{
-		AnimatedSprite.Stop();
-
-		float delay = GD.Randf() * _maxAnimationStartDelay;
-		await ToSignal(GetTree().CreateTimer(delay), SceneTreeTimer.SignalName.Timeout);
-		
-		AnimatedSprite.Play();
-
-	}
 
 	// FOR _PhysicsProcess:
-	private Vector2 MoveSnake(Vector2 velocity)
+	private void ApplyJump()
 	{
-		if (!IsOnFloor()) return velocity;
-		
-
-		velocity.X = IsInMovingFrame ?
-			AnimatedSprite.FlipH ? Speed : -Speed // If sprite is flipped (looking right), move right, else move left
-			: 0.0f;
-
-		return velocity;
-	}
-	
-	private void FlipSnake()
-	{
-		if (!_floorDetect.IsColliding() || IsOnWall())
+		if (IsOnFloor() && _inJump)
 		{
-			AnimatedSprite.FlipH = !AnimatedSprite.FlipH;	// Flips sprite in opposite direction from where it was facing before
-			_floorDetect.Position = new Vector2(
-				_floorDetect.Position.X * -1,				// Moves RayCast to opposite side via changing its operator (+/-)
-				_floorDetect.Position.Y
-			);
+			AnimatedSprite.Play("frog_jump");
+			Velocity = GetJumpVelocity();
+			_inJump = false;
+			Timer.Start(GD.RandRange(2.0f, 4.0f));
 		}
 	}
-	
+
+	private Vector2 GetJumpVelocity()
+	{
+		if (_smallWallDetect.IsColliding() || _highWallDetect.IsColliding())
+		{
+			AnimatedSprite.FlipH = !AnimatedSprite.FlipH;	// Flips sprite in opposite direction from where it was facing before
+		}
+
+		var randomRange = (float)GD.RandRange(MinXDistance, MaxXDistance);
+		var finalRange = AnimatedSprite.FlipH ? randomRange : -randomRange;
+		
+		return new Vector2(finalRange, JumpHeight);
+	}
+
+	private void FlipFrog()
+	{
+		AnimatedSprite.FlipH = PlayerRef.GlobalPosition.X > GlobalPosition.X;
+		_smallWallDetect.RotationDegrees = AnimatedSprite.FlipH ? 180.0f : 0.0f;
+		_highWallDetect.RotationDegrees = AnimatedSprite.FlipH ? 180.0f : 0.0f;
+	}
 
 	//* ________________________________________________________________________________________________
 	//* OWN METHODS:
+	
+	
+	
+	//* ________________________________________________________________________________________________
+	//* SIGNAL METHODS:
+
+	protected override void OnTimerTimeout()
+	{
+		_inJump = true;
+		GD.Print(Name + ": Frog Jumping");
+	}
 }

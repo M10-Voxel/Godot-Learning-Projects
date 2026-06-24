@@ -176,16 +176,18 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="EnemyBlueprint" type="CharacterBody2D" unique_id=1582077499 node_paths=PackedStringArray("_screenNotifier", "_hitbox", "AnimatedSprite")]
+[node name="EnemyBlueprint" type="CharacterBody2D" unique_id=1582077499 node_paths=PackedStringArray("_screenNotifier", "_hitbox", "AnimatedSprite", "Timer")]
 collision_layer = 0
 script = ExtResource("1_crcul")
 _screenNotifier = NodePath("VisibleOnScreen")
 _hitbox = NodePath("EnemyHitbox")
 AnimatedSprite = NodePath("EnemieSprites")
+Timer = NodePath("Timer")
 
 [node name="EnemieSprites" type="AnimatedSprite2D" parent="." unique_id=913801390]
 sprite_frames = SubResource("SpriteFrames_o2wuw")
-animation = &"snail"
+animation = &"frog_idle"
+autoplay = "frog_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1213411130]
 debug_color = Color(0.66586006, 0.5119707, 0, 0.41960785)
@@ -193,3 +195,6 @@ debug_color = Color(0.66586006, 0.5119707, 0, 0.41960785)
 [node name="VisibleOnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=464255321]
 
 [node name="EnemyHitbox" parent="." unique_id=79862408 instance=ExtResource("4_3w300")]
+
+[node name="Timer" type="Timer" parent="." unique_id=928132327]
+wait_time = 3.0
