@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cjsccrqkmngyx"]
+
+[ext_resource type="PackedScene" uid="uid://dhohw75b7jkg1" path="res://interactables/Enemies/enemy_blueprint.tscn" id="1_01gij"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01gij"]
+radius = 8.062258
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01gij"]
+size = Vector2(18, 14)
+
+[node name="Frog" unique_id=1582077499 instance=ExtResource("1_01gij")]
+
+[node name="EnemieSprites" parent="." index="0" unique_id=913801390]
+scale = Vector2(0.7, 0.7)
+animation = &"frog_idle"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1213411130]
+shape = SubResource("CircleShape2D_01gij")
+
+[node name="VisibleOnScreen" parent="." index="2" unique_id=464255321]
+visible = false
+
+[node name="EnemyHitbox" parent="." index="3" unique_id=79862408]
+position = Vector2(0, 1)
+Shape = SubResource("RectangleShape2D_01gij")

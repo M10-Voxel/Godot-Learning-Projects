@@ -2,7 +2,7 @@ using Godot;
 
 public partial class GameManager : Node
 {
-    public GameManager Instance { get; private set; }
+    public static GameManager Instance { get; private set; }
 
 
     // NAVIGATION SCENES:
@@ -21,13 +21,13 @@ public partial class GameManager : Node
     //* ________________________________________________________________________________________________
     //* OWN METHODS:
 
-    public void LoadMain()
-    {
-        GetTree().ChangeSceneToPacked(_mainScene);
-    }
+    // Changes to the Main Screen Scene
+    private void LoadMain() => GetTree().ChangeSceneToPacked(_mainScene);
+    public static void ChangeToMainScreen() => Instance.LoadMain();
     
-    public void LoadLevel()
-    {
-        GetTree().ChangeSceneToPacked(_levelBlueprint);
-    }
+    // Changes to the Level Blueprint Scene
+    private void LoadLevel() => GetTree().ChangeSceneToPacked(_levelBlueprint);
+    public static void ChangeToLevel() => Instance.LoadLevel();
+
+
 }
