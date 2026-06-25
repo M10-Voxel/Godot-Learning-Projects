@@ -34,10 +34,11 @@ project/assembly_name="Foxy Antics"
 
 folder_colors={
 "res://assets/": "red",
-"res://global/": "orange",
-"res://interactables/": "yellow",
-"res://scenes/": "green",
-"res://ui/": "blue"
+"res://functions/": "orange",
+"res://global/": "yellow",
+"res://interactables/": "green",
+"res://scenes/": "blue",
+"res://ui/": "purple"
 }
 
 [input]

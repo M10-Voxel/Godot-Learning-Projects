@@ -2,7 +2,7 @@ using Godot;
 
 
 [Tool]	// Tool Scripts run in the editor
-public partial class EnemyHitbox : Area2D
+public partial class Hitbox : Area2D
 {
 	// EXPORTS:
 	[Export] private CollisionShape2D _collisionShape;

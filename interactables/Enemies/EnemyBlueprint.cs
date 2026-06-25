@@ -4,7 +4,7 @@ public partial class EnemyBlueprint : CharacterBody2D
 {
 	// EXPORTS:
 	[Export] private VisibleOnScreenNotifier2D _screenNotifier;
-	[Export] private EnemyHitbox _hitbox;
+	[Export] private Hitbox _hitbox;
 	[Export] protected AnimatedSprite2D AnimatedSprite;
 	[Export] protected Timer Timer;
 
@@ -13,8 +13,8 @@ public partial class EnemyBlueprint : CharacterBody2D
 	
 	
 	// CONSTS:
-	protected float Gravity = 800.0f;
-	protected float FallenOff = 200.0f;
+	private float _gravity = 800.0f;
+	private float _fallenOff = 200.0f;
 	protected Player PlayerRef;
 	
 	
@@ -25,7 +25,7 @@ public partial class EnemyBlueprint : CharacterBody2D
 	public override void _Ready()
 	{
 		_screenNotifier.ScreenEntered += OnScreenEntered;
-		Timer.Timeout += HandleTimerTimeout;
+		Timer.Timeout += OnTimerTimeout;
 		AssignPlayerRef();
 	}
 
@@ -38,7 +38,7 @@ public partial class EnemyBlueprint : CharacterBody2D
 	//* ________________________________________________________________________________________________
 	//* SUB METHODS:
 
-	protected void AssignPlayerRef()
+	private void AssignPlayerRef()
 	{
 		PlayerRef = GetTree().GetFirstNodeInGroup(GameConstants.GroupPlayer) as Player;
 		if (PlayerRef == null)
@@ -50,7 +50,7 @@ public partial class EnemyBlueprint : CharacterBody2D
 	
 	private void EnemyFallenOff()
 	{
-		if (GlobalPosition.Y > FallenOff)
+		if (GlobalPosition.Y > _fallenOff)
 		{
 			CallDeferred(Node.MethodName.QueueFree);
 		}
@@ -74,24 +74,24 @@ public partial class EnemyBlueprint : CharacterBody2D
 	protected Vector2 ApplyGravity(double delta)
 	{
 		Vector2 velocity = Velocity;
-		velocity.Y += Gravity * (float)delta;
+		velocity.Y += _gravity * (float)delta;
 		return velocity;
+	}
+
+	protected void FlipSprite()
+	{
+		AnimatedSprite.FlipH = PlayerRef.GlobalPosition.X > GlobalPosition.X;
 	}
 	
 	
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 
-	private void OnScreenEntered()
+	protected virtual void OnScreenEntered()
 	{
 		GD.Print(Name + ": OnScreenEntered");
 		Timer.Start();
 		_screenNotifier.ScreenEntered -= OnScreenEntered;
-	}
-
-	private void HandleTimerTimeout()
-	{
-		OnTimerTimeout();
 	}
 	
 	protected virtual void OnTimerTimeout()

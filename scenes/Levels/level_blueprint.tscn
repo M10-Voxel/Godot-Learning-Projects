@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://cdas7uht8xnth" path="res://scenes/Levels/LevelBlueprint.cs" id="1_1fskv"]
 [ext_resource type="TileSet" uid="uid://dq1s08atukq5o" path="res://global/resources/TileSet_Terrain.tres" id="2_c7fa6"]
 [ext_resource type="PackedScene" uid="uid://bk65nhfen1w6x" path="res://interactables/Player/player.tscn" id="3_8jmua"]
-[ext_resource type="PackedScene" uid="uid://c2dnfxe337pmo" path="res://interactables/Enemies/Snail/snail.tscn" id="4_xx4vp"]
-[ext_resource type="PackedScene" uid="uid://cjsccrqkmngyx" path="res://interactables/Enemies/Frog/frog.tscn" id="5_sokqy"]
+[ext_resource type="PackedScene" uid="uid://bj187t0khukr8" path="res://interactables/Enemies/Eagle/eagle.tscn" id="4_xx4vp"]
+[ext_resource type="PackedScene" uid="uid://sfhyxoosfcvh" path="res://functions/shooter.tscn" id="5_sokqy"]
+[ext_resource type="PackedScene" uid="uid://qqfvy31iky2" path="res://interactables/Bullets/player_bullet.tscn" id="6_t8v6q"]
+[ext_resource type="PackedScene" uid="uid://y1bwiopt7ym0" path="res://functions/object_factory.tscn" id="7_hi1cc"]
 
 [node name="LevelBlueprint" type="Node" unique_id=498748723]
 script = ExtResource("1_1fskv")
@@ -16,16 +18,14 @@ tile_set = ExtResource("2_c7fa6")
 [node name="Player" parent="." unique_id=2065221929 instance=ExtResource("3_8jmua")]
 position = Vector2(35, -64)
 
+[node name="Shooter" parent="." unique_id=1273060790 instance=ExtResource("5_sokqy")]
+position = Vector2(77, -136)
+_bulletSpeed = 100.0
+_bulletScene = ExtResource("6_t8v6q")
+
 [node name="Enemies" type="Node" parent="." unique_id=1276655953]
 
-[node name="Snail" parent="Enemies" unique_id=1582077499 instance=ExtResource("4_xx4vp")]
-position = Vector2(173, -108)
+[node name="Eagle" parent="Enemies" unique_id=1582077499 instance=ExtResource("4_xx4vp")]
+position = Vector2(226, -334)
 
-[node name="Snail2" parent="Enemies" unique_id=820615835 instance=ExtResource("4_xx4vp")]
-position = Vector2(458, -156)
-
-[node name="Frog" parent="Enemies" unique_id=95656485 instance=ExtResource("5_sokqy")]
-position = Vector2(411, -200)
-
-[node name="Frog2" parent="Enemies" unique_id=1253297122 instance=ExtResource("5_sokqy")]
-position = Vector2(242, -120)
+[node name="ObjectFactory" parent="." unique_id=246725015 instance=ExtResource("7_hi1cc")]

@@ -2,7 +2,9 @@ using Godot;
 
 public partial class SignalHub : Node
 {
-    public SignalHub Instance { get; private set; }
+    public static SignalHub Instance { get; private set; }
+
+    [Signal] public delegate void OnCreateBulletEventHandler(Vector2 position, Vector2 direction, float speed, PackedScene scene);
 
     
     //* ________________________________________________________________________________________________
@@ -16,4 +18,9 @@ public partial class SignalHub : Node
     
     //* ________________________________________________________________________________________________
     //* SIGNAL METHODS:
+
+    public static void EmitOnCreateBullet(Vector2 position, Vector2 direction, float speed, PackedScene scene)
+    {
+        Instance.EmitSignalOnCreateBullet(position, direction, speed, scene);
+    }
 }

@@ -3,9 +3,9 @@ using Godot;
 public partial class Player : CharacterBody2D
 {
 	// EXPORTS:
-	[Export] private Label _debugLabel;
 	[Export] private AudioStreamPlayer2D _jumpSound;
 	[Export] private Sprite2D _playerSprite;
+	[Export] private Shooter _shooter;
 
 	// CONSTS:
 	private const float Gravity = 690.0f;
@@ -29,14 +29,9 @@ public partial class Player : CharacterBody2D
 		AddToGroup(GameConstants.GroupPlayer);
 	}
 
-	public override void _Ready()
-	{
-	}
-
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
-
 		velocity.Y += Gravity * (float)delta;
 
 		velocity = GetInput(velocity);
@@ -46,12 +41,16 @@ public partial class Player : CharacterBody2D
 
 		MoveAndSlide();
 
-		_debugLabel.Text = $"{Velocity.Y:000}";
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed("jump") && !_hasJumped) _hasJumped = true;
+		if (@event.IsActionPressed("shoot"))
+		{
+			Vector2 direction = _playerSprite.FlipH ? Vector2.Left : Vector2.Right;
+			_shooter.Shoot(direction);
+		}
 	}
 
 	
@@ -60,6 +59,7 @@ public partial class Player : CharacterBody2D
 
 	private Vector2 GetInput(Vector2 velocity)
 	{
+		// Determine move direction and speed
 		velocity.X = Input.GetAxis("left", "right") * RunSpeed;
 
 		if (IsOnFloor() && _hasJumped)

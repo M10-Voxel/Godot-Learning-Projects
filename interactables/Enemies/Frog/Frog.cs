@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public partial class Frog : EnemyBlueprint
@@ -21,7 +20,7 @@ public partial class Frog : EnemyBlueprint
 	{
 		base._Ready();
 		DelayInitialAnimation();
-		Timer.OneShot = true;
+		
 		Timer.Start(GD.RandRange(2.0f, 4.0f));
 	}
 	
@@ -45,21 +44,18 @@ public partial class Frog : EnemyBlueprint
 	//* ________________________________________________________________________________________________
 	//* SUB METHODS:
 
-	// FOR _Ready:
-
 	// FOR _PhysicsProcess:
 	private void ApplyJump()
 	{
 		if (IsOnFloor() && _inJump)
 		{
 			AnimatedSprite.Play("frog_jump");
-			Velocity = GetJumpVelocity();
+			Velocity = GetJumpDirection();
 			_inJump = false;
 			Timer.Start(GD.RandRange(2.0f, 4.0f));
 		}
 	}
-
-	private Vector2 GetJumpVelocity()
+	private Vector2 GetJumpDirection()
 	{
 		if (_smallWallDetect.IsColliding() || _highWallDetect.IsColliding())
 		{
@@ -74,7 +70,7 @@ public partial class Frog : EnemyBlueprint
 
 	private void FlipFrog()
 	{
-		AnimatedSprite.FlipH = PlayerRef.GlobalPosition.X > GlobalPosition.X;
+		FlipSprite();
 		_smallWallDetect.RotationDegrees = AnimatedSprite.FlipH ? 180.0f : 0.0f;
 		_highWallDetect.RotationDegrees = AnimatedSprite.FlipH ? 180.0f : 0.0f;
 	}

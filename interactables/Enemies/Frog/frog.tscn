@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgrnn"]
 size = Vector2(15, 13)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_01gij"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yimfm"]
 size = Vector2(18, 14)
 
 [node name="Frog" unique_id=1582077499 node_paths=PackedStringArray("_smallWallDetect", "_highWallDetect") instance=ExtResource("1_01gij")]
@@ -23,7 +23,7 @@ shape = SubResource("RectangleShape2D_lgrnn")
 
 [node name="EnemyHitbox" parent="." index="3" unique_id=79862408]
 position = Vector2(0, 1)
-Shape = SubResource("RectangleShape2D_01gij")
+Shape = SubResource("RectangleShape2D_yimfm")
 
 [node name="smallWallDetect" type="RayCast2D" parent="." index="5" unique_id=985612575]
 target_position = Vector2(-18, 0)

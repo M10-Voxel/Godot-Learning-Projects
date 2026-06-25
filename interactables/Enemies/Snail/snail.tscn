@@ -6,8 +6,8 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nc603"]
 height = 34.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xx4vp"]
-size = Vector2(36, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgrnn"]
+size = Vector2(36, 23)
 
 [node name="Snail" unique_id=1582077499 node_paths=PackedStringArray("_floorDetect") instance=ExtResource("1_iab4f")]
 script = ExtResource("2_nc603")
@@ -24,7 +24,7 @@ shape = SubResource("CapsuleShape2D_nc603")
 
 [node name="EnemyHitbox" parent="." index="3" unique_id=79862408]
 position = Vector2(0, 1)
-Shape = SubResource("RectangleShape2D_xx4vp")
+Shape = SubResource("RectangleShape2D_lgrnn")
 
 [node name="FloorDetect" type="RayCast2D" parent="." index="5" unique_id=963637676]
 position = Vector2(-19, 0)

@@ -2,7 +2,6 @@ using Godot;
 
 public partial class LevelBlueprint : Node
 {
-    
     //* ________________________________________________________________________________________________
     //* GODOT BASE METHODS:
     

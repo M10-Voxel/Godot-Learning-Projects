@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bj187t0khukr8"]
+
+[ext_resource type="PackedScene" uid="uid://dhohw75b7jkg1" path="res://interactables/Enemies/enemy_blueprint.tscn" id="1_qn28t"]
+[ext_resource type="Script" uid="uid://cdyah74tf04nv" path="res://interactables/Enemies/Eagle/Eagle.cs" id="2_27a6p"]
+[ext_resource type="PackedScene" uid="uid://sfhyxoosfcvh" path="res://functions/shooter.tscn" id="3_eugs2"]
+[ext_resource type="PackedScene" uid="uid://d2xudvyx2wfsp" path="res://interactables/Bullets/enemy_bullet.tscn" id="4_q20qf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qn28t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ihjlf"]
+radius = 22.0
+
+[node name="Eagle" unique_id=1582077499 node_paths=PackedStringArray("_playerDetect", "_shooter") instance=ExtResource("1_qn28t")]
+collision_mask = 0
+script = ExtResource("2_27a6p")
+_playerDetect = NodePath("PlayerDetect")
+_shooter = NodePath("Shooter")
+
+[node name="EnemieSprites" parent="." index="0" unique_id=913801390]
+animation = &"eagle"
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1213411130]
+shape = SubResource("CircleShape2D_qn28t")
+
+[node name="EnemyHitbox" parent="." index="3" unique_id=79862408]
+Shape = SubResource("CircleShape2D_ihjlf")
+
+[node name="Timer" parent="." index="4" unique_id=928132327]
+wait_time = 2.5
+
+[node name="PlayerDetect" type="RayCast2D" parent="." index="5" unique_id=187384960]
+target_position = Vector2(0, 250)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Shooter" parent="." index="6" unique_id=1273060790 instance=ExtResource("3_eugs2")]
+_bulletSpeed = 150.0
+_cooldownTime = 0.3
+_bulletScene = ExtResource("4_q20qf")
+
+[node name="Sound" parent="Shooter" index="0" unique_id=424718524]
+volume_db = -8.0
+pitch_scale = 0.3
+
+[editable path="Shooter"]

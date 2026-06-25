@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://sfhyxoosfcvh"]
+
+[ext_resource type="AudioStream" uid="uid://bleadmkk85ysa" path="res://assets/sound/laser.wav" id="1_3cfgt"]
+[ext_resource type="Script" uid="uid://76a221sahid0" path="res://functions/Shooter.cs" id="1_glly2"]
+
+[node name="Shooter" type="Node2D" unique_id=1273060790 node_paths=PackedStringArray("_cooldown", "_sound")]
+script = ExtResource("1_glly2")
+_cooldown = NodePath("Timer")
+_sound = NodePath("Sound")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=424718524]
+stream = ExtResource("1_3cfgt")
+volume_db = -5.0
+pitch_scale = 0.64
+
+[node name="Timer" type="Timer" parent="." unique_id=1840142899]
+wait_time = 0.8

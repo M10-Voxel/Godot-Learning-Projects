@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://balqyjjcd1yqo"]
+
+[ext_resource type="Script" uid="uid://dhsn4iyafxgnm" path="res://interactables/Bullets/BulletBlueprint.cs" id="1_0iuk0"]
+[ext_resource type="PackedScene" uid="uid://bcl0i1a7qx8ms" path="res://functions/lifetime.tscn" id="2_dbhqh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i2p60"]
+
+[node name="BulletBlueprint" type="Area2D" unique_id=1844955034]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_0iuk0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=597510199]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2120283737]
+shape = SubResource("CircleShape2D_i2p60")
+
+[node name="Lifetime" parent="." unique_id=1496746716 instance=ExtResource("2_dbhqh")]
