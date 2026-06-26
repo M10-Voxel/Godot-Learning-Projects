@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bj187t0khukr8" path="res://interactables/Enemies/Eagle/eagle.tscn" id="4_xx4vp"]
 [ext_resource type="PackedScene" uid="uid://sfhyxoosfcvh" path="res://functions/shooter.tscn" id="5_sokqy"]
 [ext_resource type="PackedScene" uid="uid://qqfvy31iky2" path="res://interactables/Bullets/player_bullet.tscn" id="6_t8v6q"]
+[ext_resource type="PackedScene" uid="uid://cjsccrqkmngyx" path="res://interactables/Enemies/Frog/frog.tscn" id="7_84s48"]
 [ext_resource type="PackedScene" uid="uid://y1bwiopt7ym0" path="res://functions/object_factory.tscn" id="7_hi1cc"]
+[ext_resource type="PackedScene" uid="uid://c2dnfxe337pmo" path="res://interactables/Enemies/Snail/snail.tscn" id="8_axtwf"]
 
 [node name="LevelBlueprint" type="Node" unique_id=498748723]
 script = ExtResource("1_1fskv")
@@ -27,5 +29,16 @@ _bulletScene = ExtResource("6_t8v6q")
 
 [node name="Eagle" parent="Enemies" unique_id=1582077499 instance=ExtResource("4_xx4vp")]
 position = Vector2(226, -334)
+
+[node name="Frog" parent="Enemies" unique_id=1616373138 instance=ExtResource("7_84s48")]
+position = Vector2(407, -200)
+
+[node name="Snail" parent="Enemies" unique_id=1028073585 instance=ExtResource("8_axtwf")]
+position = Vector2(174, -107)
+
+[node name="Snail2" parent="Enemies" unique_id=423509980 instance=ExtResource("8_axtwf")]
+position = Vector2(603, -92)
+
+[node name="Pickups" type="Node" parent="." unique_id=57942794]
 
 [node name="ObjectFactory" parent="." unique_id=246725015 instance=ExtResource("7_hi1cc")]

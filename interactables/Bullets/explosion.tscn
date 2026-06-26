@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dp6kgwy6x23wq"]
+
+[ext_resource type="Texture2D" uid="uid://c1rsx6p8d5i68" path="res://assets/explosion/enemy-deadth.png" id="1_cyx41"]
+[ext_resource type="Script" uid="uid://dk5hrtw00qb23" path="res://interactables/Bullets/Boom.cs" id="2_jsrds"]
+[ext_resource type="AudioStream" uid="uid://hvbnh2ayjf2i" path="res://assets/sound/pickup5.ogg" id="3_jsrds"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxlvf"]
+atlas = ExtResource("1_cyx41")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctnom"]
+atlas = ExtResource("1_cyx41")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsrds"]
+atlas = ExtResource("1_cyx41")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oot1u"]
+atlas = ExtResource("1_cyx41")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ff3m"]
+atlas = ExtResource("1_cyx41")
+region = Rect2(160, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0yue"]
+atlas = ExtResource("1_cyx41")
+region = Rect2(200, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d0nxa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxlvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctnom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsrds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oot1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ff3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0yue")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wyv21"]
+random_pitch = 1.3348398
+streams_count = 1
+stream_0/stream = ExtResource("3_jsrds")
+
+[node name="Explosion" type="AnimatedSprite2D" unique_id=1671244131 node_paths=PackedStringArray("_sound")]
+sprite_frames = SubResource("SpriteFrames_d0nxa")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0
+script = ExtResource("2_jsrds")
+_sound = NodePath("Sound")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=2100804485]
+z_index = 1
+stream = SubResource("AudioStreamRandomizer_wyv21")
+volume_db = -10.0

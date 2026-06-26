@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://y1bwiopt7ym0"]
 
 [ext_resource type="Script" uid="uid://b077na47icwjv" path="res://functions/ObjectFactory.cs" id="1_gxqe0"]
+[ext_resource type="PackedScene" uid="uid://dp6kgwy6x23wq" path="res://interactables/Bullets/explosion.tscn" id="2_r30yh"]
+[ext_resource type="PackedScene" uid="uid://l3d0ybgewx58" path="res://interactables/Bullets/destruction.tscn" id="3_gtuvp"]
+[ext_resource type="PackedScene" uid="uid://wys5xluw0u6o" path="res://interactables/Items/fruit_pickup.tscn" id="4_emloy"]
 
 [node name="ObjectFactory" type="Node" unique_id=246725015]
 script = ExtResource("1_gxqe0")
+_explosionScene = ExtResource("2_r30yh")
+_destructionScene = ExtResource("3_gtuvp")
+_fruitScene = ExtResource("4_emloy")

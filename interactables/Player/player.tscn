@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://byc36pv4fjxrl" path="res://interactables/Player/Player.cs" id="1_repto"]
 [ext_resource type="PackedScene" uid="uid://betwvt23xauu2" path="res://interactables/Player/player_camera.tscn" id="2_xtfdf"]
 [ext_resource type="AudioStream" uid="uid://eviw0poqok6k" path="res://assets/sound/jump.wav" id="4_8cii2"]
+[ext_resource type="AudioStream" uid="uid://cjhhfqyhj3c2l" path="res://assets/sound/damage.wav" id="5_ubanl"]
 [ext_resource type="PackedScene" uid="uid://cv6mvaahau8ee" path="res://interactables/hitbox.tscn" id="5_usp73"]
 [ext_resource type="PackedScene" uid="uid://sfhyxoosfcvh" path="res://functions/shooter.tscn" id="6_epbmi"]
 [ext_resource type="PackedScene" uid="uid://qqfvy31iky2" path="res://interactables/Bullets/player_bullet.tscn" id="7_ubanl"]
@@ -129,6 +130,44 @@ _data = {
 &"run": SubResource("Animation_fv16o")
 }
 
+[sub_resource type="Animation" id="Animation_hedt8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lp3pp"]
+resource_name = "invincible"
+length = 1.5999999999999999
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1), Color(1, 1, 1, 0.15686275), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hedt8"]
+_data = {
+&"RESET": SubResource("Animation_hedt8"),
+&"invincible": SubResource("Animation_lp3pp")
+}
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_epbmi"]
 animation = &"fall"
 
@@ -191,6 +230,18 @@ advance_expression = "OnFloor == false"
 advance_mode = 2
 advance_expression = "OnFloor == true"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_14olg"]
+advance_mode = 2
+advance_expression = "IsHurt == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m3uay"]
+advance_mode = 2
+advance_expression = "IsHurt == false"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vycps"]
+advance_mode = 2
+advance_expression = "IsHurt == true"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i2p60"]
 states/Air/node = SubResource("AnimationNodeStateMachine_hedt8")
 states/Air/position = Vector2(571, 100)
@@ -199,15 +250,20 @@ states/Grounded/position = Vector2(408, 100)
 states/Start/position = Vector2(172, 100)
 states/hurt/node = SubResource("AnimationNodeAnimation_8cii2")
 states/hurt/position = Vector2(511, 226)
-transitions = ["Start", "Grounded", SubResource("AnimationNodeStateMachineTransition_usp73"), "Grounded", "Air", SubResource("AnimationNodeStateMachineTransition_fv16o"), "Air", "Grounded", SubResource("AnimationNodeStateMachineTransition_hedt8")]
-graph_offset = Vector2(-208, -82)
+transitions = ["Start", "Grounded", SubResource("AnimationNodeStateMachineTransition_usp73"), "Grounded", "Air", SubResource("AnimationNodeStateMachineTransition_fv16o"), "Air", "Grounded", SubResource("AnimationNodeStateMachineTransition_hedt8"), "Air", "hurt", SubResource("AnimationNodeStateMachineTransition_14olg"), "hurt", "Grounded", SubResource("AnimationNodeStateMachineTransition_m3uay"), "Grounded", "hurt", SubResource("AnimationNodeStateMachineTransition_vycps")]
+graph_offset = Vector2(-263, 101)
 
-[node name="Player" type="CharacterBody2D" unique_id=2065221929 node_paths=PackedStringArray("_jumpSound", "_playerSprite", "_shooter")]
+[node name="Player" type="CharacterBody2D" unique_id=2065221929 node_paths=PackedStringArray("_jumpSound", "_hurtSound", "_playerSprite", "_hurtTimer", "_invincibilityAnimation", "_shooter", "_hitbox")]
 collision_layer = 0
+collision_mask = 17
 script = ExtResource("1_repto")
 _jumpSound = NodePath("Jump")
+_hurtSound = NodePath("Hurt")
 _playerSprite = NodePath("Sprite2D")
+_hurtTimer = NodePath("HurtTimer")
+_invincibilityAnimation = NodePath("Invincibility")
 _shooter = NodePath("Shooter")
+_hitbox = NodePath("Hitbox")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=418563117]
 texture = ExtResource("1_h7wof")
@@ -224,6 +280,10 @@ debug_color = Color(0.6673655, 0.51116186, 5.7756904e-07, 0.41960785)
 [node name="Jump" type="AudioStreamPlayer2D" parent="." unique_id=2125700914]
 stream = ExtResource("4_8cii2")
 
+[node name="Hurt" type="AudioStreamPlayer2D" parent="." unique_id=1397714776]
+stream = ExtResource("5_ubanl")
+volume_db = -10.0
+
 [node name="Hitbox" parent="." unique_id=79862408 instance=ExtResource("5_usp73")]
 position = Vector2(-1, 5)
 collision_layer = 4
@@ -231,14 +291,22 @@ collision_mask = 10
 Shape = SubResource("CapsuleShape2D_nc603")
 
 [node name="Shooter" parent="." unique_id=1273060790 instance=ExtResource("6_epbmi")]
-_bulletSpeed = 100.0
+z_index = 10
+_bulletSpeed = 115.0
 _bulletScene = ExtResource("7_ubanl")
 
 [node name="PlayerAnimations" type="AnimationPlayer" parent="." unique_id=314050063]
 libraries/ = SubResource("AnimationLibrary_usp73")
 autoplay = &"idle"
 
+[node name="Invincibility" type="AnimationPlayer" parent="." unique_id=2057237149]
+libraries/ = SubResource("AnimationLibrary_hedt8")
+
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=250158964]
 tree_root = SubResource("AnimationNodeStateMachine_i2p60")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../PlayerAnimations")
+
+[node name="HurtTimer" type="Timer" parent="." unique_id=1370900187]
+wait_time = 0.6
+one_shot = true

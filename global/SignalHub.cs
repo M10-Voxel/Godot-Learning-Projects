@@ -5,6 +5,10 @@ public partial class SignalHub : Node
     public static SignalHub Instance { get; private set; }
 
     [Signal] public delegate void OnCreateBulletEventHandler(Vector2 position, Vector2 direction, float speed, PackedScene scene);
+    [Signal] public delegate void OnCreateExplosionEventHandler(Vector2 position);
+    [Signal] public delegate void OnCreateDestructionEventHandler(Vector2 position);
+
+    [Signal] public delegate void OnEnemyDiedEventHandler(Vector2 position);
 
     
     //* ________________________________________________________________________________________________
@@ -22,5 +26,20 @@ public partial class SignalHub : Node
     public static void EmitOnCreateBullet(Vector2 position, Vector2 direction, float speed, PackedScene scene)
     {
         Instance.EmitSignalOnCreateBullet(position, direction, speed, scene);
+    }
+
+    public static void EmitOnCreateExplosion(Vector2 position)
+    {
+        Instance.EmitSignalOnCreateExplosion(position);
+    }
+    
+    public static void EmitOnCreateDestruction(Vector2 position)
+    {
+        Instance.EmitSignalOnCreateDestruction(position);
+    }
+
+    public static void EmitOnEnemyDied(Vector2 position)
+    {
+        Instance.EmitSignalOnEnemyDied(position);
     }
 }

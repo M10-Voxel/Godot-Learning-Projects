@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://l3d0ybgewx58"]
+
+[ext_resource type="AudioStream" uid="uid://sijwq08w0oa4" path="res://assets/sound/pickup3.ogg" id="1_qinvj"]
+[ext_resource type="Texture2D" uid="uid://c1rsx6p8d5i68" path="res://assets/explosion/enemy-deadth.png" id="1_sokea"]
+[ext_resource type="Script" uid="uid://dk5hrtw00qb23" path="res://interactables/Bullets/Boom.cs" id="2_db5s5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db5s5"]
+atlas = ExtResource("1_sokea")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e52lh"]
+atlas = ExtResource("1_sokea")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sokea"]
+atlas = ExtResource("1_sokea")
+region = Rect2(200, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qinvj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db5s5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e52lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sokea")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ctnom"]
+random_pitch = 1.3348398
+streams_count = 1
+stream_0/stream = ExtResource("1_qinvj")
+
+[node name="Destruction" type="AnimatedSprite2D" unique_id=691878644 node_paths=PackedStringArray("_sound")]
+z_index = 1
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_qinvj")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+script = ExtResource("2_db5s5")
+_sound = NodePath("Sound")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=328770408]
+stream = SubResource("AudioStreamRandomizer_ctnom")
+volume_db = -20.0
+pitch_scale = 1.75
