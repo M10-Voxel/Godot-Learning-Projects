@@ -25,6 +25,7 @@ SignalHub="*uid://4v3gu0sf31l0"
 window/size/viewport_width=1024
 window/size/viewport_height=768
 window/stretch/mode="viewport"
+window/vsync/vsync_mode=0
 
 [dotnet]
 

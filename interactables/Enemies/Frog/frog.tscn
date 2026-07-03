@@ -13,6 +13,7 @@ size = Vector2(18, 14)
 script = ExtResource("2_lgrnn")
 _smallWallDetect = NodePath("smallWallDetect")
 _highWallDetect = NodePath("highWallDetect")
+_points = 24
 
 [node name="EnemieSprites" parent="." index="0" unique_id=913801390]
 scale = Vector2(0.7, 0.7)

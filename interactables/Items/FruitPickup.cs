@@ -5,7 +5,7 @@ public partial class FruitPickup : Area2D
 {
 	[Export] private AnimatedSprite2D _sprite;
 	[Export] private AudioStreamPlayer2D _sound;
-	[Export] private int _points = 2;
+	[Export] private int _points = 8;
 
 	private bool _isOnGround = false;
 	private const float FallSpeed = 200.0f;
@@ -42,6 +42,7 @@ public partial class FruitPickup : Area2D
 		_sound.Play();
 		Hide();
 		AreaEntered -= OnPlayerEntered;
+		SignalHub.EmitOnPointScored(_points);
 	}
 	
 	private void OnPlatformEntered(Node2D body)

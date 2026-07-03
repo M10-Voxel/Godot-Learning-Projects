@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bauo23rs360b"]
+
+[ext_resource type="Script" uid="uid://xh3khs0vnhrv" path="res://interactables/Enemies/BallSpike/BallSpike.cs" id="1_37h52"]
+[ext_resource type="Texture2D" uid="uid://bjr7h1jkt5qqk" path="res://assets/danger/spiked_ball.png" id="1_j5in8"]
+[ext_resource type="PackedScene" uid="uid://cv6mvaahau8ee" path="res://interactables/hitbox.tscn" id="2_aee65"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_37h52"]
+
+[node name="BallSpike" type="PathFollow2D" unique_id=686157713]
+rotates = false
+script = ExtResource("1_37h52")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1460824893]
+texture = ExtResource("1_j5in8")
+
+[node name="Hitbox" parent="." unique_id=79862408 instance=ExtResource("2_aee65")]
+collision_layer = 2
+Shape = SubResource("CircleShape2D_37h52")

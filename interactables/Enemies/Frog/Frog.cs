@@ -86,6 +86,5 @@ public partial class Frog : EnemyBlueprint
 	protected override void OnTimerTimeout()
 	{
 		_inJump = true;
-		GD.Print(Name + ": Frog Jumping");
 	}
 }

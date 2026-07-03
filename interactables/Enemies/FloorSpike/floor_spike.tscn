@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dky6gcwe5d45n"]
+
+[ext_resource type="Texture2D" uid="uid://d22fqrng835gd" path="res://assets/danger/floor_spikes.png" id="1_yb7xs"]
+[ext_resource type="PackedScene" uid="uid://cv6mvaahau8ee" path="res://interactables/hitbox.tscn" id="2_ifolj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yb7xs"]
+size = Vector2(16, 6)
+
+[node name="FloorSpike" type="Node2D" unique_id=1482138812]
+z_index = -2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1499796985]
+texture = ExtResource("1_yb7xs")
+
+[node name="Hitbox" parent="." unique_id=79862408 instance=ExtResource("2_ifolj")]
+position = Vector2(0, -3)
+collision_layer = 2
+Shape = SubResource("RectangleShape2D_yb7xs")

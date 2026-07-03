@@ -22,7 +22,6 @@ public partial class BulletBlueprint : Area2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Position += _direction * (float)delta;
-		
 	}
 	
 	

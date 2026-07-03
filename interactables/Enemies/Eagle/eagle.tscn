@@ -15,6 +15,7 @@ collision_mask = 0
 script = ExtResource("2_27a6p")
 _playerDetect = NodePath("PlayerDetect")
 _shooter = NodePath("Shooter")
+_points = 18
 
 [node name="EnemieSprites" parent="." index="0" unique_id=913801390]
 animation = &"eagle"

@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://b5cxyu7gk6dcn"]
+
+[ext_resource type="Texture2D" uid="uid://4bu5j1xq3yja" path="res://assets/items/checkpoint.png" id="1_eugpy"]
+[ext_resource type="Script" uid="uid://d2u4ykshti33k" path="res://interactables/Checkpoint.cs" id="1_ucyyf"]
+[ext_resource type="AudioStream" uid="uid://01o2hn2gkrh4" path="res://assets/sound/checkpoint.wav" id="2_afc5q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afc5q"]
+size = Vector2(33, 49)
+
+[sub_resource type="Animation" id="Animation_afc5q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [26]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ucyyf"]
+resource_name = "flap"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_eugpy"]
+resource_name = "open"
+length = 2.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5, 1.6, 1.7, 1.8000001, 1.9, 2, 2.1000001, 2.2, 2.3, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_afc5q")
+}],
+"times": PackedFloat32Array(0.9)
+}
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_afc5q"]
+_data = {
+&"RESET": SubResource("Animation_afc5q"),
+&"flap": SubResource("Animation_ucyyf"),
+&"open": SubResource("Animation_eugpy")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_afc5q"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ucyyf"]
+animation = &"flap"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_codlq"]
+animation = &"open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hpv63"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_afc5q"]
+advance_mode = 2
+advance_condition = &"boss_killed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ucyyf"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i2p60"]
+states/RESET/node = SubResource("AnimationNodeAnimation_afc5q")
+states/RESET/position = Vector2(340, 100)
+states/Start/position = Vector2(196, 100)
+states/flap/node = SubResource("AnimationNodeAnimation_ucyyf")
+states/flap/position = Vector2(713, 100)
+states/open/node = SubResource("AnimationNodeAnimation_codlq")
+states/open/position = Vector2(494, 100)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_hpv63"), "RESET", "open", SubResource("AnimationNodeStateMachineTransition_afc5q"), "open", "flap", SubResource("AnimationNodeStateMachineTransition_ucyyf")]
+
+[node name="Checkpoint" type="Area2D" unique_id=1737009299 node_paths=PackedStringArray("_onScreenNotifier", "_animationTree")]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+script = ExtResource("1_ucyyf")
+_onScreenNotifier = NodePath("OnScreenEnterNotify")
+_animationTree = NodePath("AnimationTree")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2039852478]
+position = Vector2(1.5, -23.5)
+shape = SubResource("RectangleShape2D_afc5q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1893159995]
+visible = false
+position = Vector2(0, -32)
+texture = ExtResource("1_eugpy")
+hframes = 26
+vframes = 3
+frame = 26
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=1013692559]
+volume_db = -10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=724340401]
+libraries/ = SubResource("AnimationLibrary_afc5q")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1147930824]
+deterministic = false
+tree_root = SubResource("AnimationNodeStateMachine_i2p60")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/boss_killed = false
+
+[node name="OnScreenEnterNotify" type="VisibleOnScreenNotifier2D" parent="." unique_id=1969151074]
+position = Vector2(-53, 0)
+rect = Rect2(-10, -454, 20, 523)

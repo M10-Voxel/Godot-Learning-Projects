@@ -10,6 +10,7 @@ public partial class EnemyBlueprint : CharacterBody2D
 
     [Export] protected float Speed = 30.0f;
     [Export] private float _maxAnimationStartDelay = 0.8f;
+    [Export] private int _points = 20;
 
 
     // CONSTS:
@@ -90,19 +91,16 @@ public partial class EnemyBlueprint : CharacterBody2D
 
     protected virtual void OnScreenEntered()
     {
-        GD.Print(Name + ": OnScreenEntered");
         Timer.Start();
         _screenNotifier.ScreenEntered -= OnScreenEntered;
     }
 
-    protected virtual void OnTimerTimeout()
-    {
-        GD.Print(Name + ": OnTimerTimeout");
-    }
+    protected virtual void OnTimerTimeout() {}
 
     private void Die(Area2D area)
     {
         SignalHub.EmitOnEnemyDied(GlobalPosition);
+        SignalHub.EmitOnPointScored(_points);
         QueueFree();
     }
 }

@@ -11,12 +11,14 @@ public partial class Player : CharacterBody2D
 	[Export] private AnimationPlayer _invincibilityAnimation;
 	[Export] private Shooter _shooter;
 	[Export] private Hitbox _hitbox;
+	[Export (PropertyHint.Range, "1, 10,1")] private int _lives = 5;
 
 	// CONSTS/READONLY:
 	private const float Gravity = 690.0f;
 	private const float RunSpeed = 120.0f;
 	private const float JumpSpeed = -270.0f;
 	private const float MaxFallSpeed = 300.0f;
+	private const float FallenOff = 200.0f;
 	
 	private readonly Vector2 _hurtJumpVelocity = new(0.0f, JumpSpeed/2);
 	private readonly List<Area2D> _currentDamageAreas = [];
@@ -32,6 +34,8 @@ public partial class Player : CharacterBody2D
 	private bool _isHurt = false;
 	private bool _isInvincible = false;
 
+	
+
 	//* ________________________________________________________________________________________________
 	//* GODOT BASE METHODS:
 
@@ -46,6 +50,7 @@ public partial class Player : CharacterBody2D
 		_hitbox.AreaExited += OnHitboxExited;
 		_hurtTimer.Timeout += () => _isHurt = false;
 		_invincibilityAnimation.AnimationFinished += TurnOffInvincibility;
+		CallDeferred(MethodName.LateInit);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -59,6 +64,7 @@ public partial class Player : CharacterBody2D
 		Velocity = velocity;
 
 		MoveAndSlide();
+		PlayerFallenOff();
 
 	}
 
@@ -75,6 +81,11 @@ public partial class Player : CharacterBody2D
 	
 	//* ________________________________________________________________________________________________
 	//* SUB METHODS:
+
+	private void LateInit()
+	{
+		SignalHub.EmitOnPlayerHit(_lives, false);
+	}
 
 	private Vector2 GetInput(Vector2 velocity)
 	{
@@ -96,6 +107,13 @@ public partial class Player : CharacterBody2D
 		return velocity;
 	}
 
+	private void PlayerFallenOff()
+	{
+		if (GlobalPosition.Y > FallenOff)
+		{
+			ReduceLives(_lives);
+		}
+	}
 
 	//* ________________________________________________________________________________________________
 	//* OWN METHODS:
@@ -112,6 +130,7 @@ public partial class Player : CharacterBody2D
 	private void ApplyHit()
 	{
 		if (_isInvincible) return;
+		ReduceLives(1);
 		TurnOnInvincibility();
 		ApplyHurtJump();
 	}
@@ -129,6 +148,11 @@ public partial class Player : CharacterBody2D
 		Velocity = _hurtJumpVelocity;
 	}
 
+	private void ReduceLives(int reduction)
+	{
+		_lives -= reduction;
+		SignalHub.EmitOnPlayerHit(_lives);
+	}
 
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
@@ -142,7 +166,7 @@ public partial class Player : CharacterBody2D
 
 	private void OnHitboxExited(Area2D area)
 	{
-        _currentDamageAreas.Remove(area);
+		_currentDamageAreas.Remove(area);
     }
 
 	private void TurnOffInvincibility(StringName animationName)

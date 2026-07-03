@@ -13,11 +13,17 @@ public partial class ObjectFactory : Node
 	public override void _Ready()
 	{
 		SignalHub.Instance.OnCreateBullet += OnCreateBullet;
-		SignalHub.Instance.OnCreateExplosion += OnCreateExplosion;
 		SignalHub.Instance.OnCreateDestruction += OnCreateDestruction;
 		SignalHub.Instance.OnEnemyDied += OnEnemyDied;
 	}
-	    
+
+	public override void _ExitTree()
+	{
+		SignalHub.Instance.OnCreateBullet -= OnCreateBullet;
+		SignalHub.Instance.OnCreateDestruction -= OnCreateDestruction;
+		SignalHub.Instance.OnEnemyDied -= OnEnemyDied;
+	}
+
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 	
