@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cc0n2cywygreh"]
 
+[ext_resource type="Script" uid="uid://0t0gtj7332wl" path="res://interactables/Platforms/MovingPlatformAnimated.cs" id="1_ccu2i"]
 [ext_resource type="Texture2D" uid="uid://c0tknw7lkxwyc" path="res://assets/tiles/Terrain (16x16).png" id="1_op2qp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_op2qp"]
@@ -7,6 +8,7 @@ size = Vector2(48, 8)
 
 [node name="MovingPlatform-Animated" type="AnimatableBody2D" unique_id=227196361]
 collision_mask = 0
+script = ExtResource("1_ccu2i")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2131747718]
 texture = ExtResource("1_op2qp")

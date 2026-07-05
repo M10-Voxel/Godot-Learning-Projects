@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b5cxyu7gk6dcn" path="res://interactables/checkpoint.tscn" id="11_duom4"]
 [ext_resource type="PackedScene" uid="uid://dky6gcwe5d45n" path="res://interactables/Enemies/FloorSpike/floor_spike.tscn" id="11_hw52q"]
 [ext_resource type="PackedScene" uid="uid://rpnh0flm58y3" path="res://interactables/Platforms/moving_platform_path.tscn" id="12_3nrk2"]
+[ext_resource type="PackedScene" uid="uid://cc0n2cywygreh" path="res://interactables/Platforms/moving_platform_animated.tscn" id="13_js7gl"]
 
 [sub_resource type="Curve2D" id="Curve2D_k66vj"]
 _data = {
@@ -116,6 +117,17 @@ curve = SubResource("Curve2D_hw52q")
 position = Vector2(757, -296)
 progress = 116.0
 _speed = 43.0
+
+[node name="MovingPlatform-Animated" parent="MovingPlatforms" unique_id=227196361 node_paths=PackedStringArray("_from", "_to") instance=ExtResource("13_js7gl")]
+position = Vector2(253, -229)
+_from = NodePath("../Marker2D")
+_to = NodePath("../Marker2D2")
+
+[node name="Marker2D" type="Marker2D" parent="MovingPlatforms" unique_id=979818072]
+position = Vector2(253, -176)
+
+[node name="Marker2D2" type="Marker2D" parent="MovingPlatforms" unique_id=1253098913]
+position = Vector2(253, -285)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1270762073]
 
