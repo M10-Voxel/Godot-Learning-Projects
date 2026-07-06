@@ -2,11 +2,13 @@ using Godot;
 
 public partial class ScoreManager : Node
 {
+    
+    // PROPERTIES:
     public static ScoreManager Instance { get; private set; }
     public HighScores ScoresHistory { get; private set; } = new HighScores();
-
     public int CachedScore { get; set; }
 
+    // CONSTANTS:
     private const string ScoreFilePath = "user://foxy.res";
     
     //* ________________________________________________________________________________________________
@@ -31,6 +33,7 @@ public partial class ScoreManager : Node
     //* ________________________________________________________________________________________________
     //* OWN METHODS:
 
+    // Used to generate clearer messages in console
     private static void LogInfo(string msg)
     {
         GD.Print($"[ScoreManager] {msg}");

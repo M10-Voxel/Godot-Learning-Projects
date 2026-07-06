@@ -197,5 +197,4 @@ public partial class Player : CharacterBody2D
 			CallDeferred(MethodName.ApplyHit);
 		}
 	}
-
 }

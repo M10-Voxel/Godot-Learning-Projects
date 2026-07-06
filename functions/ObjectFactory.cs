@@ -1,5 +1,8 @@
 using Godot;
 
+/// <summary>
+/// Creates objects in the game world at specified parameters
+/// </summary>
 public partial class ObjectFactory : Node
 {
 	// EXPORTS:
@@ -39,7 +42,13 @@ public partial class ObjectFactory : Node
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 	
-	// Creates a specified (enemy- or player-) bullet, with given position, direction and speed
+	/// <summary>
+	/// Creates a specified (enemy- or player-) bullet
+	/// </summary>
+	/// <param name="position">Position where bullet should be created</param>
+	/// <param name="direction">Direction (left/right) where bullet goes to</param>
+	/// <param name="speed">Horizontal Speed that bullet travels at</param>
+	/// <param name="scene">Type of bullet</param>
 	private void OnCreateBullet(Vector2 position, Vector2 direction, float speed, PackedScene scene)
 	{
 		var bullet = scene.Instantiate<BulletBlueprint>();

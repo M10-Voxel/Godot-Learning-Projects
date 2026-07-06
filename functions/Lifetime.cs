@@ -1,5 +1,7 @@
 using Godot;
-
+/// <summary>
+/// Node that deletes the parent after a certain amount of time
+/// </summary>
 public partial class Lifetime : Node
 {
 	// EXPORTS:

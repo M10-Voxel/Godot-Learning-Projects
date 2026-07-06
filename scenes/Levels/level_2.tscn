@@ -52,7 +52,7 @@ position = Vector2(2400, -288)
 position = Vector2(168, -272)
 
 [node name="Eagle2" parent="Enemies" parent_id_path=PackedInt32Array(1276655953) index="1" unique_id=429527147 instance=ExtResource("2_04sgr")]
-position = Vector2(480, -424)
+position = Vector2(480, -396)
 
 [node name="Eagle3" parent="Enemies" parent_id_path=PackedInt32Array(1276655953) index="2" unique_id=376857705 instance=ExtResource("2_04sgr")]
 position = Vector2(680, -368)

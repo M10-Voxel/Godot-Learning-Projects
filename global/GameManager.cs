@@ -3,10 +3,11 @@ using Godot;
 
 public partial class GameManager : Node
 {
+    // PROPERTIES:
     public static GameManager Instance { get; private set; }
     public int CurrentLevel { get; private set; } = -1;
-    public int MaxLives { get; private set; } = 3;
     public int CurrentLives { get; set; } = 3;
+    private int MaxLives { get; set; } = 3;
 
 
     // NAVIGATION SCENES:
@@ -30,7 +31,8 @@ public partial class GameManager : Node
     //* ________________________________________________________________________________________________
     //* OWN METHODS:
     
-    public void ResetLives()
+    // Sets live to default amount
+    private void ResetLives()
     {
         CurrentLives = MaxLives;
     }
@@ -61,8 +63,5 @@ public partial class GameManager : Node
         ResetLives();
         GetTree().ChangeSceneToPacked(_levelScenes[CurrentLevel]);
     }
-    public static void ReloadLevel()
-    {
-        Instance.ReloadCurrentLevel();
-    }
+    public static void ReloadLevel() => Instance.ReloadCurrentLevel();
 }

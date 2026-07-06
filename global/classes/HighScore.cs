@@ -2,11 +2,15 @@ using Godot;
 
 public partial class HighScore : Resource
 {
-
+    // EXPORTS:
     [Export] public int Score { get; set; } = 0;
     [Export] public string DateScored { get; set; } = GetFormattedDate();
 
+    
+    //* ________________________________________________________________________________________________
+    //* OWN METHODS:
 
+    // Uses Godot Date Dictionary to get current date and formates it
     static string GetFormattedDate()
     {
         var date = Time.GetDateDictFromSystem();
