@@ -8,6 +8,8 @@ public partial class GameHud : Control
     [Export] private ColorRect _overlayScreen;
     [Export] private Label _score;
     [Export] private Label _state;
+    [Export] private Label _level;
+    [Export] private Label _pressButton;
     [Export] private AudioStreamPlayer2D _winSound;
     [Export] private AudioStreamPlayer2D _loseSound;
     [Export] private Timer _completeTimer;
@@ -18,6 +20,7 @@ public partial class GameHud : Control
     
     
     private bool _canContinue = false;
+    private bool _completedLevel = false;
     private int _scoreValue = 0;
     private List<TextureRect> _hearts = [];
     
@@ -27,13 +30,16 @@ public partial class GameHud : Control
     
     public override void _Ready()
     {
+        GetTree().Paused = false;
         SignalHub.Instance.OnLevelCompleted += OnLevelCompleted;
         SignalHub.Instance.OnPointScored += OnPointScored;
         SignalHub.Instance.OnPlayerHit += OnPlayerHit;
         _completeTimer.Timeout += OnCompleteTimerTimeout;
         _pauseGameTimer.Timeout += () => GetTree().Paused = true;
-        UpdateScoreLabel(_scoreValue);
         _hearts = _heartContainer.GetChildren().OfType<TextureRect>().ToList();
+        _level.Text = $"Level: {GameManager.Instance.CurrentLevel + 1}";
+        _scoreValue = ScoreManager.Instance.CachedScore;
+        UpdateScoreLabel(_scoreValue);
     }
 
     public override void _ExitTree()
@@ -51,9 +57,23 @@ public partial class GameHud : Control
             GameManager.ChangeToMainScreen();
         }
 
+        // When shoot (Left Click) is pressed - Change to Next Level or Main Screen depending on level completion
         if (@event.IsActionPressed("shoot") && _canContinue)
         {
-            GameManager.ChangeToMainScreen();
+            if (_completedLevel) GameManager.ChangeToNextLevel();
+            else                 GameManager.ChangeToMainScreen();
+        }
+
+        // When next (E) is pressed - Change to Next Level
+        if (@event.IsActionPressed("next"))
+        {
+            GameManager.ChangeToNextLevel();
+        }
+
+        // When reload (R) is pressed - Reload Level
+        if (@event.IsActionPressed("reload"))
+        {
+            GameManager.ReloadLevel();
         }
     }
     
@@ -80,13 +100,19 @@ public partial class GameHud : Control
     {
         if (isCompleted)
         {
+            _completedLevel = true;
+            ScoreManager.Instance.CachedScore = _scoreValue;
             _state.Text = "Level Completed";
+            _pressButton.Text = "Left Click to continue";
             _winSound.Play();
         }
         else
         {
             _state.Text = "Game Over";
+            _pressButton.Text = "press R to restart";
             _loseSound.Play();
+            ScoreManager.Instance.AddScore(_scoreValue);
+            ScoreManager.Instance.CachedScore = 0;
         }
         
         _overlayScreen.Show();

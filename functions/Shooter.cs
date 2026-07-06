@@ -27,6 +27,7 @@ public partial class Shooter : Node2D
 	//* ________________________________________________________________________________________________
 	//* OWN METHODS:
 	
+	// Shoots a bullet in given direction, when cooldown is over
 	public void Shoot(Vector2 direction)
 	{
 		if (!_canShoot) return;

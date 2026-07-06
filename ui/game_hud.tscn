@@ -25,7 +25,7 @@ stacked_shadow_0/offset = Vector2(1, 2)
 stacked_shadow_0/color = Color(0.14117648, 0.06666667, 0.27058825, 1)
 stacked_shadow_0/outline_size = 12
 
-[node name="GameHud" type="Control" unique_id=1953880951 node_paths=PackedStringArray("_overlayScreen", "_score", "_state", "_winSound", "_loseSound", "_completeTimer", "_pauseGameTimer", "_heartContainer")]
+[node name="GameHud" type="Control" unique_id=1953880951 node_paths=PackedStringArray("_overlayScreen", "_score", "_state", "_level", "_pressButton", "_winSound", "_loseSound", "_completeTimer", "_pauseGameTimer", "_heartContainer")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -38,6 +38,8 @@ script = ExtResource("1_agb43")
 _overlayScreen = NodePath("ColorRect")
 _score = NodePath("IngameHud/Labels/Score")
 _state = NodePath("ColorRect/GameState/State")
+_level = NodePath("IngameHud/Labels/Level")
+_pressButton = NodePath("ColorRect/GameState/Press Shoot")
 _winSound = NodePath("WinSound")
 _loseSound = NodePath("GameOver")
 _completeTimer = NodePath("CompleteTimer")
@@ -160,7 +162,7 @@ vertical_alignment = 1
 
 [node name="Press Shoot" type="Label" parent="ColorRect/GameState" unique_id=670016625]
 layout_mode = 2
-text = "Press Shoot"
+text = "press R to restart"
 label_settings = SubResource("LabelSettings_5bps4")
 horizontal_alignment = 1
 vertical_alignment = 1

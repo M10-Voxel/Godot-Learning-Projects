@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://byd48yahtfx2r"]
+
+[ext_resource type="Script" uid="uid://cpvok822w5qkj" path="res://ui/ScrollingBackground.cs" id="1_32f34"]
+
+[node name="ScrollingBackground" type="Node2D" unique_id=948724049]
+z_index = -10
+texture_filter = 1
+script = ExtResource("1_32f34")

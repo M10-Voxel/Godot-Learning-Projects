@@ -2,6 +2,7 @@ using Godot;
 
 public partial class ObjectFactory : Node
 {
+	// EXPORTS:
 	[Export] private PackedScene _explosionScene;
 	[Export] private PackedScene _destructionScene;
 	[Export] private PackedScene _fruitScene;
@@ -23,10 +24,22 @@ public partial class ObjectFactory : Node
 		SignalHub.Instance.OnCreateDestruction -= OnCreateDestruction;
 		SignalHub.Instance.OnEnemyDied -= OnEnemyDied;
 	}
+	
+	
+	//* ________________________________________________________________________________________________
+	//* OWN METHODS:
+	
+	// Method used to be called as deferred -> creates object after frame end
+	private void AddObject(Node node)
+	{
+		AddChild(node);
+	}
 
+	
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 	
+	// Creates a specified (enemy- or player-) bullet, with given position, direction and speed
 	private void OnCreateBullet(Vector2 position, Vector2 direction, float speed, PackedScene scene)
 	{
 		var bullet = scene.Instantiate<BulletBlueprint>();
@@ -34,6 +47,7 @@ public partial class ObjectFactory : Node
 		CallDeferred(MethodName.AddObject, bullet);
 	}
 
+	// Creates an explosion at given position
 	private void OnCreateExplosion(Vector2 position)
 	{
 		var explosion = _explosionScene.Instantiate<Boom>();
@@ -41,6 +55,7 @@ public partial class ObjectFactory : Node
 		CallDeferred(MethodName.AddObject, explosion);
 	}
 
+	// Creates a destruction effect on bullet collision (with terrain) at given position
 	private void OnCreateDestruction(Vector2 position)
 	{
 		var destruction = _destructionScene.Instantiate<Boom>();
@@ -48,6 +63,7 @@ public partial class ObjectFactory : Node
 		CallDeferred(MethodName.AddObject, destruction);
 	}
 
+	// Creates a fruit pickup (item) at given Position, after explosion, when enemy was hit
 	private void OnEnemyDied(Vector2 position)
 	{
 		OnCreateExplosion(position);
@@ -56,8 +72,4 @@ public partial class ObjectFactory : Node
 		CallDeferred(MethodName.AddObject, fruit);
 	}
 
-	private void AddObject(Node node)
-	{
-		AddChild(node);
-	}
 }

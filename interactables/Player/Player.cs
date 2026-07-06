@@ -4,6 +4,7 @@ using Godot;
 public partial class Player : CharacterBody2D
 {
 	// EXPORTS:
+	[Export] private PlayerCamera _camera;
 	[Export] private AudioStreamPlayer2D _jumpSound;
 	[Export] private AudioStreamPlayer2D _hurtSound;
 	[Export] private Sprite2D _playerSprite;
@@ -12,6 +13,11 @@ public partial class Player : CharacterBody2D
 	[Export] private Shooter _shooter;
 	[Export] private Hitbox _hitbox;
 	[Export (PropertyHint.Range, "1, 10,1")] private int _lives = 5;
+	[Export] private int _camLimitLeft = -100000;
+	[Export] private int _camLimitRight = 100000;
+	[Export] private int _camLimitBottom = -100000;
+	[Export] private int _camLimitTop = 100000;
+	
 
 	// CONSTS/READONLY:
 	private const float Gravity = 690.0f;
@@ -33,6 +39,7 @@ public partial class Player : CharacterBody2D
 	private bool _hasJumped = false;
 	private bool _isHurt = false;
 	private bool _isInvincible = false;
+	private bool _hasFallenOff = false;
 
 	
 
@@ -50,6 +57,7 @@ public partial class Player : CharacterBody2D
 		_hitbox.AreaExited += OnHitboxExited;
 		_hurtTimer.Timeout += () => _isHurt = false;
 		_invincibilityAnimation.AnimationFinished += TurnOffInvincibility;
+		SetCameraLimits();
 		CallDeferred(MethodName.LateInit);
 	}
 
@@ -81,11 +89,20 @@ public partial class Player : CharacterBody2D
 	
 	//* ________________________________________________________________________________________________
 	//* SUB METHODS:
-
+	
+	private void SetCameraLimits()
+    	{
+    		_camera.LimitLeft = _camLimitLeft;
+    		_camera.LimitRight = _camLimitRight;
+    		_camera.LimitBottom = _camLimitBottom;
+    		_camera.LimitTop = _camLimitTop;
+    	}
 	private void LateInit()
 	{
+		_lives = GameManager.Instance.CurrentLives;
 		SignalHub.EmitOnPlayerHit(_lives, false);
 	}
+	
 
 	private Vector2 GetInput(Vector2 velocity)
 	{
@@ -109,9 +126,10 @@ public partial class Player : CharacterBody2D
 
 	private void PlayerFallenOff()
 	{
-		if (GlobalPosition.Y > FallenOff)
+		if (GlobalPosition.Y > FallenOff && !_hasFallenOff)
 		{
 			ReduceLives(_lives);
+			_hasFallenOff = true;
 		}
 	}
 
@@ -151,6 +169,7 @@ public partial class Player : CharacterBody2D
 	private void ReduceLives(int reduction)
 	{
 		_lives -= reduction;
+		GameManager.Instance.CurrentLives = _lives;
 		SignalHub.EmitOnPlayerHit(_lives);
 	}
 

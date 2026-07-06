@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c4gbdp5pjhr2"]
+
+[ext_resource type="LabelSettings" uid="uid://dpyhbyl1aer8j" path="res://global/resources/Label_Score.tres" id="1_gwtnd"]
+[ext_resource type="Script" uid="uid://c5le0tbkmodh" path="res://ui/HighScoreDisplay.cs" id="1_t3wul"]
+
+[node name="HighScoreDisplay" type="VBoxContainer" unique_id=982196360 node_paths=PackedStringArray("_scoreLabel", "_dateLabel")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_t3wul")
+_scoreLabel = NodePath("Score")
+_dateLabel = NodePath("Date")
+
+[node name="Score" type="Label" parent="." unique_id=806971676]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("1_gwtnd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Date" type="Label" parent="." unique_id=1345081203]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("1_gwtnd")
+horizontal_alignment = 1
+vertical_alignment = 1

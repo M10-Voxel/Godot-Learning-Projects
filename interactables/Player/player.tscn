@@ -253,10 +253,11 @@ states/hurt/position = Vector2(511, 226)
 transitions = ["Start", "Grounded", SubResource("AnimationNodeStateMachineTransition_usp73"), "Grounded", "Air", SubResource("AnimationNodeStateMachineTransition_fv16o"), "Air", "Grounded", SubResource("AnimationNodeStateMachineTransition_hedt8"), "Air", "hurt", SubResource("AnimationNodeStateMachineTransition_14olg"), "hurt", "Grounded", SubResource("AnimationNodeStateMachineTransition_m3uay"), "Grounded", "hurt", SubResource("AnimationNodeStateMachineTransition_vycps")]
 graph_offset = Vector2(-190, -3)
 
-[node name="Player" type="CharacterBody2D" unique_id=2065221929 node_paths=PackedStringArray("_jumpSound", "_hurtSound", "_playerSprite", "_hurtTimer", "_invincibilityAnimation", "_shooter", "_hitbox")]
+[node name="Player" type="CharacterBody2D" unique_id=2065221929 node_paths=PackedStringArray("_camera", "_jumpSound", "_hurtSound", "_playerSprite", "_hurtTimer", "_invincibilityAnimation", "_shooter", "_hitbox")]
 collision_layer = 0
 collision_mask = 17
 script = ExtResource("1_repto")
+_camera = NodePath("PlayerCamera")
 _jumpSound = NodePath("Jump")
 _hurtSound = NodePath("Hurt")
 _playerSprite = NodePath("Sprite2D")

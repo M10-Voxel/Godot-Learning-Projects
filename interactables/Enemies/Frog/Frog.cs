@@ -15,14 +15,6 @@ public partial class Frog : EnemyBlueprint
 	
 	//* ________________________________________________________________________________________________
 	//* GODOT BASE METHODS:
-
-	public override void _Ready()
-	{
-		base._Ready();
-		DelayInitialAnimation();
-		
-		Timer.Start(GD.RandRange(2.0f, 4.0f));
-	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -83,6 +75,11 @@ public partial class Frog : EnemyBlueprint
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 
+	protected override void OnScreenEntered()
+	{
+		Timer.Start(GD.RandRange(2.0f, 4.0f));
+	}
+	
 	protected override void OnTimerTimeout()
 	{
 		_inJump = true;

@@ -1,48 +1,76 @@
-using System;
 using Godot;
 
 public partial class ScoreManager : Node
 {
-    public ScoreManager Instance { get; private set; }
+    public static ScoreManager Instance { get; private set; }
     public HighScores ScoresHistory { get; private set; } = new HighScores();
+
+    public int CachedScore { get; set; }
+
+    private const string ScoreFilePath = "user://foxy.res";
     
     //* ________________________________________________________________________________________________
     //* GODOT BASE METHODS:
-    
+
+    public override void _EnterTree()
+    {
+        LoadScoresFromFile();
+    }
+
     public override void _Ready()
     {
         Instance = this;
-        MakeScores();
+    }
+
+    public override void _ExitTree()
+    {
+        SaveScoresToFile();
     }
 
 
+    //* ________________________________________________________________________________________________
+    //* OWN METHODS:
 
-
-
-
-
-
-    public void LogInfo(string msg)
+    private static void LogInfo(string msg)
     {
         GD.Print($"[ScoreManager] {msg}");
     }
 
-    private void MakeScores()
+    public void AddScore(int score)
     {
-        Random rng = new Random();
+        LogInfo($"AddScore | {score}");
+        LogInfo($"AddScore | pre-add score count: {ScoresHistory.Scores.Count}");
+        ScoresHistory.AddNewScore(score);
+        LogInfo($"AddScore | done score count: {ScoresHistory.Scores.Count}");
+        SaveScoresToFile();
+    }
 
-        for (int i = 0; i < 12; i++)
+    private void LoadScoresFromFile()
+    {
+        LogInfo("LoadScoresFromFile");
+
+        if (!ResourceLoader.Exists(ScoreFilePath))
         {
-            var randNum = rng.Next(10 , 200);
-            ScoresHistory.AddNewScore(randNum);
-            LogInfo($"Added score: {randNum}");
+            LogInfo("LoadScoresFromFile | !ResourceLoader.Exists");
+            return;
         }
         
-        LogInfo("Scores Created");
-
-        foreach (var score in ScoresHistory.Scores)
+        HighScores highScores = ResourceLoader.Load<HighScores>(ScoreFilePath);
+        if(highScores != null)
         {
-            LogInfo($"Score: {score.Score}");
+            ScoresHistory = highScores;
+            LogInfo($"LoadScoresFromFile | Load ok, score count: {ScoresHistory.Scores.Count}");
         }
+        else
+        {
+            LogInfo("LoadScoresFromFile | Load failed");
+        }
+    }
+
+    private void SaveScoresToFile()
+    {
+        Error error = ResourceSaver.Save(ScoresHistory, ScoreFilePath);
+
+        LogInfo(error == Error.Ok ? "SaveScoresToFile | ok" : "SaveScoresToFile | failed");
     }
 }

@@ -20,6 +20,7 @@ public partial class Lifetime : Node
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 
+	// Deletes the parent object, after timer ran out
 	private void OnTimeout()
 	{
 		GetParent().QueueFree();
