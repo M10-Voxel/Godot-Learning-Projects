@@ -1,5 +1,9 @@
 using Godot;
 
+/// <summary>
+/// The eagle enemy. Descending from the sky, in zigzag pattern - turns to the player after delay and shoots when over him.
+/// Starts movement when entering Screen (no collision with other objects)
+/// </summary>
 public partial class Eagle : EnemyBlueprint
 {
     // EXPORTS:
@@ -24,21 +28,18 @@ public partial class Eagle : EnemyBlueprint
     
     public override void _PhysicsProcess(double delta)
     {
-        Velocity = _flyDirection;
+        Velocity = _flyDirection;   // constant down movement without gravity
         MoveAndSlide();
-        if (_playerDetect.IsColliding()) Shoot();
+        if (_playerDetect.IsColliding()) _shooter.Shoot(GlobalPosition.DirectionTo(PlayerRef.GlobalPosition));
     }
 
-    //* ________________________________________________________________________________________________
-    //* SUB METHODS:
-
-    private void Shoot()
-    {
-        _shooter.Shoot(GlobalPosition.DirectionTo(PlayerRef.GlobalPosition));
-    }
 
     //* ________________________________________________________________________________________________
     //* OWN METHODS:
+    
+    /// <summary>
+    /// Flips sprite as well as flight direction depending on player position
+    /// </summary>
     private void FlyToPlayer()
     {
         FlipSprite();
@@ -49,6 +50,9 @@ public partial class Eagle : EnemyBlueprint
     //* ________________________________________________________________________________________________
     //* SIGNAL METHODS:
 
+    /// <summary>
+    /// Animation and movement start when entering screen
+    /// </summary>
     protected override void OnScreenEntered()
     {
         base.OnScreenEntered();
@@ -56,6 +60,9 @@ public partial class Eagle : EnemyBlueprint
         FlyToPlayer();
     }
 
+    /// <summary>
+    /// Fly to player after delay
+    /// </summary>
     protected override void OnTimerTimeout()
     {
         FlyToPlayer();

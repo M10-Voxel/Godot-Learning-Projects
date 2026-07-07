@@ -7,11 +7,9 @@ public partial class Frog : EnemyBlueprint
 	[Export] private RayCast2D _highWallDetect;
 	
 	// PRIVATE VARIABLES:
-	private const float MinXDistance = 80.0f;
-	private const float MaxXDistance = 130.0f;
+	private const float MinXDistance = 60.0f;
+	private const float MaxXDistance = 150.0f;
 	private const float JumpHeight = -240.0f;
-	
-	private bool _inJump = false;
 	
 	//* ________________________________________________________________________________________________
 	//* GODOT BASE METHODS:
@@ -21,7 +19,6 @@ public partial class Frog : EnemyBlueprint
 		Vector2 velocity = ApplyGravity(delta);
 		Velocity = velocity;
 		
-		ApplyJump();
 		MoveAndSlide();
 		
 		if (IsOnFloor())
@@ -36,18 +33,23 @@ public partial class Frog : EnemyBlueprint
 	//* ________________________________________________________________________________________________
 	//* SUB METHODS:
 
-	// FOR _PhysicsProcess:
+	/// <summary>
+	/// Applies jump velocity and starts timer for next jump, when frog is on floor
+	/// </summary>
 	private void ApplyJump()
 	{
-		if (IsOnFloor() && _inJump)
+		if (IsOnFloor())
 		{
 			AnimatedSprite.Play("frog_jump");
-			Velocity = GetJumpDirection();
-			_inJump = false;
+			Velocity = GetJump();
 			Timer.Start(GD.RandRange(2.0f, 4.0f));
 		}
 	}
-	private Vector2 GetJumpDirection()
+	/// <summary>
+	/// Checks if frog can jump in direction. Determines jump direction (sprite rotation) and randomizes jump range.
+	/// </summary>
+	/// <returns>Vector2 containing jump range (with direction) and jump height</returns>
+	private Vector2 GetJump()
 	{
 		if (_smallWallDetect.IsColliding() || _highWallDetect.IsColliding())
 		{
@@ -59,7 +61,10 @@ public partial class Frog : EnemyBlueprint
 		
 		return new Vector2(finalRange, JumpHeight);
 	}
-
+	
+	/// <summary>
+	/// Flips sprite and rotates raycasts in the opposite direction
+	/// </summary>
 	private void FlipFrog()
 	{
 		FlipSprite();
@@ -67,21 +72,23 @@ public partial class Frog : EnemyBlueprint
 		_highWallDetect.RotationDegrees = AnimatedSprite.FlipH ? 180.0f : 0.0f;
 	}
 
-	//* ________________________________________________________________________________________________
-	//* OWN METHODS:
-	
-	
 	
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 
+	/// <summary>
+	/// Starts frog movement only after first time entering screen
+	/// </summary>
 	protected override void OnScreenEntered()
 	{
 		Timer.Start(GD.RandRange(2.0f, 4.0f));
 	}
 	
+	/// <summary>
+	/// On timer timeout make the frog jump
+	/// </summary>
 	protected override void OnTimerTimeout()
 	{
-		_inJump = true;
+		ApplyJump();
 	}
 }

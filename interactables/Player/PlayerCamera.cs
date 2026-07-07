@@ -2,6 +2,7 @@ using Godot;
 
 public partial class PlayerCamera : Camera2D
 {
+    // EXPORTS:
     [Export] private double _shakeAmount = 5.0;
     [Export] private double _shakeDuration = 0.3;
         
@@ -17,6 +18,7 @@ public partial class PlayerCamera : Camera2D
 
     public override void _Process(double delta)
     {
+        // Changes X and Y coordinate of Camera each frame, creating a camera shake effect
         Offset = new Vector2(
             (float)GD.RandRange(-_shakeAmount, _shakeAmount),
             (float)GD.RandRange(-_shakeAmount, _shakeAmount)
@@ -32,8 +34,13 @@ public partial class PlayerCamera : Camera2D
     //* ________________________________________________________________________________________________
     //* SIGNAL METHODS:
 
-
-
+    /// <summary>
+    /// When shake is true, set Process to true, enabling the camera shake.
+    /// Then create a timer, after its timeout Process is stopped, with that the camera shake
+    /// Then Camera is reset, to ensure it's at the root position
+    /// </summary>
+    /// <param name="lives">Irrelevant</param>
+    /// <param name="shake">The boolean to determine if camera should shake</param>
     private async void ShakeCamera(int lives, bool shake)
     {
         if (!shake) return;

@@ -1,5 +1,8 @@
 using Godot;
 
+/// <summary>
+/// Creates everything that is important for a bullet
+/// </summary>
 public partial class Shooter : Node2D
 {
 	// EXPORTS:

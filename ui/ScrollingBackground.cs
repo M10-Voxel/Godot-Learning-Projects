@@ -1,5 +1,8 @@
 using Godot;
 
+/// <summary>
+/// Logic to create a parallax scrolling background with multiple layers of images using only code
+/// </summary>
 public partial class ScrollingBackground : Node2D
 {
     // EXPORTS:
@@ -28,7 +31,9 @@ public partial class ScrollingBackground : Node2D
     //* ________________________________________________________________________________________________
     //* SUB METHODS:
     
-    // Layers images with different speeds to create a depth effect
+    /// <summary>
+    /// Layers images with different speeds to create a depth effect
+    /// </summary>
     private void Setup()
     {
         float scrollGap = 1.0f / _bgImages.Images.Count;    // Regulates speed at which images move in comparison to camera
@@ -41,7 +46,11 @@ public partial class ScrollingBackground : Node2D
             currentScrollScale += scrollGap;
         }
     }
-    // Configures and adds one layer to the background
+    /// <summary>
+    /// Configures and adds one layer to the background
+    /// </summary>
+    /// <param name="currentScrollScale">The speed in which the current layer should move</param>
+    /// <param name="image">The image for the current laer</param>
     private void AddLayer(float currentScrollScale, Texture2D image)
     {
         Parallax2D parallax2D = new Parallax2D();

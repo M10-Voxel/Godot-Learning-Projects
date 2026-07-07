@@ -33,7 +33,7 @@ public partial class ObjectFactory : Node
     //* OWN METHODS:
     
     /// <summary>
-    /// Method used to be called as deferred -> creates object after frame end
+    /// Method used to be called as deferred -> creates object after frame end.
     /// </summary>
     /// <param name="node">The object to add as a child</param>
     private void AddObject(Node node)

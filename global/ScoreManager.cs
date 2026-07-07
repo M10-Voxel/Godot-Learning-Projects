@@ -1,11 +1,14 @@
 using Godot;
 
+/// <summary>
+/// A singleton node that manages the player's score
+/// </summary>
 public partial class ScoreManager : Node
 {
     
     // PROPERTIES:
     public static ScoreManager Instance { get; private set; }
-    public HighScores ScoresHistory { get; private set; } = new HighScores();
+    public HighScores ScoresHistory { get; private set; } = new();
     public int CachedScore { get; set; }
 
     // CONSTANTS:
@@ -33,12 +36,19 @@ public partial class ScoreManager : Node
     //* ________________________________________________________________________________________________
     //* OWN METHODS:
 
-    // Used to generate clearer messages in console
+    /// <summary>
+    /// Used to generate clearer messages in console
+    /// </summary>
+    /// <param name="msg">The message added to the log</param>
     private static void LogInfo(string msg)
     {
         GD.Print($"[ScoreManager] {msg}");
     }
 
+    /// <summary>
+    /// Adds a new score to the existing HighScores list
+    /// </summary>
+    /// <param name="score">The integer value of the score to add</param>
     public void AddScore(int score)
     {
         LogInfo($"AddScore | {score}");
@@ -47,7 +57,10 @@ public partial class ScoreManager : Node
         LogInfo($"AddScore | done score count: {ScoresHistory.Scores.Count}");
         SaveScoresToFile();
     }
-
+    
+    /// <summary>
+    /// Loads the HighScores list from the saved file
+    /// </summary>
     private void LoadScoresFromFile()
     {
         LogInfo("LoadScoresFromFile");
@@ -70,6 +83,9 @@ public partial class ScoreManager : Node
         }
     }
 
+    /// <summary>
+    /// Saves the HighScores list to a file in given directory
+    /// </summary>
     private void SaveScoresToFile()
     {
         Error error = ResourceSaver.Save(ScoresHistory, ScoreFilePath);

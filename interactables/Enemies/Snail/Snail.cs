@@ -5,7 +5,6 @@ public partial class Snail : EnemyBlueprint
 	// EXPORTS:
 	[Export] private RayCast2D _floorDetect;
 	
-	
 	// PRIVATE VARIABLES:
 	private bool IsInMovingFrame => AnimatedSprite.Frame is >= 2 and <= 5;
 	
@@ -22,7 +21,7 @@ public partial class Snail : EnemyBlueprint
 	{
 		Vector2 velocity = ApplyGravity(delta);
 
-		velocity = MoveSnake(velocity);
+		velocity = MoveSnail(velocity);
 		
 		Velocity = velocity;
 		MoveAndSlide();
@@ -34,8 +33,12 @@ public partial class Snail : EnemyBlueprint
 	//* ________________________________________________________________________________________________
 	//* SUB METHODS:
 
-	// FOR _PhysicsProcess:
-	private Vector2 MoveSnake(Vector2 velocity)
+	/// <summary>
+	/// Moves the snail in the direction it is facing only during movement animation frames
+	/// </summary>
+	/// <param name="velocity">The speed/velocity the snail currently has</param>
+	/// <returns></returns>
+	private Vector2 MoveSnail(Vector2 velocity)
 	{
 		if (!IsOnFloor()) return velocity;
 		
@@ -47,6 +50,9 @@ public partial class Snail : EnemyBlueprint
 		return velocity;
 	}
 
+	/// <summary>
+	/// Flips snail sprite and Raycast
+	/// </summary>
 	private void FlipSnail()
 	{
 		AnimatedSprite.FlipH = !AnimatedSprite.FlipH;	// Flips sprite in opposite direction from where it was facing before
@@ -55,9 +61,4 @@ public partial class Snail : EnemyBlueprint
 			_floorDetect.Position.Y
 		);
 	}
-	
-
-	//* ________________________________________________________________________________________________
-	//* OWN METHODS:
-
 }

@@ -2,6 +2,9 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 
+/// <summary>
+/// Creates a list of HighScores limiting it to a MaxScore and sorting it in descending order
+/// </summary>
 public partial class HighScores : Resource
 {
     // EXPORTS:
@@ -14,10 +17,14 @@ public partial class HighScores : Resource
     //* ________________________________________________________________________________________________
     //* OWN METHODS:
 
+    /// <summary>
+    /// Adds a new HighScore to list, sorting and limiting it to MaxScores
+    /// </summary>
+    /// <param name="score">The integer value of the score to add</param>
     public void AddNewScore(int score)
     {
-        HighScore highScore = new HighScore {Score = score};
-        Scores.Add(highScore);  // Date is added automatically
+        HighScore highScore = HighScore.Create(score);
+        Scores.Add(highScore);
         
         SortScores();
         
@@ -25,7 +32,9 @@ public partial class HighScores : Resource
         if(Scores.Count > MaxScores) Scores.Resize(MaxScores);
     }
 
-    // Sorts the scores in descending order using Linq
+    /// <summary>
+    /// Sorts the scores in descending order using Linq
+    /// </summary>
     private void SortScores()
     {
         var list = Scores.ToList();

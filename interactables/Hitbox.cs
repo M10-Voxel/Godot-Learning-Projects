@@ -1,6 +1,8 @@
 using Godot;
 
-
+/// <summary>
+/// This Tool allows to easily set layer and mask collision for the imported scene
+/// </summary>
 [Tool]	// Tool Scripts run in the editor
 public partial class Hitbox : Area2D
 {
@@ -24,7 +26,6 @@ public partial class Hitbox : Area2D
 
 	// PRIVATE VARIABLES:
 	private Shape2D _shape;
-	
 	
 
 	//* ________________________________________________________________________________________________

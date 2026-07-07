@@ -1,4 +1,5 @@
 using Godot;
+
 /// <summary>
 /// Node that deletes the parent after a certain amount of time
 /// </summary>
@@ -23,7 +24,7 @@ public partial class Lifetime : Node
 	//* SIGNAL METHODS:
 
 	/// <summary>
-	/// Deletes the parent object, after timer ran out
+	/// Deletes the parent object, after timer ran out.
 	/// </summary>
 	private void OnTimeout()
 	{

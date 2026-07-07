@@ -2,9 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
+/// <summary>
+/// In Game Hud to display current level, score and hearts, as well as GameOver/-Win screens
+/// and the logic to change scenes and display of text etc.
+/// </summary>
 public partial class GameHud : Control
 {
-
+    #region EXPORTS
     [Export] private ColorRect _overlayScreen;
     [Export] private Label _score;
     [Export] private Label _state;
@@ -15,14 +19,14 @@ public partial class GameHud : Control
     [Export] private Timer _completeTimer;
     [Export] private Timer _pauseGameTimer;
     [Export] private HBoxContainer _heartContainer;
-    
-    
-    
-    
+    #endregion
+
+    #region PRIVATE VARIABLES
     private bool _canContinue = false;
     private bool _completedLevel = false;
     private int _scoreValue = 0;
     private List<TextureRect> _hearts = [];
+    #endregion
     
     
     //* ________________________________________________________________________________________________
@@ -31,14 +35,16 @@ public partial class GameHud : Control
     public override void _Ready()
     {
         GetTree().Paused = false;
+        
         SignalHub.Instance.OnLevelCompleted += OnLevelCompleted;
         SignalHub.Instance.OnPointScored += OnPointScored;
         SignalHub.Instance.OnPlayerHit += OnPlayerHit;
-        _completeTimer.Timeout += OnCompleteTimerTimeout;
+        _completeTimer.Timeout += () => _canContinue = true;
         _pauseGameTimer.Timeout += () => GetTree().Paused = true;
-        _hearts = _heartContainer.GetChildren().OfType<TextureRect>().ToList();
-        _level.Text = $"Level: {GameManager.Instance.CurrentLevel + 1}";
-        _scoreValue = ScoreManager.Instance.CachedScore;
+        
+        _hearts = _heartContainer.GetChildren().OfType<TextureRect>().ToList(); // Assigns heart images to list
+        _level.Text = $"Level: {GameManager.Instance.CurrentLevel + 1}";    // Assigns current level
+        _scoreValue = ScoreManager.Instance.CachedScore;                    // Assigns current score
         UpdateScoreLabel(_scoreValue);
     }
 
@@ -81,6 +87,10 @@ public partial class GameHud : Control
     //* ________________________________________________________________________________________________
     //* OWN METHODS:
 
+    /// <summary>
+    /// Updates the score label to the current score
+    /// </summary>
+    /// <param name="points">The current amount of points/current score</param>
     private void UpdateScoreLabel(int points)
     {
         _score.Text = "Score: " + _scoreValue;
@@ -90,12 +100,12 @@ public partial class GameHud : Control
     //* ________________________________________________________________________________________________
     //* SIGNAL METHODS:
 
-    private void OnCompleteTimerTimeout()
-    {
-        _canContinue = true;
-        GD.Print("Set Can Continue to " + _canContinue);
-    }
-
+    /// <summary>
+    /// Show/Play matching message/sound, depending on level completion and start timers
+    /// OnCompletion: Transfer score to GameManager for next level and set _completedLevel to true
+    /// OnGameOver: Save score to the HighScores and reset them for the current game
+    /// </summary>
+    /// <param name="isCompleted">The bool if game is completed, or player lost/died</param>
     private void OnLevelCompleted(bool isCompleted)
     {
         if (isCompleted)
@@ -122,12 +132,22 @@ public partial class GameHud : Control
         
     }
 
+    /// <summary>
+    /// Update the score label to the new score
+    /// </summary>
+    /// <param name="points">The new score count</param>
     private void OnPointScored(int points)
     {
         _scoreValue += points;
         UpdateScoreLabel(_scoreValue);
     }
 
+    /// <summary>
+    /// Turn off visibility of Images to match the remaining hearts.
+    /// When lives are 0 (or below), start GameOver Logic
+    /// </summary>
+    /// <param name="lives">The amount of hearts left</param>
+    /// <param name="shake">Irrelevant</param>
     private void OnPlayerHit(int lives, bool shake)
     {
         for (int i = 0; i < _hearts.Count; i++)

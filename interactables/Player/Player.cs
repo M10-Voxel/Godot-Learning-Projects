@@ -3,7 +3,8 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
-	// EXPORTS:
+
+	#region EXPORTS
 	[Export] private PlayerCamera _camera;
 	[Export] private AudioStreamPlayer2D _jumpSound;
 	[Export] private AudioStreamPlayer2D _hurtSound;
@@ -17,9 +18,16 @@ public partial class Player : CharacterBody2D
 	[Export] private int _camLimitRight = 100000;
 	[Export] private int _camLimitBottom = -100000;
 	[Export] private int _camLimitTop = 100000;
+	#endregion
 	
-
-	// CONSTS/READONLY:
+	#region PLAYER STATES
+	private bool IsStill	=> Mathf.IsZeroApprox(Velocity.X);
+	private bool IsFalling	=> Velocity.Y > 0;
+	private bool OnFloor	=> IsOnFloor();
+	private bool IsHurt => _isHurt;
+	#endregion
+	
+	#region CONSTS/READONLY
 	private const float Gravity = 690.0f;
 	private const float RunSpeed = 120.0f;
 	private const float JumpSpeed = -270.0f;
@@ -28,19 +36,14 @@ public partial class Player : CharacterBody2D
 	
 	private readonly Vector2 _hurtJumpVelocity = new(0.0f, JumpSpeed/2);
 	private readonly List<Area2D> _currentDamageAreas = [];
-	
-	// PLAYER STATES:
-	private bool IsStill	=> Mathf.IsZeroApprox(Velocity.X);
-	private bool IsFalling	=> Velocity.Y > 0;
-	private bool OnFloor	=> IsOnFloor();
-	private bool IsHurt => _isHurt;
+	#endregion
 
-	// PRIVATE BOOlS:
+	#region PRIVATE BOOlS
 	private bool _hasJumped = false;
 	private bool _isHurt = false;
 	private bool _isInvincible = false;
 	private bool _hasFallenOff = false;
-
+	#endregion
 	
 
 	//* ________________________________________________________________________________________________
@@ -55,8 +58,8 @@ public partial class Player : CharacterBody2D
 	{
 		_hitbox.AreaEntered += OnHitboxEntered;
 		_hitbox.AreaExited += OnHitboxExited;
-		_hurtTimer.Timeout += () => _isHurt = false;
 		_invincibilityAnimation.AnimationFinished += TurnOffInvincibility;
+		_hurtTimer.Timeout += () => _isHurt = false;	// Enable player again after hurt timer
 		SetCameraLimits();
 		CallDeferred(MethodName.LateInit);
 	}
@@ -67,13 +70,12 @@ public partial class Player : CharacterBody2D
 		velocity.Y += Gravity * (float)delta;
 
 		velocity = GetInput(velocity);
-		velocity.Y = Mathf.Clamp(velocity.Y, JumpSpeed, MaxFallSpeed);
+		velocity.Y = Mathf.Clamp(velocity.Y, JumpSpeed, MaxFallSpeed);	// Cap falling velocity
 
 		Velocity = velocity;
 
 		MoveAndSlide();
 		PlayerFallenOff();
-
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -90,20 +92,32 @@ public partial class Player : CharacterBody2D
 	//* ________________________________________________________________________________________________
 	//* SUB METHODS:
 	
+	/// <summary>
+	/// Sets camera boundaries based on exported values (adjusted in respective scene)
+	/// </summary>
 	private void SetCameraLimits()
-    	{
-    		_camera.LimitLeft = _camLimitLeft;
-    		_camera.LimitRight = _camLimitRight;
-    		_camera.LimitBottom = _camLimitBottom;
-    		_camera.LimitTop = _camLimitTop;
-    	}
+    {
+    	_camera.LimitLeft = _camLimitLeft;
+    	_camera.LimitRight = _camLimitRight;
+    	_camera.LimitBottom = _camLimitBottom;
+    	_camera.LimitTop = _camLimitTop;
+    }
+	
+	/// <summary>
+	/// Method to delay the call for current lives to be sure, they are already set in the GameManager
+	/// </summary>
 	private void LateInit()
 	{
 		_lives = GameManager.Instance.CurrentLives;
 		SignalHub.EmitOnPlayerHit(_lives, false);
 	}
 	
-
+	/// <summary>
+	/// Calculates velocity based on input (resulting direction) and if player has jumped (upwards velocity).
+	/// Flips sprite depending on movement direction.
+	/// </summary>
+	/// <param name="velocity">The current velocity of the player</param>
+	/// <returns>Altered velocity depending on player states and inputs</returns>
 	private Vector2 GetInput(Vector2 velocity)
 	{
 		if (_isHurt) return velocity;
@@ -124,6 +138,9 @@ public partial class Player : CharacterBody2D
 		return velocity;
 	}
 
+	/// <summary>
+	/// When enemy reaches bottom limit, it is removed from the scene
+	/// </summary>
 	private void PlayerFallenOff()
 	{
 		if (GlobalPosition.Y > FallenOff && !_hasFallenOff)
@@ -136,7 +153,10 @@ public partial class Player : CharacterBody2D
 	//* ________________________________________________________________________________________________
 	//* OWN METHODS:
 	
-	// For bouncing a player off of his own bullet
+	/// <summary>
+	/// Adds vertical velocity to player when called
+	/// </summary>
+	/// <param name="bounceSpeed">The amount of velocity</param>
 	public void Bounce(float bounceSpeed)
 	{
 		Vector2 velocity = Velocity;
@@ -144,7 +164,9 @@ public partial class Player : CharacterBody2D
 		Velocity = velocity;
 	}
 
-
+	/// <summary>
+	/// Applies hit logic: life reduction, invincibility, and hurt jump.
+	/// </summary>
 	private void ApplyHit()
 	{
 		if (_isInvincible) return;
@@ -152,11 +174,27 @@ public partial class Player : CharacterBody2D
 		TurnOnInvincibility();
 		ApplyHurtJump();
 	}
+	/// <summary>
+	/// Reduces Player lives and sends signal
+	/// </summary>
+	/// <param name="reduction">The amount of hearts that should be reduced</param>
+	private void ReduceLives(int reduction)
+	{
+		_lives -= reduction;
+		GameManager.Instance.CurrentLives = _lives;
+		SignalHub.EmitOnPlayerHit(_lives);
+	}
+	/// <summary>
+	/// Turn _isInvincible to true and player animation
+	/// </summary>
 	private void TurnOnInvincibility()
 	{
 		_isInvincible = true;
 		_invincibilityAnimation.Play("invincible");
 	}
+	/// <summary>
+	/// Turn _isHurt to true, start immovability cooldown, play sound and overwrite velocity with hurtJump
+	/// </summary>
 	private void ApplyHurtJump()
 	{
 		_isHurt = true;
@@ -166,28 +204,34 @@ public partial class Player : CharacterBody2D
 		Velocity = _hurtJumpVelocity;
 	}
 
-	private void ReduceLives(int reduction)
-	{
-		_lives -= reduction;
-		GameManager.Instance.CurrentLives = _lives;
-		SignalHub.EmitOnPlayerHit(_lives);
-	}
 
 	//* ________________________________________________________________________________________________
 	//* SIGNAL METHODS:
 
+	/// <summary>
+	/// Applies a hit and adds the area to the list in order to check later if player is still in area
+	/// </summary>
+	/// <param name="area">The Hitbox (enemy or enemy bullet in this case) the payer entered</param>
 	private void OnHitboxEntered(Area2D area)
 	{
 		CallDeferred(MethodName.ApplyHit);
 		
-		if (area is Hitbox && !_currentDamageAreas.Contains(area)) _currentDamageAreas.Add(area);
+		if (!_currentDamageAreas.Contains(area)) _currentDamageAreas.Add(area);
 	}
 
+	/// <summary>
+	/// Removes the current area from the list
+	/// </summary>
+	/// <param name="area">The Hitbox (enemy or enemy bullet in this case) the payer exited</param>
 	private void OnHitboxExited(Area2D area)
 	{
 		_currentDamageAreas.Remove(area);
     }
 
+	/// <summary>
+	/// Turns off invincibility and applies hit if player is still in an area
+	/// </summary>
+	/// <param name="animationName">Irrelevant</param>
 	private void TurnOffInvincibility(StringName animationName)
 	{
 		_isInvincible = false;

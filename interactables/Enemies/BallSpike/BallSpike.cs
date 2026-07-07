@@ -1,8 +1,12 @@
 using Godot;
 
+/// <summary>
+/// Logic for the BallSpike following the path
+/// </summary>
 public partial class BallSpike : PathFollow2D
 {
 
+    // EXPORTS:
     [Export] private float _speed = 50.0f;
     [Export] private float _rotationSpeed = 300.0f;
     

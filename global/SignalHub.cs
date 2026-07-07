@@ -34,6 +34,8 @@ public partial class SignalHub : Node
     //* ________________________________________________________________________________________________
     //* SIGNAL METHODS:
     
+    // Methods to emit signals from other scripts:
+    
     public static void EmitOnCreateBullet(Vector2 position, Vector2 direction, float speed, PackedScene scene)
     {
         Instance.EmitSignalOnCreateBullet(position, direction, speed, scene);

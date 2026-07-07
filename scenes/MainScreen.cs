@@ -1,8 +1,11 @@
 using Godot;
 
+/// <summary>
+/// Creates navigation logic and score display for the main scene
+/// </summary>
 public partial class MainScreen : Control
 {
-
+    // EXPORTS:
     [Export] private PackedScene _highSoreScene;
     [Export] private GridContainer _highScoreContainer;
     
@@ -32,6 +35,9 @@ public partial class MainScreen : Control
     //* ________________________________________________________________________________________________
     //* SUB METHODS:
 
+    /// <summary>
+    /// Sets up each HighScoreDisplay and adds it to scene
+    /// </summary>
     private void SetupScores()
     {
         foreach (var score in ScoreManager.Instance.ScoresHistory.Scores)
@@ -39,9 +45,6 @@ public partial class MainScreen : Control
             var highscoreDisplay = _highSoreScene.Instantiate<HighScoreDisplay>();
             highscoreDisplay.SetHighScore(score);
             _highScoreContainer.AddChild(highscoreDisplay);
-        }
-        {
-            
         }
     }
 }
