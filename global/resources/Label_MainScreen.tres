@@ -4,7 +4,7 @@
 
 [resource]
 font = ExtResource("1_qaupo")
-font_size = 84
+font_size = 63
 font_color = Color(0.14117648, 0.06666667, 0.27058825, 1)
 stacked_shadow_count = 1
 stacked_shadow_0/offset = Vector2(1, 2)

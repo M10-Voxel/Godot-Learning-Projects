@@ -4,7 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://c8ctumxmuftjv" path="res://assets/backgrounds/game_background_3/game_background_3.1.png" id="2_fkp2a"]
 [ext_resource type="AudioStream" uid="uid://bnleclmgogvt" path="res://assets/sound/Farm Frolics.ogg" id="3_fkp2a"]
 [ext_resource type="LabelSettings" uid="uid://c6vl1xex7y7pm" path="res://global/resources/Label_MainScreen.tres" id="4_wfb6r"]
+[ext_resource type="FontFile" uid="uid://w0v6usaxnmyi" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="5_a46j4"]
 [ext_resource type="PackedScene" uid="uid://c4gbdp5pjhr2" path="res://ui/high_score_display.tscn" id="5_xns2g"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_23dc1"]
+font = ExtResource("5_a46j4")
+font_size = 60
+font_color = Color(0.14117648, 0.06666667, 0.27058825, 1)
+stacked_shadow_count = 1
+stacked_shadow_0/offset = Vector2(1, 2)
+stacked_shadow_0/color = Color(0.6, 0.64705884, 0.6745098, 1)
+stacked_shadow_0/outline_size = 18
 
 [node name="MainScene" type="Control" unique_id=486667216 node_paths=PackedStringArray("_highScoreContainer")]
 layout_mode = 3
@@ -29,7 +39,7 @@ expand_mode = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1801875355]
 stream = ExtResource("3_fkp2a")
-volume_db = -20.0
+volume_db = -80.0
 autoplay = true
 parameters/looping = true
 
@@ -39,12 +49,25 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 85.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 96
+theme_override_constants/margin_top = 128
 
-[node name="Label" type="Label" parent="MarginContainer" unique_id=1688520864]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=827602110]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1688520864]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Foxy Antics"
+size_flags_vertical = 0
+text = "Lightning Division"
+label_settings = SubResource("LabelSettings_23dc1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=115036826]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "2D Plattformer in Godot"
 label_settings = ExtResource("4_wfb6r")
 horizontal_alignment = 1
 vertical_alignment = 1
