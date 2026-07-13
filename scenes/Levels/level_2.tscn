@@ -255,11 +255,11 @@ stretch_mode = 1
 _from = NodePath("../Marker2D")
 _to = NodePath("../Marker2D2")
 
-[node name="Story" type="Node2D" parent="." index="11" unique_id=1404875451]
+[node name="Lessons Learned" type="Node2D" parent="." index="11" unique_id=1404875451]
 position = Vector2(2571, -476)
 scale = Vector2(0.5, 0.5)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Story" index="0" unique_id=1029096822]
+[node name="VBoxContainer" type="VBoxContainer" parent="Lessons Learned" index="0" unique_id=1029096822]
 texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -270,32 +270,32 @@ offset_bottom = 38.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="Story/VBoxContainer" index="0" unique_id=1292394754]
+[node name="Label" type="Label" parent="Lessons Learned/VBoxContainer" index="0" unique_id=1292394754]
 layout_mode = 2
 text = "Lessons Learned"
 label_settings = SubResource("LabelSettings_6qxha")
 
-[node name="Control" type="Control" parent="Story/VBoxContainer" index="1" unique_id=2024470872]
+[node name="Control" type="Control" parent="Lessons Learned/VBoxContainer" index="1" unique_id=2024470872]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Story/VBoxContainer" index="2" unique_id=911249505]
+[node name="Label2" type="Label" parent="Lessons Learned/VBoxContainer" index="2" unique_id=911249505]
 layout_mode = 2
 text = "- Code Dateien sind oft recht kurz aber dafür viele Überall"
 label_settings = SubResource("LabelSettings_4i6gi")
 
-[node name="Label3" type="Label" parent="Story/VBoxContainer" index="3" unique_id=1818467369]
+[node name="Label3" type="Label" parent="Lessons Learned/VBoxContainer" index="3" unique_id=1818467369]
 layout_mode = 2
 text = "- Im Code basiert vieles auf Godot Spezifischen Code
    (besonders da keine komplexe Logik verwendet wird)"
 label_settings = SubResource("LabelSettings_4i6gi")
 
-[node name="Label4" type="Label" parent="Story/VBoxContainer" index="4" unique_id=543370292]
+[node name="Label4" type="Label" parent="Lessons Learned/VBoxContainer" index="4" unique_id=543370292]
 layout_mode = 2
 text = "- Signale überall bentuzt wo es ging"
 label_settings = SubResource("LabelSettings_4i6gi")
 
-[node name="Label5" type="Label" parent="Story/VBoxContainer" index="5" unique_id=1646647175]
+[node name="Label5" type="Label" parent="Lessons Learned/VBoxContainer" index="5" unique_id=1646647175]
 layout_mode = 2
 text = "- Mehr Zeitaufwändig als erwartet"
 label_settings = SubResource("LabelSettings_4i6gi")

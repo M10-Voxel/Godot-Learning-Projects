@@ -60,6 +60,17 @@ public partial class ObjectFactory : Node
     }
 
     /// <summary>
+    /// Creates a fruit pickup (item) at given after explosion, when enemy was hit
+    /// </summary>
+    /// <param name="position">The position the item spawns</param>
+    private void OnEnemyDied(Vector2 position)
+    {
+        OnCreateExplosion(position);
+        var fruit = _fruitScene.Instantiate<FruitPickup>();
+        fruit.GlobalPosition = position;
+        CallDeferred(MethodName.AddObject, fruit);
+    }
+    /// <summary>
     /// Creates an explosion (scene) that is used to show an animation after an enemy was hit
     /// </summary>
     /// <param name="position">The position the explosion spawns</param>
@@ -80,17 +91,4 @@ public partial class ObjectFactory : Node
         destruction.GlobalPosition = position;
         CallDeferred(MethodName.AddObject, destruction);
     }
-
-    /// <summary>
-    /// Creates a fruit pickup (item) at given after explosion, when enemy was hit
-    /// </summary>
-    /// <param name="position">The position the item spawns</param>
-    private void OnEnemyDied(Vector2 position)
-    {
-        OnCreateExplosion(position);
-        var fruit = _fruitScene.Instantiate<FruitPickup>();
-        fruit.GlobalPosition = position;
-        CallDeferred(MethodName.AddObject, fruit);
-    }
-
 }
